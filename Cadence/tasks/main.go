@@ -54,13 +54,15 @@ func main() {
 		Fetch timestamp for a user.
 	*/
 
-	/* 	epoch := otu.Script(
-	   		"./Guestbook/get_user_timestamp",
-	   		WithSigner("account"),
-	   		WithArg("user", "bob"),
-	   	)
-	   	epochToHumanReadable(epoch)
-	*/
+	epoch := otu.Script(
+		"./Guestbook/get_user_timestamp",
+		WithSigner("account"),
+		WithArg("user", "bob"),
+	).Result
+	fmt.Println("The timestamp for bob is: ", epoch)
+
+	//	   	epochToHumanReadable(epoch)
+
 	color.Green("-----------------------------PASSED---------------------")
 
 	color.Red("Shouldn't let you sign twice with the same account")
