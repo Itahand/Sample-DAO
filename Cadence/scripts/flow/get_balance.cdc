@@ -3,8 +3,8 @@
 // Parameters:
 // - address: The address of the account holding the FLOW vault.
 
-import FungibleToken from "../../contracts/FungibleToken.cdc"
-import FlowToken from "../../contracts/FlowToken.cdc"
+import FungibleToken from "../../contracts/standard/FungibleToken.cdc"
+import FlowToken from "../../contracts/standard/FlowToken.cdc"
 
 pub fun main(address: Address): UFix64 {
     let account = getAccount(address)

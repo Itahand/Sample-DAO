@@ -5,6 +5,7 @@
 		"testnet": "access.devnet.nodes.onflow.org:9000"
 	},
 	"contracts": {
+		"Guestbook": "./contracts/Blockversity/Guestbook.cdc",
 		"NonFungibleToken": {
 			"source": "./contracts/standard/NonFungibleToken.cdc",
 			"aliases": {
@@ -71,7 +72,8 @@
 			"emulator-bob": [],
 			"emulator-account": [
 				"NonFungibleToken",
-				"MetadataViews"
+				"MetadataViews",
+				"Guestbook"
 			]
 		},
 		"testnet": {
