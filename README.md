@@ -4,7 +4,7 @@
 
 # BlockVersity-DAO
 
-[Blockversity](https://www.blockversity.xyz/) is THE marketplace for online courses supported by a DAO. BlockVersity's objective is to become the largest decentralized NFT marketplace for continuous education, giving power back to Course Creators and verifiable on-chain credentials to students.
+[BlockVersity](https://www.blockversity.xyz/) is THE marketplace for online courses supported by a DAO. BlockVersity's objective is to become the largest decentralized NFT marketplace for continuous education, giving power back to Course Creators and verifiable on-chain credentials to students.
 
 BlockVersity gives power back to thousands of global course creators selling on centralized marketplaces, offering them fairer compensation by providing an NFT marketplace to sell courses. For students, BlockVersity provides them with verifiable on-chain credentials. These proof-of-skill NFTs would have the same credibility globally.
 
