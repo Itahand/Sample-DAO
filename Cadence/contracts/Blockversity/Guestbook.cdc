@@ -2,7 +2,6 @@ pub contract Guestbook {
 
     // Contract Information
     pub var addressInfo: {Address: UFix64}
-    pub var allUsers: [Address]
 
     // Events
     //
@@ -16,14 +15,12 @@ pub contract Guestbook {
 
         let timestamp = getCurrentBlock().timestamp
         self.addressInfo[newAddress] = timestamp
-        self.allUsers.append(newAddress)
 
         emit Signed(user: newAddress, timestamp: timestamp)
     }
 
     init() {
         self.addressInfo = {}
-        self.allUsers = []
 
         emit ContractInitialized()
     }
