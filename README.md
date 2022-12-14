@@ -1,4 +1,4 @@
-<a href="https://www.blockversity.xyz/">
+<a href="https://www.blockversity.xyz/" target="none">
     <img src="https://www.blockversity.xyz/img/logo-1-1@1x.png" alt="BlockVersity logo" title="BlockVersity" align="right" height="40" />
 </a>
 
