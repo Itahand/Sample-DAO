@@ -44,13 +44,13 @@
 	},
 	"accounts": {
 		"testnet-account": {
-			"address": "0x285ca2dc98ed5119",
+			"address": "0x800a10d0fff7acd4",
 			"key": {
 				"type": "hex",
 				"index": 0,
 				"signatureAlgorithm": "ECDSA_P256",
 				"hashAlgorithm": "SHA3_256",
-				"privateKey": "4ebb41b0577c04bb6dba2bef6b45bf7235e0eb056abf51eebc64a3d39efdef0c"
+				"privateKey": "077a4268773503750e1ad2757f3f6768ff73ef03c3410e2e7e4e027ca43b2a04"
 			}
 		},
 		"emulator-account": {
