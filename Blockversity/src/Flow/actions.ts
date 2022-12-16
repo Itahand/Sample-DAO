@@ -12,13 +12,12 @@ export const logIn = async () => await fcl.logIn();
 export const signUp = () => fcl.signUp();
 
 // Scripts
-
-import getAllAddressesScript from './scripts/get_all_addresses.js';
-import getUserTimestampScript from './scripts/get_user_timestamp.js';
+import { getAllAddresses as getAllAddressesScript } from './scripts/get_all_addresses';
+import { getUserTimestamp as getUserTimestampScript } from './scripts/get_user_timestamp';
 
 // Transactions
 
-import signGuestbookTransaction from './Transactions/sign_Guestbook.js';
+import { signGuestbook as signGuestbookTransaction } from './Transactions/sign_Guestbook';
 
 // ****** Transactions Functions ****** //
 

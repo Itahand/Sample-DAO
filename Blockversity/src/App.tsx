@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-/* import {
+import {
   unauthenticate,
   logIn,
   signUp,
   signGuestbook
-} from "./Flow/actions.js"; */
+} from "./Flow/actions.js";
 import './App.css'
 
 
