@@ -14,7 +14,7 @@ BlockVersity gives power back to thousands of global course creators selling on 
 
  Congratulations! This is the first step in your journey towards learning how to build a DAO on the Flow network. This document's objective is to provide the basic tools and help you understand how to use them.
 
- All of the code that interacts with Flow is written with Cadence; a a new high-level programming language intended for smart contract development.
+ All of the code that interacts with Flow is written with Cadence; a new high-level programming language intended for smart contract development.
 
  The tools used for testing the smart contracts, scripts and transactions are written in Go and are part of the [Overflow](https://github.com/bjartek/overflow) library.
 
