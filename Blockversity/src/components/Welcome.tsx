@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { TbCoin } from "react-icons/tb";
 import { BsInfoCircle } from "react-icons/bs";
+import { logIn } from "../Flow/actions";
 
 import Loader from "./Loader";
 
@@ -35,7 +36,7 @@ const Input: React.FC<{ placeholder: string; name: string; type: string; value: 
 );
 
 const Welcome: React.FC = () => {
-//   const { currentAccount, connectWallet, handleChange, sendTransaction, formData, isLoading } = useContext<TransactionContext>(TransactionContext);
+  //   const { currentAccount, connectWallet, handleChange, sendTransaction, formData, isLoading } = useContext<TransactionContext>(TransactionContext);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     // const { addressTo, amount, keyword, message } = formData;
@@ -55,40 +56,41 @@ const Welcome: React.FC = () => {
             Explore the Web3 world. Become a flow developer. Learn how to build
             your own NFTs, DAOs, and more.
           </p>
-         
-            <button
-              type="button"
-              className="flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]"
-            >
-              <AiFillPlayCircle className="text-white mr-2" />
-              <p className="text-white text-base font-semibold">
-                Connect Wallet
-              </p>
-            </button>
 
-        <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
-          <div className="p-3 flex justify-end items-start flex-col rounded-xl h-40 sm:w-72 w-full my-5 flow-card .white-glassmorphism ">
-            <div className="flex justify-between flex-col w-full h-full">
-              <div className="flex justify-between items-start">
-                <div className="w-10 h-10 rounded-full border-2 border-white flex justify-center items-center">
-                  <TbCoin fontSize={21} color="#fff" />
+          <button
+            type="button"
+            onClick={() => logIn()}
+            className="flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]"
+          >
+            <AiFillPlayCircle className="text-white mr-2" />
+            <p className="text-white text-base font-semibold">
+              Connect Wallet
+            </p>
+          </button>
+
+          <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
+            <div className="p-3 flex justify-end items-start flex-col rounded-xl h-40 sm:w-72 w-full my-5 flow-card .white-glassmorphism ">
+              <div className="flex justify-between flex-col w-full h-full">
+                <div className="flex justify-between items-start">
+                  <div className="w-10 h-10 rounded-full border-2 border-white flex justify-center items-center">
+                    <TbCoin fontSize={21} color="#fff" />
+                  </div>
+                  <BsInfoCircle fontSize={17} color="#fff" />
                 </div>
-                <BsInfoCircle fontSize={17} color="#fff" />
-              </div>
-              <div>
-                <p className="text-white font-light text-sm">
-                  currentAccount
-                </p>
-                <p className="text-white font-semibold text-lg mt-1">
-                  flow
-                </p>
+                <div>
+                  <p className="text-white font-light text-sm">
+                    currentAccount
+                  </p>
+                  <p className="text-white font-semibold text-lg mt-1">
+                    flow
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism"> 
+            <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism">
 
+            </div>
           </div>
-        </div>
 
 
           <div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
