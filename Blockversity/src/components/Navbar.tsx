@@ -49,6 +49,9 @@ const Navbar: React.FC = () => {
             Connect Wallet
           </p>
         </button>
+        <button onClick={() => getAllAddresses()}>
+          Get All Addresses
+        </button>
       </ul>
       <div className="flex relative">
         {!toggleMenu && (

@@ -50,7 +50,7 @@ export const signGuestbook = async () => {
 export const getAllAddresses = async () => {
   try {
     const response = await fcl.query({
-      cadence: getAllAddressesScript,
+      cadence: getAllAddressesScript(),
       args: (arg, t) => [],
     });
 
@@ -64,7 +64,7 @@ export const getAllAddresses = async () => {
 export const getUserTimestamp = async (userAddress) => {
   try {
     const response = await fcl.query({
-      cadence: getUserTimestampScript,
+      cadence: getUserTimestampScript(),
       args: (arg, t) => [arg(userAddress, t.Address)],
     });
 
