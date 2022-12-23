@@ -49,8 +49,14 @@ const Navbar: React.FC = () => {
             Connect Wallet
           </p>
         </button>
+<<<<<<< HEAD
         }
 
+=======
+        <button onClick={() => getAllAddresses()}>
+          Get All Addresses
+        </button>
+>>>>>>> c72ae19fe264c7e7c197a9a665f095300eb8c29a
       </ul>
       <div className="flex relative">
         {!toggleMenu && (
