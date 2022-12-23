@@ -10,6 +10,7 @@ import './config';
 export const unauthenticate = () => fcl.unauthenticate();
 export const logIn = async () => await fcl.logIn();
 export const signUp = () => fcl.signUp();
+export const currentUser = () => fcl.currentUser()
 
 // // Scripts
 /* import { getAllAddresses as getAllAddressesScript } from './scripts/get_all_addresses';

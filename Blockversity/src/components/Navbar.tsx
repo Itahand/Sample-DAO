@@ -2,7 +2,10 @@ import React from "react";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
 import { AiFillPlayCircle } from "react-icons/ai";
-import { logIn } from "../Flow/actions";
+import {
+  logIn,
+  currentUser
+} from "../Flow/actions";
 import logo from "../assets/flow-logo.png";
 
 interface NavBarItemProps {
@@ -16,26 +19,33 @@ const NavBarItem: React.FC<NavBarItemProps> = ({ title, classprops }) => (
 
 const Navbar: React.FC = () => {
   const [toggleMenu, setToggleMenu] = React.useState(false);
+  const [user, setUser] = React.useState();
+
+  React.useEffect(() => {
+    currentUser().subscribe(setUser);
+  }, []);
+
 
   return (
     <nav className="w-full flex md:justify-center justify-between items-center p-4">
       <div className="md:flex-[0.5] flex-initial justify-center items-center">
         <img src={logo} alt="logo" className="w-32 cursor-pointer" />
       </div>
+      <h1>User's Address: {user?.addr}</h1>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
-         {["Signin", "Fetch addresses", "Tutorials", "Wallets"].map((item, index) => (
-           <NavBarItem key={item + index} title={item} />
-        ))} 
-          <button
-            type="button"
-            onClick={() => logIn()}
-            className="flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]"
-          >
-            <AiFillPlayCircle className="text-white mr-2" />
-            <p className="text-white text-base font-semibold">
-              Connect Wallet
-            </p>
-          </button>
+        {["Signin", "Fetch addresses", "Tutorials", "Wallets"].map((item, index) => (
+          <NavBarItem key={item + index} title={item} />
+        ))}
+        <button
+          type="button"
+          onClick={() => logIn()}
+          className="flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]"
+        >
+          <AiFillPlayCircle className="text-white mr-2" />
+          <p className="text-white text-base font-semibold">
+            Connect Wallet
+          </p>
+        </button>
       </ul>
       <div className="flex relative">
         {!toggleMenu && (
@@ -61,4 +71,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
- 
