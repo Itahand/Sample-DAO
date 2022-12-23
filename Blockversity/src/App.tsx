@@ -1,7 +1,4 @@
-import Loader from './components/Loader';
-import Navbar from './components/Navbar';
-import Welcome from './components/Welcome';
-import Footer from './components/Footer';
+import{Navbar, Welcome, Footer} from './components';
 
 const App: React.FC = () => (
   <div className="min-h-screen">

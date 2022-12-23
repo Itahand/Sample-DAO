@@ -1,7 +1,8 @@
 import React from "react";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
-
+import { AiFillPlayCircle } from "react-icons/ai";
+import { logIn } from "../Flow/actions";
 import logo from "../assets/flow-logo.png";
 
 interface NavBarItemProps {
@@ -22,12 +23,19 @@ const Navbar: React.FC = () => {
         <img src={logo} alt="logo" className="w-32 cursor-pointer" />
       </div>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
-         {["Flow", "Exchange", "Tutorials", "Wallets"].map((item, index) => (
+         {["Signin", "Fetch addresses", "Tutorials", "Wallets"].map((item, index) => (
            <NavBarItem key={item + index} title={item} />
         ))} 
-        <li className="bg-[#0f9c45] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]">
-          Login
-        </li>
+          <button
+            type="button"
+            onClick={() => logIn()}
+            className="flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]"
+          >
+            <AiFillPlayCircle className="text-white mr-2" />
+            <p className="text-white text-base font-semibold">
+              Connect Wallet
+            </p>
+          </button>
       </ul>
       <div className="flex relative">
         {!toggleMenu && (
@@ -53,3 +61,4 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+ 
