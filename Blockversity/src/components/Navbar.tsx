@@ -5,7 +5,9 @@ import { AiFillPlayCircle } from "react-icons/ai";
 import {
   logIn,
   currentUser,
-  unauthenticate
+  unauthenticate,
+  getAllAddresses,
+  getUserTimestamp,
 } from "../Flow/actions";
 import logo from "../assets/flow-logo.png";
 

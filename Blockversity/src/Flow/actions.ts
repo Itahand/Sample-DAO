@@ -13,8 +13,8 @@ export const signUp = () => fcl.signUp();
 export const currentUser = () => fcl.currentUser()
 
 // // Scripts
-/* import { getAllAddresses as getAllAddressesScript } from './scripts/get_all_addresses';
-import { getUserTimestamp as getUserTimestampScript } from './scripts/get_user_timestamp'; */
+import { getAllAddresses as getAllAddressesScript } from './scripts/get_all_addresses';
+import { getUserTimestamp as getUserTimestampScript } from './scripts/get_user_timestamp';
 
 // // Transactions
 
@@ -41,4 +41,36 @@ export const signGuestbook = async () => {
       reject(false);
     }
   });
+}
+
+// // ****** Script Functions ****** //
+
+// Get a Owned NFTs from connected account.
+
+export const getAllAddresses = async () => {
+  try {
+    const response = await fcl.query({
+      cadence: getAllAddressesScript,
+      args: (arg, t) => [],
+    });
+
+    console.log(response);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export const getUserTimestamp = async (userAddress) => {
+  try {
+    const response = await fcl.query({
+      cadence: getUserTimestampScript,
+      args: (arg, t) => [arg(userAddress, t.Address)],
+    });
+
+    console.log(response);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
 }
