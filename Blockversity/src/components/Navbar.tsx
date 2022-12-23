@@ -4,7 +4,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import { AiFillPlayCircle } from "react-icons/ai";
 import {
   logIn,
-  currentUser
+  currentUser,
+  unauthenticate
 } from "../Flow/actions";
 import logo from "../assets/flow-logo.png";
 
@@ -19,7 +20,7 @@ const NavBarItem: React.FC<NavBarItemProps> = ({ title, classprops }) => (
 
 const Navbar: React.FC = () => {
   const [toggleMenu, setToggleMenu] = React.useState(false);
-  const [user, setUser] = React.useState();
+  const [user, setUser] = React.useState(null);
 
   React.useEffect(() => {
     currentUser().subscribe(setUser);
