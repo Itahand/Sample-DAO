@@ -21,6 +21,7 @@ const NavBarItem: React.FC<NavBarItemProps> = ({ title, classprops }) => (
 const Navbar: React.FC = () => {
   const [toggleMenu, setToggleMenu] = React.useState(false);
   const [user, setUser] = React.useState(null);
+  const [auth, setAuth] = React.useState(false);
 
   React.useEffect(() => {
     currentUser().subscribe(setUser);
@@ -32,12 +33,12 @@ const Navbar: React.FC = () => {
       <div className="md:flex-[0.5] flex-initial justify-center items-center">
         <img src={logo} alt="logo" className="w-32 cursor-pointer" />
       </div>
-      <h1>User's Address: {user?.addr}</h1>
+      <h1 className="text-white">User's Address: {user?.addr}</h1>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
-        {["Signin", "Fetch addresses", "Tutorials", "Wallets"].map((item, index) => (
-          <NavBarItem key={item + index} title={item} />
-        ))}
-        <button
+        {user?.addr === null ?
+          <button>Disconnect</button>
+          : 
+          <button
           type="button"
           onClick={() => logIn()}
           className="flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]"
@@ -47,6 +48,8 @@ const Navbar: React.FC = () => {
             Connect Wallet
           </p>
         </button>
+        }
+
       </ul>
       <div className="flex relative">
         {!toggleMenu && (
