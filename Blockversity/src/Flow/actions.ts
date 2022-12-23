@@ -27,7 +27,7 @@ export const signGuestbook = async () => {
   return new Promise(async (resolve, reject) => {
     try {
       const transactionId = await fcl.mutate({
-        cadence: signGuestbookTransaction,
+        cadence: signGuestbookTransaction(),
         proposer: fcl.currentUser,
         payer: fcl.currentUser,
         authorizations: [fcl.currentUser],
