@@ -23,7 +23,7 @@ const NavBarItem: React.FC<NavBarItemProps> = ({ title, classprops }) => (
 const Navbar: React.FC = () => {
   const [toggleMenu, setToggleMenu] = React.useState(false);
   const [user, setUser] = React.useState(null);
-
+  
   React.useEffect(() => {
     currentUser().subscribe(setUser);
   }, []);
@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
       <h1 className="text-white">User's Address: {user?.addr}</h1>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
         {user?.addr === null ?
-          <button>Disconnect</button>
+          <button onClick={() => unauthenticate()}>Disconnect</button>
           : 
           <button
           type="button"
@@ -49,14 +49,7 @@ const Navbar: React.FC = () => {
             Connect Wallet
           </p>
         </button>
-<<<<<<< HEAD
         }
-
-=======
-        <button onClick={() => getAllAddresses()}>
-          Get All Addresses
-        </button>
->>>>>>> c72ae19fe264c7e7c197a9a665f095300eb8c29a
       </ul>
       <div className="flex relative">
         {!toggleMenu && (
