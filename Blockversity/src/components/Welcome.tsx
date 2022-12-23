@@ -1,4 +1,3 @@
-import { AiFillPlayCircle } from "react-icons/ai";
 import { signGuestbook } from "../Flow/actions";
 import { getAllAddresses } from "../Flow/Scripts/get_all_addresses";
 
@@ -22,15 +21,14 @@ const Welcome: React.FC = () => {
             onClick={() => signGuestbook()}
             className="flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]"
           >
-            <AiFillPlayCircle className="text-white mr-2" />
             <p className="text-white text-base font-semibold">
               Sign Guestbook
             </p>
           </button>
 
           <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
-            <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism">
-
+            <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism">
+              {getAllAddresses()}
             </div>
           </div>
 
