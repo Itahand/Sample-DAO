@@ -9,6 +9,7 @@
 body {
   margin: 0;
   font-family: "Open Sans", sans-serif;
+  background-color: #021006;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -21,13 +22,6 @@ body {
     radial-gradient(at 100% 0%, rgb(19, 134, 24) 0, transparent 50%);
 }
 
-
-.gradient-bg-footer {
-  background-color: #021006;
-  background-image: 
-    radial-gradient(at 0% 100%, hsla(253,16%,7%,1) 0, transparent 53%), 
-    radial-gradient(at 50% 150%, rgb(39, 114, 94) 0, transparent 50%);
-}
 
 .blue-glassmorphism {
   background: rgb(39, 51, 89, 0.4);
