@@ -1,7 +1,7 @@
 import{Navbar, Welcome, Footer} from './components';
 
 const App: React.FC = () => (
-  <div className="min-h-screen">
+  <div>
     <div className="gradient-bg-welcome">
       <Navbar />
        <Welcome /> 
