@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
       </div>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
         {isConnected === true ?
-          <button onClick={() => unauthenticate()}>Disconnect</button>
+          <button onClick={() => Disconnect()}>Disconnect</button>
           : 
           <button
           type="button"
@@ -75,9 +75,9 @@ const Navbar: React.FC = () => {
           >
             <li className="text-xl w-full my-2"><AiOutlineClose onClick={() => setToggleMenu(false)} /></li>
             {isConnected === true ?
-            <button className="my-2 mx-4 text-lg">Disconnect</button>
+            <button className="my-2 mx-4 text-lg" onClick={() => Disconnect()}>Disconnect</button>
               : 
-            <button onClick={() => logIn()} className="my-2 mx-4 text-lg">Connect Wallet</button> 
+            <button onClick={() => Connect()} className="my-2 mx-4 text-lg">Connect Wallet</button> 
             }
           </ul>
         )}
