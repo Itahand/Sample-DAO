@@ -74,7 +74,7 @@ const Navbar: React.FC = () => {
             flex flex-col justify-start items-end rounded-md blue-glassmorphism text-white animate-slide-in"
           >
             <li className="text-xl w-full my-2"><AiOutlineClose onClick={() => setToggleMenu(false)} /></li>
-            {user?.addr === null ?
+            {isConnected === true ?
             <button className="my-2 mx-4 text-lg">Disconnect</button>
               : 
             <button onClick={() => logIn()} className="my-2 mx-4 text-lg">Connect Wallet</button> 
