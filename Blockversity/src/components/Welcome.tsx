@@ -1,4 +1,4 @@
-import { signGuestbook , getAllAddresses, getUserTimestamp, currentUser } from "../Flow/actions";
+import { signGuestbook , getAllAddresses } from "../Flow/actions";
 import { useEffect, useState } from "react";
 
 
