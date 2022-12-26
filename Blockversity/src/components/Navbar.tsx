@@ -6,10 +6,8 @@ import {
   logIn,
   currentUser,
   unauthenticate,
-  getAllAddresses,
-  getUserTimestamp,
 } from "../Flow/actions";
-import logo from "../assets/flow-logo.png";
+import logo from "../assets/vite.svg";
 
 interface NavBarItemProps {
   title: string;
@@ -32,7 +30,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className="w-full flex md:justify-center justify-between items-center p-4">
       <div className="md:flex-[0.5] flex-initial justify-center items-center">
-        <img src={logo} alt="logo" className="w-32 cursor-pointer" />
+        <img src={logo} alt="logo" className="w-10 cursor-pointer" />
       </div>
       <h1 className="text-white">User's Address: {user?.addr}</h1>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
