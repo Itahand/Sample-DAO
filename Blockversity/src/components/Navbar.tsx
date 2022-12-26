@@ -21,10 +21,22 @@ const NavBarItem: React.FC<NavBarItemProps> = ({ title, classprops }) => (
 const Navbar: React.FC = () => {
   const [toggleMenu, setToggleMenu] = React.useState(false);
   const [user, setUser] = React.useState(null);
-  
+  const [isConnected, setIsConnected] = React.useState(false);
+
+  const Disconnect = () => {
+    unauthenticate();
+    setIsConnected(false);
+  };
+
+  const Connect = () => {
+    logIn();
+    setIsConnected(true);
+  };
+
   React.useEffect(() => {
     currentUser().subscribe(setUser);
   }, []);
+
 
 
   return (
@@ -34,18 +46,19 @@ const Navbar: React.FC = () => {
       </div>
       <h1 className="text-white">User's Address: {user?.addr}</h1>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
-        {user?.addr === null ?
+        {isConnected === true ?
           <button onClick={() => unauthenticate()}>Disconnect</button>
           : 
           <button
           type="button"
-          onClick={() => logIn()}
+          onClick={() => Connect()}
           className="flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]"
         >
           <AiFillPlayCircle className="text-white mr-2" />
           <p className="text-white text-base font-semibold">
             Connect Wallet
           </p>
+
         </button>
         }
       </ul>
