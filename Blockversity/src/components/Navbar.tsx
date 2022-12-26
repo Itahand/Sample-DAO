@@ -7,7 +7,7 @@ import {
   currentUser,
   unauthenticate,
 } from "../Flow/actions";
-import logo from "../assets/vite.svg";
+import logo from "../assets/react.svg";
 
 interface NavBarItemProps {
   title: string;
@@ -42,9 +42,8 @@ const Navbar: React.FC = () => {
   return (
     <nav className="w-full flex md:justify-center justify-between items-center p-4">
       <div className="md:flex-[0.5] flex-initial justify-center items-center">
-        <img src={logo} alt="logo" className="w-10 cursor-pointer" />
+        <img src={logo} alt="logo" className="w-14 cursor-pointer" />
       </div>
-      <h1 className="text-white">User's Address: {user?.addr}</h1>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
         {isConnected === true ?
           <button onClick={() => unauthenticate()}>Disconnect</button>
