@@ -1,5 +1,5 @@
 import * as fcl from "@onflow/fcl";
-import t from "@onflow/types";
+//import t from "@onflow/types";
 import './config';
 
 // ///////////////
@@ -13,8 +13,8 @@ export const signUp = () => fcl.signUp();
 export const currentUser = () => fcl.currentUser()
 
 // // Scripts
-import { getAllAddresses as getAllAddressesScript } from './scripts/get_all_addresses';
-import { getUserTimestamp as getUserTimestampScript } from './scripts/get_user_timestamp';
+import { getAllAddresses as getAllAddressesScript } from './Scripts/get_all_addresses';
+import { getUserTimestamp as getUserTimestampScript } from './Scripts/get_user_timestamp';
 
 // // Transactions
 
@@ -51,7 +51,7 @@ export const getAllAddresses = async () => {
   try {
     const response = await fcl.query({
       cadence: getAllAddressesScript(),
-      args: (arg, t) => [],
+      args: (arg: any, t: any) => [],
     });
 
     console.log(response);
@@ -61,11 +61,11 @@ export const getAllAddresses = async () => {
   }
 }
 
-export const getUserTimestamp = async (userAddress) => {
+export const getUserTimestamp = async (userAddress: any) => {
   try {
     const response = await fcl.query({
       cadence: getUserTimestampScript(),
-      args: (arg, t) => [arg(userAddress, t.Address)],
+      args: (arg: any, t: any) => [arg(userAddress, t.Address)],
     });
 
     console.log(response);
@@ -74,3 +74,5 @@ export const getUserTimestamp = async (userAddress) => {
     console.log(e);
   }
 }
+
+// @ts-ignore
