@@ -57,9 +57,15 @@ const Navbar: React.FC = () => {
           <p className="text-white text-base font-semibold">
             Connect Wallet
           </p>
-
         </button>
         }
+        <div className="flex flex-row ml-10">
+          {isConnected === true ?
+        <div className="border border-green-500 px-4 py-2 rounded-full text-green-500 font-bold">{user?.addr}</div>
+        : 
+        <div className="border border-grey-500 px-4 py-2 rounded-full text-grey-500 font-bold">Not Connected</div>
+          }
+        </div>
       </ul>
       <div className="flex relative">
         {!toggleMenu && (
