@@ -47,23 +47,26 @@ const Navbar: React.FC = () => {
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
         {isConnected === true ?
           <button onClick={() => Disconnect()}>Disconnect</button>
-          : 
+          :
           <button
-          type="button"
-          onClick={() => Connect()}
-          className="flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]"
-        >
-          <AiFillPlayCircle className="text-white mr-2" />
-          <p className="text-white text-base font-semibold">
-            Connect Wallet
-          </p>
-        </button>
+            type="button"
+            onClick={() => Connect()}
+            className="flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]"
+          >
+            <AiFillPlayCircle className="text-white mr-2" />
+            <p className="text-white text-base font-semibold">
+              Connect Wallet
+            </p>
+          </button>
         }
         <div className="flex flex-row ml-10">
           {isConnected === true ?
-        <div className="border border-green-500 px-4 py-2 rounded-full text-green-500 font-bold">{user?.addr}</div>
-        : 
-        <div className="border border-grey-500 px-4 py-2 rounded-full text-grey-500 font-bold">Not Connected</div>
+            <div
+              /*
+  // @ts-ignore */
+              className="border border-green-500 px-4 py-2 rounded-full text-green-500 font-bold"> {user?.addr} </div>
+            :
+            <div className="border border-grey-500 px-4 py-2 rounded-full text-grey-500 font-bold">Not Connected</div>
           }
         </div>
       </ul>
@@ -81,9 +84,9 @@ const Navbar: React.FC = () => {
           >
             <li className="text-xl w-full my-2"><AiOutlineClose onClick={() => setToggleMenu(false)} /></li>
             {isConnected === true ?
-            <button className="my-2 mx-4 text-lg" onClick={() => Disconnect()}>Disconnect</button>
-              : 
-            <button onClick={() => Connect()} className="my-2 mx-4 text-lg">Connect Wallet</button> 
+              <button className="my-2 mx-4 text-lg" onClick={() => Disconnect()}>Disconnect</button>
+              :
+              <button onClick={() => Connect()} className="my-2 mx-4 text-lg">Connect Wallet</button>
             }
           </ul>
         )}

@@ -1,10 +1,9 @@
-pub contract Guestbook {
+pub contract Whitelist {
 
     // Contract Information
     pub var addressInfo: {Address: UFix64}
 
     // Events
-    //
     pub event ContractInitialized()
     pub event Signed(user: Address, timestamp: UFix64)
     // Public function to add a new Address
