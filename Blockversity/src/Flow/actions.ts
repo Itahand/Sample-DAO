@@ -18,17 +18,17 @@ import { getUserTimestamp as getUserTimestampScript } from './Scripts/get_user_t
 
 // // Transactions
 
-import { signGuestbook as signGuestbookTransaction } from './Transactions/sign_Guestbook';
+import { signWhitelist as signWhitelistTransaction } from './Transactions/sign_Whitelist';
 
 // // ****** Transactions Functions ****** //
 
-export const signGuestbook = async () => {
+export const signWhitelist = async () => {
 
 
   return new Promise(async (resolve, reject) => {
     try {
       const transactionId = await fcl.mutate({
-        cadence: signGuestbookTransaction(),
+        cadence: signWhitelistTransaction(),
         proposer: fcl.currentUser,
         payer: fcl.currentUser,
         authorizations: [fcl.currentUser],

@@ -1,4 +1,4 @@
-import { signGuestbook , getAllAddresses } from "../Flow/actions";
+import { signWhitelist, getAllAddresses } from "../Flow/actions";
 import { useEffect, useState } from "react";
 
 
@@ -7,7 +7,7 @@ const companyCommonStyles = "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex jus
 const Welcome: React.FC = () => {
   //   const { currentAccount, connectWallet, handleChange, sendTransaction, formData, isLoading } = useContext<TransactionContext>(TransactionContext);
   const [addresses, setAddresses] = useState([]);
-  const [toggle , setToggle] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   const showAddresses = () => {
     setToggle(!toggle);
@@ -28,32 +28,32 @@ const Welcome: React.FC = () => {
             Welcome
           </h1>
           <p className="text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base">
-            Sign the Guestbook to get started!
-            </p>
+            Sign the Whitelist to get started!
+          </p>
           <button
             type="button"
-            onClick={() => signGuestbook()}
+            onClick={() => signWhitelist()}
             className="flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]"
           >
             <p className="text-white text-base font-semibold">
-              Sign Guestbook
+              Sign Whitelist
             </p>
           </button>
 
           <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
             <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism">
-            <button onClick={() => showAddresses()}>
-            Get All Addresses
-            </button>
-            {toggle && (
-              <div>
-                {addresses.map((address) => (
-                  <div key={address}>
-                  <p>{address}</p>
-                  </div>
-                 ))}
+              <button onClick={() => showAddresses()}>
+                Get All Addresses
+              </button>
+              {toggle && (
+                <div>
+                  {addresses.map((address) => (
+                    <div key={address}>
+                      <p>{address}</p>
+                    </div>
+                  ))}
                 </div>
-                )}
+              )}
             </div>
           </div>
 

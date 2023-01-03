@@ -1,6 +1,6 @@
-export const signGuestbook = () => {
+export const signWhitelist = () => {
   return `
-  import Guestbook from 0x800a10d0fff7acd4
+  import Whitelist from 0x800a10d0fff7acd4
 
   transaction {
     // Setup address variable
@@ -12,7 +12,7 @@ export const signGuestbook = () => {
     }
 
     execute {
-      // Add address to the Guestbook
+      // Add address to the Whitelist
       Guestbook.addAddress(newAddress: self.address)
     }
   }
