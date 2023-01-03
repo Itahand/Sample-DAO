@@ -12,7 +12,7 @@ BlockVersity gives power back to thousands of global course creators selling on 
 
 ## Overview
 
- Congratulations! This is the first step in your journey towards learning how to build a DAO on the Flow network. This document's objective is to provide the basic tools and help you understand how to use them.
+ Congratulations! This is the first step in your journey towards learning how to build a DAO on the Flow network. This document's objective is to provide the basic tools and help you understand how to use them. You can read the full guide [here](https://medium.com/blockversity/build-a-dao-on-flow-21569387fc3a) 
 
  All of the code that interacts with Flow is written with Cadence; a new high-level programming language intended for smart contract development.
 
