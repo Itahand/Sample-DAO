@@ -1,6 +1,6 @@
 export const signWhitelist = () => {
   return `
-  import Whitelist from 0x800a10d0fff7acd4
+  import Whitelist from 0xa2f587819db4486e
 
   transaction {
     // Setup address variable
@@ -13,7 +13,7 @@ export const signWhitelist = () => {
 
     execute {
       // Add address to the Whitelist
-      Guestbook.addAddress(newAddress: self.address)
+      Whitelist.addAddress(newAddress: self.address)
     }
   }
   `

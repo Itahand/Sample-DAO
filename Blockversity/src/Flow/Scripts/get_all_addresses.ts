@@ -1,8 +1,8 @@
 export const getAllAddresses = () => {
   return `
-  import Guestbook from 0x800a10d0fff7acd4
+  import Whitelist from 0xa2f587819db4486e
   pub fun main():[Address] {
-    let timestamp = Guestbook.addressInfo.keys
+    let timestamp = Whitelist.addressInfo.keys
     return timestamp
   }
   `

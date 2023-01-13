@@ -1,8 +1,8 @@
 export const getUserTimestamp = () => {
   return `
-  import Guestbook from 0x800a10d0fff7acd4
+  import Whitelist from 0xa2f587819db4486e
   pub fun main(user: Address): UFix64? {
-    let timestamp = Guestbook.addressInfo[user]
+    let timestamp = Whitelist.addressInfo[user]
     return timestamp
   }
   `
