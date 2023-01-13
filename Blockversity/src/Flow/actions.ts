@@ -1,3 +1,4 @@
+//@ts-ignore
 import * as fcl from "@onflow/fcl";
 //import t from "@onflow/types";
 import './config';
