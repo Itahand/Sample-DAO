@@ -2,6 +2,7 @@ import FungibleToken from "../utility/FungibleToken.cdc"
 import NonFungibleToken from "../utility/NonFungibleToken.cdc"
 import BlockVersityTokenMetadataViews from "../BlockVersityTokenMetadataViews.cdc"
 import FUSD from "../utility/FUSD.cdc"
+import Whitelist from "../Whitelist.cdc"
 
 pub contract BlockVersityTokenPublicSale {
 
@@ -84,9 +85,9 @@ pub contract BlockVersityTokenPublicSale {
 
     // BVT purchase method
     // User pays FUSD and get unlocked BlockVersityToken
-    // Note that "address" can potentially be faked, but there's no incentive doing so
     pub fun purchase(from: @FUSD.Vault, address: Address) {
         pre {
+            Whitelist.addressInfo[address] != nil: "This Address is not in the Whitelist"
             self.isSaleActive: "Token sale is not active"
             self.purchases[address] == nil: "Already purchased by the same account"
             from.balance <= self.personalCap: "Purchase amount exceeds personal cap"
@@ -203,7 +204,7 @@ pub contract BlockVersityTokenPublicSale {
 
             let receiverRef = getAccount(address).getCapability(/public/fusdReceiver)
                 .borrow<&{FungibleToken.Receiver}>()
-                ?? panic("Could not borrow tUSDT vault receiver public reference")
+                ?? panic("Could not borrow FUSD vault receiver public reference")
 
             let purchaseInfo = BlockVersityTokenPublicSale.purchases[address]
                 ?? panic("Count not get purchase info for the address")
@@ -254,10 +255,10 @@ pub contract BlockVersityTokenPublicSale {
         // Needs Admin to start manually
         self.isSaleActive = false
 
-        // 1 BvT = 0.4 tUSDT
+        // 1 BVT = 0.4 FUSD
         self.price = 0.4
 
-        // Each user can purchase at most 500 tUSDT worth of BvT
+        // Each user can purchase at most 500 FUSD worth of BvT
         self.personalCap = 500.0
 
         self.purchases = {}
