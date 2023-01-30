@@ -1,5 +1,5 @@
-import FungibleToken from "../../contracts/standard/FungibleToken.cdc"
-import FlowToken from "../../contracts/standard/FlowToken.cdc"
+import FungibleToken from "../../contracts/utility/FungibleToken.cdc"
+import FlowToken from "../../contracts/utility/FlowToken.cdc"
 
 transaction(recipient: Address, amount: UFix64) {
 
@@ -12,7 +12,7 @@ transaction(recipient: Address, amount: UFix64) {
         ?? panic("Signer is not the token admin")
 
         self.tokenReceiver = getAccount(recipient)
-            .getCapability(/public/flowTokenReceiver)!
+            .getCapability(/public/flowTokenReceiver)
             .borrow<&{FungibleToken.Receiver}>()
             ?? panic("Unable to borrow receiver reference")
     }

@@ -1,4 +1,4 @@
-import Guestbook from "../../contracts/Blockversity/Guestbook.cdc"
+import Whitelist from "../../../contracts/Whitelist.cdc"
 
 transaction {
   // Setup address variable
@@ -10,7 +10,7 @@ transaction {
   }
 
   execute {
-    // Add address to the Guestbook
-    Guestbook.addAddress(newAddress: self.address)
+    // Add address to the Whitelist
+    Whitelist.addAddress(newAddress: self.address)
   }
 }

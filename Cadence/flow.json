@@ -1,61 +1,72 @@
 {
+	"emulators": {
+		"default": {
+			"port": 3569,
+			"serviceAccount": "emulator-account"
+		}
+	},
+	"contracts": {
+		"Debug": "./contracts/utility/Debug.cdc",
+		"Whitelist": "./contracts/Whitelist.cdc",
+		"BlockVersityToken": "./contracts/BlockVersityToken.cdc",
+		"BlockVersityTokenMetadataViews": "./contracts/BlockVersityTokenMetadataViews.cdc",
+		"FungibleTokenMetadataViews": "./contracts/utility/FungibleTokenMetadataViews.cdc",
+		"BlockVersityTokenPublicSale": "./contracts/sales/BlockVersityTokenPublicSale.cdc",
+		"exampleToken": "./contracts/exampleToken.cdc",
+		"FungibleToken": "./contracts/utility/FungibleToken.cdc",
+		"FUSD": "./contracts/utility/FUSD.cdc",
+		"FlowToken": {
+			"source": "./contracts/utility/FlowToken.cdc",
+			"aliases": {
+				"emulator": "0x0ae53cb6e3f42a79",
+				"testnet": "0x7e60df042a9c0868",
+				"mainnet": "0x1654653399040a61"
+			}
+		},
+		"NonFungibleToken": {
+			"source": "./contracts/utility/NonFungibleToken.cdc",
+			"aliases": {
+				"testnet": "0x631e88ae7f1d7c20",
+				"mainnet": "0x1d7e57aa55817448"
+			}
+		},
+		"MetadataViews": {
+			"source": "./contracts/utility/MetadataViews.cdc",
+			"aliases": {
+				"testnet": "0x631e88ae7f1d7c20",
+				"mainnet": "0x1d7e57aa55817448"
+			}
+		}
+	},
 	"networks": {
 		"emulator": "127.0.0.1:3569",
 		"mainnet": "access.mainnet.nodes.onflow.org:9000",
 		"testnet": "access.devnet.nodes.onflow.org:9000"
 	},
-	"contracts": {
-		"Guestbook": "./contracts/Blockversity/Guestbook.cdc",
-		"NonFungibleToken": {
-			"source": "./contracts/standard/NonFungibleToken.cdc",
-			"aliases": {
-				"testnet": "0x631e88ae7f1d7c20"
-			}
-		},
-		"NFTStorefrontV2": {
-			"source": "./contracts/standard/NFTStorefrontV2.cdc",
-			"aliases": {
-				"testnet": "0x2d55b98eb200daef"
-			}
-		},
-		"MetadataViews": {
-			"source": "./contracts/standard/MetadataViews.cdc",
-			"aliases": {
-				"mainnet": "0x1d7e57aa55817448",
-				"testnet": "0x631e88ae7f1d7c20"
-			}
-		},
-		"FlowToken": {
-			"source": "./contracts/standard/FlowToken.cdc",
-			"aliases": {
-				"testnet": "0x7e60df042a9c0868",
-				"emulator": "0x0ae53cb6e3f42a79",
-				"mainnet": "0x1654653399040a61"
-			}
-		},
-		"FungibleToken": {
-			"source": "./contracts/standard/FungibleToken.cdc",
-			"aliases": {
-				"testnet": "9a0766d93b6608b7",
-				"emulator": "ee82856bf20e2aa6",
-				"mainnet": "0xf233dcee88fe0abe"
-			}
-		}
-	},
 	"accounts": {
-		"testnet-account": {
-			"address": "0x800a10d0fff7acd4",
-			"key": {
-				"type": "hex",
-				"index": 0,
-				"signatureAlgorithm": "ECDSA_P256",
-				"hashAlgorithm": "SHA3_256",
-				"privateKey": "077a4268773503750e1ad2757f3f6768ff73ef03c3410e2e7e4e027ca43b2a04"
-			}
-		},
 		"emulator-account": {
 			"address": "f8d6e0586b0a20c7",
-			"key": "a51adb32c084e1a2e293d82c50bbda42ddc20a580c1bc55787ef0c39392c0c61"
+			"key": "dc0097a6b58533e56af78c955e7b0c0f386b5f44f22b75c390beab7fcb1af13f"
+		},
+		"emulator-first": {
+			"address": "01cf0e2f2f715450",
+			"key": "d5457a187e9642a8e49d4032b3b4f85c92da7202c79681d9302c6e444e7033a8"
+		},
+		"emulator-second": {
+			"address": "179b6b1cb6755e31",
+			"key": "d5457a187e9642a8e49d4032b3b4f85c92da7202c79681d9302c6e444e7033a8"
+		},
+		"emulator-3": {
+			"address": "f3fcd2c1a78f5eee",
+			"key": "d5457a187e9642a8e49d4032b3b4f85c92da7202c79681d9302c6e444e7033a8"
+		},
+		"emulator-4": {
+			"address": "e03daebed8ca0615",
+			"key": "d5457a187e9642a8e49d4032b3b4f85c92da7202c79681d9302c6e444e7033a8"
+		},
+		"emulator-5": {
+			"address": "045a1763c93006ca",
+			"key": "d5457a187e9642a8e49d4032b3b4f85c92da7202c79681d9302c6e444e7033a8"
 		},
 		"emulator-alice": {
 			"address": "0x01cf0e2f2f715450",
@@ -68,16 +79,30 @@
 	},
 	"deployments": {
 		"emulator": {
-			"emulator-alice": [],
-			"emulator-bob": [],
 			"emulator-account": [
+				"Debug",
+				"Whitelist",
 				"NonFungibleToken",
 				"MetadataViews",
-				"Guestbook"
-			]
+				"FungibleToken",
+				"exampleToken",
+				"FungibleTokenMetadataViews",
+				"BlockVersityTokenMetadataViews",
+				"BlockVersityTokenPublicSale",
+				"FUSD"
+			],
+			"emulator-bob": [],
+			"emulator-alice": []
 		},
 		"testnet": {
-			"testnet-account": []
+			"emulator-first": [
+				"Debug"
+			]
+		},
+		"mainnet": {
+			"emulator-second": [
+				"Debug"
+			]
 		}
 	}
 }

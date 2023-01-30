@@ -274,7 +274,7 @@ pub contract NFTStorefrontV2 {
         pub fun borrowNFT(): &NonFungibleToken.NFT? {
             let ref = self.nftProviderCapability.borrow()!.borrowNFT(id: self.details.nftID)
             if ref.isInstance(self.details.nftType) && ref.id == self.details.nftID {
-                return ref as! &NonFungibleToken.NFT
+                return ref
             }
             return nil
         }
@@ -714,7 +714,7 @@ pub contract NFTStorefrontV2 {
                         self.cleanup(listingResourceID: listingsIDs[index])
                     }
                 }
-                index = index + UInt64(1)
+                index = index + 1
             }
         }
 

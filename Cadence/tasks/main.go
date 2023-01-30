@@ -15,7 +15,7 @@ func epochToHumanReadable(epoch int64) time.Time {
 
 func main() {
 
-	otu := Overflow(
+	o := Overflow(
 
 		WithGlobalPrintOptions(),
 	)
@@ -24,16 +24,16 @@ func main() {
 	fmt.Println("Press any key to continue")
 	fmt.Scanln()
 	/*
-		Add an address to the Guestbook
+		Add an address to the Whitelist
 	*/
 
-	color.Red("Should be able to sign Bob's and Alice's addresses into the Guestbook.")
-	otu.Tx(
-		"./Guestbook/sign_guestbook",
+	color.Red("Should be able to sign Bob's and Alice's addresses into the Whitelist.")
+	o.Tx(
+		"./BlockVersity/Whitelist/sign_whitelist",
 		WithSigner("bob"),
 	)
-	otu.Tx(
-		"./Guestbook/sign_guestbook",
+	o.Tx(
+		"./BlockVersity/Whitelist/sign_whitelist",
 		WithSigner("alice"),
 	)
 	color.Green("-----------------------------PASSED---------------------")
@@ -43,8 +43,8 @@ func main() {
 	*/
 
 	color.Red("Should be able to fetch all the signed addresses")
-	otu.Script(
-		"./Guestbook/get_all_addresses",
+	o.Script(
+		"./BlockVersity/Whitelist/get_all_addresses",
 		WithSigner("account"),
 		WithArg("user", "bob"),
 	)
@@ -54,8 +54,8 @@ func main() {
 		Fetch timestamp for a user.
 	*/
 
-	epoch := otu.Script(
-		"./Guestbook/get_user_timestamp",
+	epoch := o.Script(
+		"./BlockVersity/Whitelist/get_user_timestamp",
 		WithSigner("account"),
 		WithArg("user", "bob"),
 	).Result
@@ -65,9 +65,28 @@ func main() {
 
 	color.Green("-----------------------------PASSED---------------------")
 
-	color.Red("Shouldn't let you sign twice with the same account")
-	otu.Tx(
-		"./Guestbook/sign_guestbook",
-		WithSigner("bob"),
+	/* 	color.Red("Shouldn't let you sign twice with the same account")
+	   	o.Tx(
+	   		"./BlockVersity/Whitelist/sign_whitelist",
+	   		WithSigner("bob"),
+	   	) */
+
+	/*
+		Setup an account with the BlockVersity Token
+	*/
+
+	color.Red("Should be able to setup an account to receive BVT")
+	o.Tx(
+		"./BlockVersity/token/setup_account_MetadataViews",
+		WithSigner("alice"),
 	)
+	o.Script(
+		"./BlockVersity/token/getBalance",
+		WithArg("account", "alice"),
+	)
+	o.Script(
+		"./BlockVersity/token/getTotalSupply",
+	)
+	color.Green("-----------------------------PASSED---------------------")
+
 }
