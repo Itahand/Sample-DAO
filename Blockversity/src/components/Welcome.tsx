@@ -91,6 +91,7 @@ const Welcome: React.FC = () => {
           </div>
 
           <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
+            <h2>Send</h2>
             <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism">
             <Input placeholder="Address To" name="addressTo" type="text" handleChange={handleChange} />
             <Input placeholder="Amount tokens" name="amount" type="number" handleChange={handleChange} />
@@ -102,6 +103,22 @@ const Welcome: React.FC = () => {
                 className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer"
               >
               Send now
+            </button>
+              
+            </div>
+          </div>
+
+          <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
+            <h2>Buy</h2>
+            <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism">
+            <Input placeholder="Amount tokens" name="amount" type="number" handleChange={handleChange} />
+            
+            <button
+                type="button"
+                onClick={handleSubmit}
+                className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer"
+              >
+              Buy now
             </button>
               
             </div>
