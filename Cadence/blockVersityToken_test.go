@@ -138,14 +138,9 @@ func TestPurchaseBVT(t *testing.T) {
 
 	o.Tx("/BlockVersity/sales/public/admin/depositBVT",
 		WithSigner("account"),
-		WithArg("amount", "1000.0"),
+		WithArg("amount", "500.0"),
 	).AssertSuccess(t)
-	color.Green("Emulator Account has deposited 1000 BVT into ICO's smart contract")
-
-	o.Tx("/BlockVersity/sales/public/admin/unpause",
-		WithSigner("account"),
-	).AssertSuccess(t)
-	color.Red("The Sale has been activated(unpaused)")
+	color.Green("Emulator Account has deposited 500 BVT into ICO's smart contract")
 
 	AccountBVTVault := o.Script("/BlockVersity/sales/getBVTVaultBalance",
 		WithSigner("account"),
@@ -166,12 +161,26 @@ func TestPurchaseBVT(t *testing.T) {
 	color.Green("The ICO's FUSD balance before purchase is: ")
 	fmt.Println(beforeAccountFUSDVault)
 
+	// Attempt to purchase before the sale is active
+
+	color.Green("Bob will attempt to buy when the sale is not active")
+	o.Tx("/BlockVersity/sales/public/purchaseBVT",
+		WithSigner("bob"),
+		WithArg("amount", "1000.0"),
+	).AssertFailure(t, "Token sale is not active")
+	color.Cyan("Bob couldn't buy BVT because the sale is not active")
+
+	o.Tx("/BlockVersity/sales/public/admin/unpause",
+		WithSigner("account"),
+	).AssertSuccess(t)
+	color.Red("The Sale has been activated(unpaused)")
+
 	// Attempt to purchase without being Whitelisted
 	color.Green("Bob will attempt to buy without being Whitelisted")
 	o.Tx("/BlockVersity/sales/public/purchaseBVT",
 		WithSigner("bob"),
 		WithArg("amount", "1000.0"),
-	).AssertFailure(t, "This Address is not in the Whitelist").Print()
+	).AssertFailure(t, "This Address is not in the Whitelist")
 	color.Cyan("Bob couldn't buy BVT because he's not Whitelisted")
 
 	// Bob signs the Whitelist
@@ -184,11 +193,10 @@ func TestPurchaseBVT(t *testing.T) {
 	// Attempt to purchase above personal cap
 
 	color.Green("Bob will attempt to buy $1000 worth of BVT!")
-	errorResult := o.Tx("/BlockVersity/sales/public/purchaseBVT",
+	o.Tx("/BlockVersity/sales/public/purchaseBVT",
 		WithSigner("bob"),
 		WithArg("amount", "1000.0"),
-	).AssertFailure(t, "Purchase amount exceeds personal cap").Err
-	fmt.Println(errorResult)
+	).AssertFailure(t, "Purchase amount exceeds personal cap")
 	color.Cyan("Bob couldn't buy pass his personal cap")
 
 	color.Green("Bob will attempt to buy $500 worth of BVT!")
@@ -243,4 +251,10 @@ func TestPurchaseBVT(t *testing.T) {
 	).Result
 	color.Green("The ICO's FUSD balance after distribution and refund is: ")
 	fmt.Println(afterAccountFUSDVault)
+
+	afterAccountBVTVault := o.Script("/BlockVersity/sales/getBVTVaultBalance",
+		WithSigner("account"),
+	).Result
+	color.Green("The ICO's BVT balance after distribution is: ")
+	fmt.Println(afterAccountBVTVault)
 }

@@ -2,6 +2,7 @@ import FungibleToken from "../utility/FungibleToken.cdc"
 import NonFungibleToken from "../utility/NonFungibleToken.cdc"
 import BlockVersityTokenMetadataViews from "../BlockVersityTokenMetadataViews.cdc"
 import FUSD from "../utility/FUSD.cdc"
+import Whitelist from "../Whitelist.cdc" // allowList? Avoiding oppressive terminology?
 
 pub contract BlockVersityTokenPublicSale {
 
@@ -87,6 +88,7 @@ pub contract BlockVersityTokenPublicSale {
     pub fun purchase(from: @FUSD.Vault, address: Address) {
         pre {
             self.isSaleActive: "Token sale is not active"
+            Whitelist.addressInfo[address] != nil: "This Address is not in the Whitelist"
             self.purchases[address] == nil: "Already purchased by the same account"
             from.balance <= self.personalCap: "Purchase amount exceeds personal cap"
         }
