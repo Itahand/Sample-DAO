@@ -2,10 +2,10 @@ import FungibleToken from "./utility/FungibleToken.cdc"
 import MetadataViews from "./utility/MetadataViews.cdc"
 import FungibleTokenMetadataViews from "./utility/FungibleTokenMetadataViews.cdc"
 
-// Token contract for BlockVersityTokenMetadataViews (BVT)
-pub contract BlockVersityTokenMetadataViews: FungibleToken {
+// Token contract for BlockVersityToken (BVT)
+pub contract BlockVersityToken: FungibleToken {
 
-    /// Total supply of BlockVersityTokenMetadataViewss in existence
+    /// Total supply of BlockVersityTokens in existence
     pub var totalSupply: UFix64
 
     /// Storage and Public Paths
@@ -80,7 +80,7 @@ pub contract BlockVersityTokenMetadataViews: FungibleToken {
         /// @param from: The Vault resource containing the funds that will be deposited
         ///
         pub fun deposit(from: @FungibleToken.Vault) {
-            let vault <- from as! @BlockVersityTokenMetadataViews.Vault
+            let vault <- from as! @BlockVersityToken.Vault
             self.balance = self.balance + vault.balance
             emit TokensDeposited(amount: vault.balance, to: self.owner?.address)
             vault.balance = 0.0
@@ -89,11 +89,11 @@ pub contract BlockVersityTokenMetadataViews: FungibleToken {
 
         destroy() {
             if self.balance > 0.0 {
-                BlockVersityTokenMetadataViews.totalSupply = BlockVersityTokenMetadataViews.totalSupply - self.balance
+                BlockVersityToken.totalSupply = BlockVersityToken.totalSupply - self.balance
             }
         }
 
-        /// The way of getting all the Metadata Views implemented by BlockVersityTokenMetadataViews
+        /// The way of getting all the Metadata Views implemented by BlockVersityToken
         ///
         /// @return An array of Types defining the implemented views. This value will be used by
         ///         developers to know which parameter to pass to the resolveView() method.
@@ -104,7 +104,7 @@ pub contract BlockVersityTokenMetadataViews: FungibleToken {
                     Type<FungibleTokenMetadataViews.FTVaultData>()]
         }
 
-        /// The way of getting a Metadata View out of the BlockVersityTokenMetadataViews
+        /// The way of getting a Metadata View out of the BlockVersityToken
         ///
         /// @param view: The Type of the desired view.
         /// @return A structure representing the requested view.
@@ -139,15 +139,15 @@ pub contract BlockVersityTokenMetadataViews: FungibleToken {
                     )
                 case Type<FungibleTokenMetadataViews.FTVaultData>():
                     return FungibleTokenMetadataViews.FTVaultData(
-                        storagePath: BlockVersityTokenMetadataViews.VaultStoragePath,
-                        receiverPath: BlockVersityTokenMetadataViews.ReceiverPublicPath,
-                        metadataPath: BlockVersityTokenMetadataViews.VaultPublicPath,
-                        providerPath: /private/BlockVersityTokenMetadataViewsVault,
-                        receiverLinkedType: Type<&BlockVersityTokenMetadataViews.Vault{FungibleToken.Receiver}>(),
-                        metadataLinkedType: Type<&BlockVersityTokenMetadataViews.Vault{FungibleToken.Balance, MetadataViews.Resolver}>(),
-                        providerLinkedType: Type<&BlockVersityTokenMetadataViews.Vault{FungibleToken.Provider}>(),
+                        storagePath: BlockVersityToken.VaultStoragePath,
+                        receiverPath: BlockVersityToken.ReceiverPublicPath,
+                        metadataPath: BlockVersityToken.VaultPublicPath,
+                        providerPath: /private/BlockVersityTokenVault,
+                        receiverLinkedType: Type<&BlockVersityToken.Vault{FungibleToken.Receiver}>(),
+                        metadataLinkedType: Type<&BlockVersityToken.Vault{FungibleToken.Balance, MetadataViews.Resolver}>(),
+                        providerLinkedType: Type<&BlockVersityToken.Vault{FungibleToken.Provider}>(),
                         createEmptyVaultFunction: (fun (): @FungibleToken.Vault {
-                            return <-BlockVersityTokenMetadataViews.createEmptyVault()
+                            return <-BlockVersityToken.createEmptyVault()
                         })
                     )
             }
@@ -201,12 +201,12 @@ pub contract BlockVersityTokenMetadataViews: FungibleToken {
         /// @param amount: The quantity of tokens to mint
         /// @return The Vault resource containing the minted tokens
         ///
-        pub fun mintTokens(amount: UFix64): @BlockVersityTokenMetadataViews.Vault {
+        pub fun mintTokens(amount: UFix64): @BlockVersityToken.Vault {
             pre {
                 amount > 0.0: "Amount minted must be greater than zero"
                 amount <= self.allowedAmount: "Amount minted must be less than the allowed amount"
             }
-            BlockVersityTokenMetadataViews.totalSupply = BlockVersityTokenMetadataViews.totalSupply + amount
+            BlockVersityToken.totalSupply = BlockVersityToken.totalSupply + amount
             self.allowedAmount = self.allowedAmount - amount
             emit TokensMinted(amount: amount)
             return <-create Vault(balance: amount)
@@ -229,7 +229,7 @@ pub contract BlockVersityTokenMetadataViews: FungibleToken {
         /// @param from: The Vault resource containing the tokens to burn
         ///
         pub fun burnTokens(from: @FungibleToken.Vault) {
-            let vault <- from as! @BlockVersityTokenMetadataViews.Vault
+            let vault <- from as! @BlockVersityToken.Vault
             let amount = vault.balance
             destroy vault
             emit TokensBurned(amount: amount)
@@ -237,13 +237,13 @@ pub contract BlockVersityTokenMetadataViews: FungibleToken {
     }
 
     init() {
-        // Total supply of BVT is 350M
-        self.totalSupply = 350_000_000.0
+        // Total supply of BVT is 300M
+        self.totalSupply = 300_000_000.0
 
-        self.VaultStoragePath = /storage/BlockVersityTokenMetadataViewsVault
-        self.VaultPublicPath = /public/BlockVersityTokenMetadataViewsMetadata
-        self.ReceiverPublicPath = /public/BlockVersityTokenMetadataViewsReceiver
-        self.AdminStoragePath = /storage/BlockVersityTokenMetadataViewsAdmin
+        self.VaultStoragePath = /storage/BlockVersityTokenVault
+        self.VaultPublicPath = /public/BlockVersityTokenMetadata
+        self.ReceiverPublicPath = /public/BlockVersityTokenReceiver
+        self.AdminStoragePath = /storage/BlockVersityTokenAdmin
 
         // Create the Vault with the total supply of tokens and save it in storage.
         let vault <- create Vault(balance: self.totalSupply)
@@ -251,14 +251,14 @@ pub contract BlockVersityTokenMetadataViews: FungibleToken {
 
         // Create a public capability to the stored Vault that exposes
         // the `deposit` method through the `Receiver` interface.
-        self.account.link<&BlockVersityTokenMetadataViews.Vault{FungibleToken.Receiver}>(
+        self.account.link<&BlockVersityToken.Vault{FungibleToken.Receiver}>(
             self.ReceiverPublicPath,
             target: self.VaultStoragePath
         )
 
         // Create a public capability to the stored Vault that only exposes
         // the `balance` field and the `resolveView` method through the `Balance` interface
-        self.account.link<&BlockVersityTokenMetadataViews.Vault{FungibleToken.Balance}>(
+        self.account.link<&BlockVersityToken.Vault{FungibleToken.Balance}>(
             self.VaultPublicPath,
             target: self.VaultStoragePath
         )

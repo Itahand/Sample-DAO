@@ -1,5 +1,5 @@
-import FungibleToken from "../../contracts/standard/FungibleToken.cdc"
-import FlowToken from "../../contracts/standard/FlowToken.cdc"
+import FungibleToken from "../../contracts/utility/FungibleToken.cdc"
+import FlowToken from "../../contracts/utility/FlowToken.cdc"
 
 transaction(amount: UFix64, recipient: Address) {
 
@@ -20,7 +20,7 @@ transaction(amount: UFix64, recipient: Address) {
         let recipientAccount = getAccount(recipient)
 
         // Get a reference to the recipient's Receiver
-        let receiverRef = recipientAccount.getCapability(/public/flowTokenReceiver)!
+        let receiverRef = recipientAccount.getCapability(/public/flowTokenReceiver)
             .borrow<&{FungibleToken.Receiver}>()
             ?? panic("Could not borrow receiver reference to the recipient's Vault")
 
