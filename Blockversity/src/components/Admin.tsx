@@ -19,21 +19,15 @@ const Input: React.FC<InputProps> = ({ placeholder, name, type, value, handleCha
   />
 );
 
+
 const AdminDashboard: React.FC = () => {
   const [price, setPrice] = useState(0);
   const [tokenBalance, setTokenBalance] = useState(0);
   const [fUSDBalance, setFUSDBalance] = useState(0);
     const [tokenSalePaused, setTokenSalePaused] = useState(false);
-    const [formData, setFormData] = useState({
-    addressTo: "",
-    amount: "",
-
-    });
+    const [depositAmount, setDepositAmount] = useState(0);
+    const [withdrawAmount, setWithdrawAmount] = useState(0);
     
-    
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, name: string) => {
-    setFormData({ ...formData, [name]: e.target.value });
-  };
 
   const handlePriceChange = (value: number) => {
     setPrice(value);
@@ -98,25 +92,47 @@ const AdminDashboard: React.FC = () => {
           Sell Tokens
         </button>
           </div>
-                    <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
-            <h2>Send</h2>
-            <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism">
-            <Input placeholder="Address To" name="addressTo" type="text" handleChange={handleChange} />
-            <Input placeholder="Amount tokens" name="amount" type="number" handleChange={handleChange} />
-            <Input placeholder="Enter Message" name="message" type="text" handleChange={handleChange} />
-            
-            <button
-                type="button"
-                onClick={handleSubmit}
-                className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer"
-              >
-              Send now
-            </button>
-              
-            </div>
+                <div className="mb-4">
+        <input
+          type="number"
+          value={depositAmount}
+        onChange={(e) => setDepositAmount(Number(e.target.value))}
+          placeholder="Amount to deposit"
+          className="my-2 w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism"
+        />
+        <button
+          className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer"
+          onClick={handleDeposit}
+        >
+          Deposit
+        </button>
           </div>
+          <div className="mb-4">
+        <input
+          type="number"
+          value={withdrawAmount}
+        onChange={(e) => setWithdrawAmount(Number(e.target.value))}
+          placeholder="Amount to withdraw"
+          className="my-2 w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism"
+        />
+              <button
+                  className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer"
+                  onClick={handleWithdraw}
+              >
+                  Withdraw
+              </button>
+          </div>
+          <div className="mb-4">
+              <button
+                  className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer"
+                  onClick={handlePauseTokenSale}
+              >
+                  {tokenSalePaused ? "Unpause" : "Pause"} Token Sale
+              </button>
+              
+          </div>
+          
       </div>
-      
     );
 };
 

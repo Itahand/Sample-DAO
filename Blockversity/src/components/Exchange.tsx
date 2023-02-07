@@ -22,11 +22,11 @@ const Exchange = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-10 bg-blue-900 text-white rounded-lg">
-      <h2 className="text-lg font-medium mb-5">Coin Swap</h2>
+    <div className="bg-dark-blue-500">
+      <h2 className="text-lg font-medium mb-5 text-white">Coin Swap</h2>
 
       <div className="mb-5">
-        <label htmlFor="fromValue" className="block font-medium mb-2">
+        <label htmlFor="fromValue" className="block text-white font-medium mb-2">
           From Value
         </label>
         <input
@@ -39,7 +39,7 @@ const Exchange = () => {
       </div>
 
       <div className="mb-5">
-        <label htmlFor="fromToken" className="block font-medium mb-2">
+        <label htmlFor="fromToken" className="block text-white font-medium mb-2">
           From Token
         </label>
         <select
@@ -55,7 +55,7 @@ const Exchange = () => {
       </div>
 
       <div className="mb-5">
-        <label htmlFor="toToken" className="block font-medium mb-2">
+        <label htmlFor="toToken" className="block text-white font-medium mb-2">
           To Token
         </label>
         <select
@@ -70,7 +70,7 @@ const Exchange = () => {
         </select>
       </div>
 
-      <button onClick={handleSwap} className="bg-white text-blue-900 p-2 rounded-lg">
+      <button onClick={handleSwap} className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer">
         Swap
       </button>
     </div>

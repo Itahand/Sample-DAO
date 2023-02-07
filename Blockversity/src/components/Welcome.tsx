@@ -74,11 +74,17 @@ const Welcome: React.FC = () => {
               Sign Whitelist
             </p>
           </button>
-          <Exchange />
+          
+
           
           <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
             <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism">
               <AdminDashboard />
+            </div>
+          </div>
+                    <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
+            <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center text-black blue-glassmorphism">
+              <Exchange />
             </div>
           </div>
 
