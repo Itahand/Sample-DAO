@@ -7,16 +7,19 @@
 	},
 	"contracts": {
 		"Debug": "./contracts/utility/Debug.cdc",
+		"testFT": "./contracts/utility/testFT.cdc",
 		"Whitelist": "./contracts/Whitelist.cdc",
+		"SwapFactory": "./contracts/DEX/SwapFactory.cdc",
+		"SwapErrors": "./contracts/DEX/SwapErrors.cdc",
+		"SwapInterfaces": "./contracts/DEX/SwapInterfaces.cdc",
+		"SwapConfig": "./contracts/DEX/SwapConfig.cdc",
 		"BlockVersityToken": {
 			"source": "./contracts/BlockVersityToken.cdc",
 			"aliases": {
 				"testnet": "0x800a10d0fff7acd4"
 			}
 		},
-		"BlockVersityTokenMetadataViews": "./contracts/BlockVersityTokenMetadataViews.cdc",
 		"FungibleTokenMetadataViews": "./contracts/utility/FungibleTokenMetadataViews.cdc",
-		"BlockVersityTokenPublicSale": "./contracts/sales/BlockVersityTokenPublicSale.cdc",
 		"exampleToken": "./contracts/exampleToken.cdc",
 		"FungibleToken": {
 			"source": "./contracts/utility/FungibleToken.cdc",
@@ -24,7 +27,7 @@
 				"testnet": "0x9a0766d93b6608b7"
 			}
 		},
-		"FUSD": "./contracts/utility/FUSD.cdc",
+		"FUSD": "./contracts/FUSD.cdc",
 		"FlowToken": {
 			"source": "./contracts/utility/FlowToken.cdc",
 			"aliases": {
@@ -99,25 +102,14 @@
 	},
 	"deployments": {
 		"emulator": {
-			"emulator-account": [
-				"Debug",
-				"Whitelist",
-				"NonFungibleToken",
-				"MetadataViews",
-				"FungibleToken",
-				"exampleToken",
-				"FungibleTokenMetadataViews",
-				"BlockVersityTokenMetadataViews",
-				"BlockVersityTokenPublicSale",
-				"FUSD"
-			],
+			"emulator-account": [],
 			"emulator-bob": [],
 			"emulator-alice": []
 		},
 		"testnet": {
 			"testnet-blockVersity": [
-				"FungibleToken",
-				"BlockVersityToken"
+				"FUSD",
+				"FlowToken"
 			]
 		},
 		"mainnet": {
