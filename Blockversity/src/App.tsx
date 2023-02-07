@@ -6,7 +6,6 @@ const App: React.FC = () => (
       <Navbar />
        <Welcome /> 
     </div>
-    <Footer />
   </div>
 );
 
