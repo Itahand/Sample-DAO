@@ -2,6 +2,7 @@
 import * as fcl from "@onflow/fcl";
 //import t from "@onflow/types";
 import './config';
+import { Buffer } from 'buffer/';
 
 // ///////////////
 // // Cadence code
@@ -23,16 +24,53 @@ import { getPurchasers as getPurchasersScript } from './Scripts/ICO/getPurchaser
 
 
 // // Transactions
-
+import { deployerTransactionCode} from './Transactions/ICO/deployICO';
 import { purchaseBVT as purchaseBVTTransaction } from './Transactions/ICO/purchaseBVT';
 import { depositBVT as depositBVTTransaction } from './Transactions/ICO/Admin/depositBVT';
 import { pause as pauseTransaction } from './Transactions/ICO/Admin/pause';
 import { unpause as unpauseTransaction } from './Transactions/ICO/Admin/unpause';
 import { refund as refundTransaction } from './Transactions/ICO/Admin/refund';
 import { distribute as distributeTransaction } from './Transactions/ICO/Admin/distribute';
+import { withdrawBVT as withdrawBVTTransaction } from './Transactions/ICO/Admin/withdrawBVT';
 
+// // ICO Contract Code
+import {contractCode} from "./Transactions/ICO/contractCode"
+
+export function replaceICOWithProperValues( tokenName: string, contractAddress: string) {
+  return contractCode()
+    .replace('"../BlockVersityToken.cdc"', contractAddress)
+    .replaceAll('BlockVersityToken', tokenName);
+}
 
 // // ****** Transactions Functions ****** //
+
+// Deploy an ICO contract from the Admin board
+export const deployICO = async (price: string, tokenAddress: string, tokenName: string) => {
+  const ICOCode = replaceICOWithProperValues(tokenName, tokenAddress)
+  const hexCode = Buffer.from(ICOCode).toString('hex');
+  return new Promise(async (resolve, reject) => {
+    try {
+      const transactionId = await fcl.mutate({
+        cadence: deployerTransactionCode(),
+        proposer: fcl.currentUser,
+        payer: fcl.currentUser,
+        authorizations: [fcl.currentUser],
+        args: (arg: any, t: any) => [
+          arg("BlockVersityTokenPublicSale", t.String),
+          arg(price, t.UFix64),
+          // Contract Code
+          arg(hexCode, t.String),
+        ],
+        limit: 500
+      });
+      const transaction = await fcl.tx(transactionId).onceSealed()
+      console.log(transaction) // The transactions status and events after being sealed
+    } catch (e) {
+      console.log(e);
+      reject(false);
+    }
+  });
+}
 
 // Purchase BVT as a user
 export const purchaseBVT = async (amount: string) => {
@@ -63,6 +101,29 @@ export const depositBVT = async (amount: string) => {
     try {
       const transactionId = await fcl.mutate({
         cadence: depositBVTTransaction(),
+        proposer: fcl.currentUser,
+        payer: fcl.currentUser,
+        authorizations: [fcl.currentUser],
+        args: (arg: any, t: any) => [
+          arg(amount, t.UFix64),
+        ],
+        limit: 500
+      });
+      const transaction = await fcl.tx(transactionId).onceSealed()
+      console.log(transaction) // The transactions status and events after being sealed
+    } catch (e) {
+      console.log(e);
+      reject(false);
+    }
+  });
+}
+
+// Withdraw BVT as an Admin
+export const withdrawBVT = async (amount: string) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const transactionId = await fcl.mutate({
+        cadence: withdrawBVTTransaction(),
         proposer: fcl.currentUser,
         payer: fcl.currentUser,
         authorizations: [fcl.currentUser],

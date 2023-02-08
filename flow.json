@@ -13,7 +13,13 @@
 		"SwapErrors": "./contracts/DEX/SwapErrors.cdc",
 		"SwapInterfaces": "./contracts/DEX/SwapInterfaces.cdc",
 		"SwapConfig": "./contracts/DEX/SwapConfig.cdc",
-		"BlockVersityToken": "./contracts/BlockVersityToken.cdc",
+		"BlockVersityToken": {
+			"source": "./contracts/BlockVersityToken.cdc",
+			"aliases": {
+				"testnet": "0x800a10d0fff7acd4"
+			}
+		},
+		"BlockVersityTokenPublicSale": "./contracts/sales/BlockVersityTokenPublicSale.cdc",
 		"FungibleTokenMetadataViews": "./contracts/utility/FungibleTokenMetadataViews.cdc",
 		"exampleToken": "./contracts/exampleToken.cdc",
 		"FungibleToken": {
@@ -22,7 +28,12 @@
 				"testnet": "0x9a0766d93b6608b7"
 			}
 		},
-		"FUSD": "./contracts/utility/FUSD.cdc",
+		"FUSD": {
+			"source": "./contracts/utility/FUSD.cdc",
+			"aliases": {
+				"testnet": "0xe223d8a629e49c68"
+			}
+		},
 		"FlowToken": "./contracts/utility/FlowToken.cdc",
 		"NonFungibleToken": {
 			"source": "./contracts/utility/NonFungibleToken.cdc",
@@ -91,15 +102,6 @@
 	"deployments": {
 		"emulator": {
 			"emulator-account": [
-				{
-					"name": "FlowToken",
-					"args": [
-						{
-							"type": "AuthAccount",
-							"value": "0xf8d6e0586b0a20c7"
-						}
-					]
-				},
 				"BlockVersityToken",
 				"FUSD",
 				"FungibleToken",
@@ -124,8 +126,7 @@
 		},
 		"testnet": {
 			"testnet-blockVersity": [
-				"FUSD",
-				"FlowToken"
+				"BlockVersityTokenPublicSale"
 			]
 		},
 		"mainnet": {
