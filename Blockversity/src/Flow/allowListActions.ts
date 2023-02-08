@@ -13,9 +13,18 @@ export const logIn = async () => await fcl.logIn();
 export const signUp = () => fcl.signUp();
 export const currentUser = () => fcl.currentUser()
 
-// // Scripts
+// // AllowList Scripts
 import { getAllAddresses as getAllAddressesScript } from './Scripts/get_all_addresses';
 import { getUserTimestamp as getUserTimestampScript } from './Scripts/get_user_timestamp';
+
+// ICO Scripts
+import { getBVTBalance as getBVTBalanceScript } from './Scripts/ICO/getBVT_Balance';
+import { getFUSDVaultBalance as getFUSDVaultBalanceScript } from './Scripts/ICO/getFUSDVaultBalance';
+import { getIsSaleActive as getIsSaleActiveScript } from './Scripts/ICO/getIsSaleActive';
+import { getPrice as getPriceScript } from './Scripts/ICO/getPrice';
+import { getPurchaseInfo as getPurchaseInfoScript } from './Scripts/ICO/getPurchaseInfo';
+import { getPurchasers as getPurchasersScript } from './Scripts/ICO/getPurchasers';
+
 
 // // Transactions
 
@@ -75,5 +84,3 @@ export const getUserTimestamp = async (userAddress: any) => {
     console.log(e);
   }
 }
-
-// @ts-ignore

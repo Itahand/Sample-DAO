@@ -1,6 +1,6 @@
 import FungibleToken from "../utility/FungibleToken.cdc"
 import NonFungibleToken from "../utility/NonFungibleToken.cdc"
-import BlockVersityTokenMetadataViews from "../BlockVersityTokenMetadataViews.cdc"
+import BlockVersityToken from "../BlockVersityToken.cdc"
 import FUSD from "../utility/FUSD.cdc"
 
 pub contract BlockVersityTokenPublicSale {
@@ -25,7 +25,7 @@ pub contract BlockVersityTokenPublicSale {
     /****** Sale Resources ******/
 
     // BVT holder vault
-    access(contract) let bvtVault: @BlockVersityTokenMetadataViews.Vault
+    access(contract) let bvtVault: @BlockVersityToken.Vault
 
     // FUSD holder vault
     access(contract) let fusdVault: @FUSD.Vault
@@ -152,7 +152,7 @@ pub contract BlockVersityTokenPublicSale {
                 BlockVersityTokenPublicSale.purchases[address]?.state == PurchaseState.initial: "Already distributed or refunded"
             }
 
-            let receiverRef = getAccount(address).getCapability(BlockVersityTokenMetadataViews.ReceiverPublicPath)
+            let receiverRef = getAccount(address).getCapability(BlockVersityToken.ReceiverPublicPath)
                 .borrow<&{FungibleToken.Receiver}>()
                 ?? panic("Could not borrow BlockVersityToken receiver reference")
 
@@ -262,7 +262,7 @@ pub contract BlockVersityTokenPublicSale {
         self.purchases = {}
         self.SaleAdminStoragePath = /storage/blockVersityTokenPublicSaleAdmin
 
-        self.bvtVault <- BlockVersityTokenMetadataViews.createEmptyVault()
+        self.bvtVault <- BlockVersityToken.createEmptyVault()
         self.fusdVault <- FUSD.createEmptyVault()
         let admin <- create Admin()
         self.account.save(<- admin, to: self.SaleAdminStoragePath)

@@ -1,5 +1,5 @@
 import BlockVersityTokenPublicSale from "../../../contracts/sales/BlockVersityTokenPublicSale.cdc"
 
-pub fun main(address: Address): Bool {
+pub fun main(): Bool {
     return BlockVersityTokenPublicSale.getIsSaleActive()
 }

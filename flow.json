@@ -13,12 +13,7 @@
 		"SwapErrors": "./contracts/DEX/SwapErrors.cdc",
 		"SwapInterfaces": "./contracts/DEX/SwapInterfaces.cdc",
 		"SwapConfig": "./contracts/DEX/SwapConfig.cdc",
-		"BlockVersityToken": {
-			"source": "./contracts/BlockVersityToken.cdc",
-			"aliases": {
-				"testnet": "0x800a10d0fff7acd4"
-			}
-		},
+		"BlockVersityToken": "./contracts/BlockVersityToken.cdc",
 		"FungibleTokenMetadataViews": "./contracts/utility/FungibleTokenMetadataViews.cdc",
 		"exampleToken": "./contracts/exampleToken.cdc",
 		"FungibleToken": {
@@ -27,15 +22,8 @@
 				"testnet": "0x9a0766d93b6608b7"
 			}
 		},
-		"FUSD": "./contracts/FUSD.cdc",
-		"FlowToken": {
-			"source": "./contracts/utility/FlowToken.cdc",
-			"aliases": {
-				"emulator": "0x0ae53cb6e3f42a79",
-				"testnet": "0x7e60df042a9c0868",
-				"mainnet": "0x1654653399040a61"
-			}
-		},
+		"FUSD": "./contracts/utility/FUSD.cdc",
+		"FlowToken": "./contracts/utility/FlowToken.cdc",
 		"NonFungibleToken": {
 			"source": "./contracts/utility/NonFungibleToken.cdc",
 			"aliases": {
@@ -102,7 +90,35 @@
 	},
 	"deployments": {
 		"emulator": {
-			"emulator-account": [],
+			"emulator-account": [
+				{
+					"name": "FlowToken",
+					"args": [
+						{
+							"type": "AuthAccount",
+							"value": "0xf8d6e0586b0a20c7"
+						}
+					]
+				},
+				"BlockVersityToken",
+				"FUSD",
+				"FungibleToken",
+				"MetadataViews",
+				"FungibleTokenMetadataViews",
+				"NonFungibleToken",
+				{
+					"name": "SwapFactory",
+					"args": [
+						{
+							"type": "Address",
+							"value": "0xf8d6e0586b0a20c7"
+						}
+					]
+				},
+				"SwapConfig",
+				"SwapErrors",
+				"SwapInterfaces"
+			],
 			"emulator-bob": [],
 			"emulator-alice": []
 		},
