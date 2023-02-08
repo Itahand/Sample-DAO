@@ -1,6 +1,6 @@
 export const pause = () => {
   return `
-import BlockVersityTokenPublicSale from 0x800a10d0fff7acd4
+import BlockVersityTokenPublicSale from 0x49a232bb31e5dd58
 
 transaction() {
 

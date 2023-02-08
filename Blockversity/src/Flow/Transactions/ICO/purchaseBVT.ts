@@ -2,7 +2,7 @@ export const purchaseBVT = () => {
   return `
 import NonFungibleToken from 0x631e88ae7f1d7c20
 import FUSD from 0xe223d8a629e49c68
-import BlockVersityTokenPublicSale from 0x800a10d0fff7acd4
+import BlockVersityTokenPublicSale from 0x49a232bb31e5dd58
 
 transaction(amount: UFix64) {
 

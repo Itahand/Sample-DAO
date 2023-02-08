@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   deployICO,
   getBVTBalance,
@@ -46,6 +46,10 @@ const AdminDashboard: React.FC = () => {
   const [tokenSalePaused, setTokenSalePaused] = useState(false);
   const [depositAmount, setDepositAmount] = useState(0);
   const [withdrawAmount, setWithdrawAmount] = useState(0);
+
+  useEffect(() => {
+    getBVTBalance().then((_balance) => setTokenBalance(_balance));
+  }, []);
 
   const handlePriceChange = (value: number) => {
     setPrice(value);

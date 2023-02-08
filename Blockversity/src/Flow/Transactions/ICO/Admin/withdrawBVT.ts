@@ -1,7 +1,7 @@
 export const withdrawBVT = () => {
   return `
-import BlockVersityTokenPublicSale from 0x800a10d0fff7acd4
-import BlockVersityTokenMetadataViews from 0x800a10d0fff7acd4
+import BlockVersityTokenPublicSale from 0x49a232bb31e5dd58
+import BlockVersityToken from 0x800a10d0fff7acd4
 import FungibleToken from 0x9a0766d93b6608b7
 
 
