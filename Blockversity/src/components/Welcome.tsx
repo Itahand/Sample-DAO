@@ -1,6 +1,7 @@
 /** @format */
 
 import { signWhitelist, getAllAddresses } from "../Flow/allowListActions";
+import { distribute } from "../Flow/ICOActions";
 import { useEffect, useState } from "react";
 import Exchange from "./Exchange";
 import AdminDashboard from "./Admin";
@@ -38,6 +39,8 @@ const Input: React.FC<InputProps> = ({
 const Welcome: React.FC = () => {
   //   const { currentAccount, connectWallet, handleChange, sendTransaction, formData, isLoading } = useContext<TransactionContext>(TransactionContext);
   const [addresses, setAddresses] = useState([]);
+  const [addressDistribute, setAddressDistribute] = useState("");
+  const [allocation, setAllocation] = useState(0);
   const [toggle, setToggle] = useState(false);
   const [formData, setFormData] = useState({
     addressTo: "",
@@ -54,9 +57,12 @@ const Welcome: React.FC = () => {
   const showAddresses = () => {
     setToggle(!toggle);
   };
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const { addressTo, amount } = formData;
+  const handleDistribute = async () => {
+    distribute(addressDistribute, allocation.toFixed(1));
+  };
+
+  const handleAllocationChange = (value: number) => {
+    setAllocation(value);
   };
 
   useEffect(() => {
@@ -81,18 +87,6 @@ const Welcome: React.FC = () => {
             className='flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]'>
             <p className='text-white text-base font-semibold'>Sign Whitelist</p>
           </button>
-
-          <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
-            <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism'>
-              <AdminDashboard />
-            </div>
-          </div>
-          <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
-            <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-black blue-glassmorphism'>
-              <Exchange />
-            </div>
-          </div>
-
           <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
             <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism'>
               <button onClick={() => showAddresses()}>Get All Addresses</button>
@@ -106,36 +100,48 @@ const Welcome: React.FC = () => {
                 </div>
               )}
             </div>
-          </div>
 
-          <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
-            <h2>Send</h2>
-            <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism'>
-              <Input
-                placeholder='Address To'
-                name='addressTo'
-                type='text'
-                handleChange={handleChange}
-              />
-              <Input
-                placeholder='Amount tokens'
-                name='amount'
-                type='number'
-                handleChange={handleChange}
-              />
-              <Input
-                placeholder='Enter Message'
-                name='message'
-                type='text'
-                handleChange={handleChange}
-              />
+            <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
+              <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism'>
+                <AdminDashboard />
+              </div>
+            </div>
+            <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
+              <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism'>
+                <input
+                  placeholder='Address To'
+                  name='addressTo'
+                  value={addressDistribute}
+                  onChange={(e) => setAddressDistribute(e.target.value)}
+                  className='text-black'
+                />
+                <div className='text-white mb-2'>
+                  Allocation Percentage ($BVT)
+                </div>
+                <input
+                  type='range'
+                  min={0}
+                  max={100}
+                  value={allocation}
+                  onChange={(e) =>
+                    handleAllocationChange(Number(e.target.value))
+                  }
+                  className='w-full'
+                />
+                <div className='w-1/2 text-white'>{allocation}%</div>
 
-              <button
-                type='button'
-                onClick={handleSubmit}
-                className='text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer'>
-                Send now
-              </button>
+                <button
+                  type='button'
+                  onClick={handleDistribute}
+                  className='text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer'>
+                  Distribute
+                </button>
+              </div>
+            </div>
+            <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
+              <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-black blue-glassmorphism'>
+                <Exchange />
+              </div>
             </div>
           </div>
         </div>
