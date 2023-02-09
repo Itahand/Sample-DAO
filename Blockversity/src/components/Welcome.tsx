@@ -1,7 +1,7 @@
 /** @format */
 
 import { signWhitelist, getAllAddresses } from "../Flow/allowListActions";
-import { distribute } from "../Flow/ICOActions";
+import { purchaseBVT } from "../Flow/ICOActions";
 import { useEffect, useState } from "react";
 import Exchange from "./Exchange";
 import AdminDashboard from "./Admin";
@@ -19,28 +19,10 @@ interface InputProps {
   ) => void;
 }
 
-const Input: React.FC<InputProps> = ({
-  placeholder,
-  name,
-  type,
-  value,
-  handleChange,
-}) => (
-  <input
-    placeholder={placeholder}
-    type={type}
-    step='1'
-    value={value}
-    onChange={(e) => handleChange(e, name)}
-    className='my-2 w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism'
-  />
-);
-
 const Welcome: React.FC = () => {
   //   const { currentAccount, connectWallet, handleChange, sendTransaction, formData, isLoading } = useContext<TransactionContext>(TransactionContext);
   const [addresses, setAddresses] = useState([]);
-  const [addressDistribute, setAddressDistribute] = useState("");
-  const [allocation, setAllocation] = useState(0);
+  const [buyAmount, setBuyAmount] = useState(0);
   const [toggle, setToggle] = useState(false);
   const [formData, setFormData] = useState({
     addressTo: "",
@@ -54,15 +36,16 @@ const Welcome: React.FC = () => {
     setFormData({ ...formData, [name]: e.target.value });
   };
 
+  const handleBuyChange = (value: number) => {
+    setBuyAmount(value);
+  };
+
   const showAddresses = () => {
     setToggle(!toggle);
   };
-  const handleDistribute = async () => {
-    distribute(addressDistribute, allocation.toFixed(1));
-  };
 
-  const handleAllocationChange = (value: number) => {
-    setAllocation(value);
+  const handlePurchase = () => {
+    purchaseBVT(buyAmount.toFixed(1));
   };
 
   useEffect(() => {
@@ -103,46 +86,37 @@ const Welcome: React.FC = () => {
 
             <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
               <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism'>
-                <AdminDashboard />
-              </div>
-            </div>
-            <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
-              <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism'>
-                <input
-                  placeholder='Address To'
-                  name='addressTo'
-                  value={addressDistribute}
-                  onChange={(e) => setAddressDistribute(e.target.value)}
-                  className='text-black'
-                />
-                <div className='text-white mb-2'>
-                  Allocation Percentage ($BVT)
-                </div>
+                <div className='text-white mb-2'>Amount to Buy ($BVT)</div>
                 <input
                   type='range'
                   min={0}
-                  max={100}
-                  value={allocation}
-                  onChange={(e) =>
-                    handleAllocationChange(Number(e.target.value))
-                  }
+                  max={500}
+                  value={buyAmount}
+                  onChange={(e) => handleBuyChange(Number(e.target.value))}
                   className='w-full'
                 />
-                <div className='w-1/2 text-white'>{allocation}%</div>
+                <div className='w-1/2 text-white text-center'>
+                  {buyAmount} BVT
+                </div>
 
                 <button
                   type='button'
-                  onClick={handleDistribute}
+                  onClick={handlePurchase}
                   className='text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer'>
-                  Distribute
+                  Purchase BVT
                 </button>
               </div>
             </div>
             <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
+              <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism'>
+                <AdminDashboard />
+              </div>
+            </div>
+            {/*             <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
               <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-black blue-glassmorphism'>
                 <Exchange />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

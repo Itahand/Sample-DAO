@@ -58,11 +58,9 @@ const Navbar: React.FC = () => {
         )}
         <div className='flex flex-row ml-10'>
           {isConnected === true ? (
-            <div
-              /*
-  // @ts-ignore */
-              className='border border-green-500 px-4 py-2 rounded-full text-green-500 font-bold'>
+            <div className='border border-green-500 px-4 py-2 rounded-full text-green-500 font-bold'>
               {" "}
+              {/* @ts-ignore */}
               {user?.addr}{" "}
             </div>
           ) : (
