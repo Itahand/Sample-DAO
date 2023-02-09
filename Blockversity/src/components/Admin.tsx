@@ -40,6 +40,8 @@ const Input: React.FC<InputProps> = ({
 );
 
 const AdminDashboard: React.FC = () => {
+  const [tokenName, setTokenName] = useState("");
+  const [tokenAddress, setTokenAddress] = useState("");
   const [price, setPrice] = useState(0);
   const [tokenBalance, setTokenBalance] = useState(0);
   const [fUSDBalance, setFUSDBalance] = useState(0);
@@ -69,8 +71,10 @@ const AdminDashboard: React.FC = () => {
     // logic to deposit BVT and update BVT balance
   };
 
-  const handleWithdraw = () => {
-    // logic to withdraw fUSD and update fUSD balance
+  const handleWithdraw = async () => {
+    const response = await withdrawBVT(withdrawAmount.toFixed(1));
+    console.log(response);
+    // logic to withdraw BVT and update BVT balance
   };
 
   const handlePauseTokenSale = () => {
@@ -78,19 +82,15 @@ const AdminDashboard: React.FC = () => {
   };
 
   const handleLaunch = async () => {
-    const response = await deployICO(
-      "1.0",
-      "0x800a10d0fff7acd4",
-      "BlockVersityToken"
-    );
+    const response = await deployICO(price.toFixed(1), tokenAddress, tokenName);
     console.log(response);
     // logic to withdraw fUSD and update fUSD balance
   };
 
   return (
     <div className='bg-dark-blue-500  p-8'>
-      <div className='text-white text-xl mb-4'>Admin Dashboard</div>
-      <button onClick={() => handleLaunch()}>Launch ICO</button>
+      <p className='text-white text-xl mb-4'>Admin Dashboard</p>
+      {/*       <button onClick={() => handleLaunch()}>Launch ICO</button> */}
       <div className='flex mb-4'>
         <div className='w-1/2'>
           <div className='text-white mb-2'>Price ($ FUSD)</div>
@@ -102,16 +102,37 @@ const AdminDashboard: React.FC = () => {
             onChange={(e) => handlePriceChange(Number(e.target.value))}
             className='w-full'
           />
+          <input
+            type='text'
+            placeholder='Token Name'
+            className='w-full text-black mb-4'
+            value={tokenName}
+            onChange={(e) => setTokenName(e.target.value)}
+          />
+          <input
+            type='text'
+            placeholder='Token Address'
+            className='w-full text-black mb-4'
+            value={tokenAddress}
+            onChange={(e) => setTokenAddress(e.target.value)}
+          />
+          <button
+            className='border-pink border-4 rounded-full p-2'
+            onClick={() => handleLaunch()}>
+            Launch ICO
+          </button>
         </div>
         <div className='w-1/2 text-white'>{price} FUSD</div>
       </div>
       <div className='mb-4'>
-        <div className='text-white mb-2'>Token Balance</div>
-        <div className='text-white'>{tokenBalance}</div>
+        <div className='text-white mb-2 text-center'>
+          BVT in ICO contract Balance
+        </div>
+        <div className='text-white text-center'>{tokenBalance}</div>
       </div>
       <div className='mb-4'>
-        <div className='text-white mb-2'>FUSD Balance</div>
-        <div className='text-white'>{fUSDBalance}</div>
+        <div className='text-white mb-2 text-center'>FUSD in ICO Balance</div>
+        <div className='text-white text-center'>{fUSDBalance}</div>
       </div>
       <div className='mb-4'>
         <button

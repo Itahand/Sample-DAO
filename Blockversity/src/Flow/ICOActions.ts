@@ -56,7 +56,7 @@ export const deployICO = async (price: string, tokenAddress: string, tokenName: 
         payer: fcl.currentUser,
         authorizations: [fcl.currentUser],
         args: (arg: any, t: any) => [
-          arg("BlockVersityTokenPublicSale", t.String),
+          arg("ExamplePublicSale", t.String),
           arg(price, t.UFix64),
           // Contract Code
           arg(hexCode, t.String),
