@@ -7,6 +7,7 @@ import {
   getIsSaleActive,
   getPrice,
   getPurchasers,
+  setupBVT,
   deployICO,
   depositBVT,
   pause,
@@ -25,7 +26,6 @@ interface InputProps {
     name: string
   ) => void;
 }
-import { getAllAddresses } from "../Flow/allowListActions";
 
 const AdminDashboard: React.FC = () => {
   const [addressDistribute, setAddressDistribute] = useState("");
@@ -48,7 +48,7 @@ const AdminDashboard: React.FC = () => {
     getFUSDBalance().then((_balance) => setFUSDBalance(_balance));
     getIsSaleActive().then((boolean) => setTokenSalePaused(!boolean));
     getPrice().then((price) => setSalePrice(price));
-    getAllAddresses().then((addresses) => {
+    getPurchasers().then((addresses) => {
       setAddresses(addresses);
     });
   }, []);

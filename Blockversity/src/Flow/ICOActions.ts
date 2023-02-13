@@ -32,6 +32,7 @@ import { unPause as unPauseTransaction } from './Transactions/ICO/Admin/unpause'
 import { refund as refundTransaction } from './Transactions/ICO/Admin/refund';
 import { distribute as distributeTransaction } from './Transactions/ICO/Admin/distribute';
 import { withdrawBVT as withdrawBVTTransaction } from './Transactions/ICO/Admin/withdrawBVT';
+import { setup_BVT as setup_BVTTransaction } from './Transactions/ICO/setup_BVT';
 
 // // ICO Contract Code
 import {contractCode} from "./Transactions/ICO/contractCode"
@@ -61,6 +62,27 @@ export const deployICO = async (price: string, tokenAddress: string, tokenName: 
           // Contract Code
           arg(hexCode, t.String),
         ],
+        limit: 500
+      });
+      const transaction = await fcl.tx(transactionId).onceSealed()
+      console.log(transaction) // The transactions status and events after being sealed
+    } catch (e) {
+      console.log(e);
+      reject(false);
+    }
+  });
+}
+
+
+// Setup an account to receive BVT
+export const setupBVT = async () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const transactionId = await fcl.mutate({
+        cadence: setup_BVTTransaction(),
+        proposer: fcl.currentUser,
+        payer: fcl.currentUser,
+        authorizations: [fcl.currentUser],
         limit: 500
       });
       const transaction = await fcl.tx(transactionId).onceSealed()

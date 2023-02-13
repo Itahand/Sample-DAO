@@ -1,7 +1,7 @@
 /** @format */
 
 import { signWhitelist, getAllAddresses } from "../Flow/allowListActions";
-import { purchaseBVT } from "../Flow/ICOActions";
+import { purchaseBVT, setupBVT } from "../Flow/ICOActions";
 import { useEffect, useState } from "react";
 import Exchange from "./Exchange";
 import AdminDashboard from "./Admin";
@@ -42,6 +42,10 @@ const Welcome: React.FC = () => {
 
   const showAddresses = () => {
     setToggle(!toggle);
+  };
+
+  const handleSetup = () => {
+    setupBVT();
   };
 
   const handlePurchase = () => {
@@ -86,6 +90,12 @@ const Welcome: React.FC = () => {
 
             <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
               <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism'>
+                <button
+                  type='button'
+                  onClick={handleSetup}
+                  className='text-white w-full mt-2 mb-4 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer'>
+                  Setup account to receive BVT
+                </button>
                 <div className='text-white mb-2'>Amount to Buy ($BVT)</div>
                 <input
                   type='range'
