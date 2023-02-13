@@ -28,7 +28,7 @@ import { deployerTransactionCode} from './Transactions/ICO/deployICO';
 import { purchaseBVT as purchaseBVTTransaction } from './Transactions/ICO/purchaseBVT';
 import { depositBVT as depositBVTTransaction } from './Transactions/ICO/Admin/depositBVT';
 import { pause as pauseTransaction } from './Transactions/ICO/Admin/pause';
-import { unpause as unpauseTransaction } from './Transactions/ICO/Admin/unpause';
+import { unPause as unPauseTransaction } from './Transactions/ICO/Admin/unpause';
 import { refund as refundTransaction } from './Transactions/ICO/Admin/refund';
 import { distribute as distributeTransaction } from './Transactions/ICO/Admin/distribute';
 import { withdrawBVT as withdrawBVTTransaction } from './Transactions/ICO/Admin/withdrawBVT';
@@ -209,11 +209,11 @@ export const pause = async () => {
 }
 
 // UnPause the public sale as an Admin
-export const unpause = async () => {
+export const unPause = async () => {
   return new Promise(async (resolve, reject) => {
     try {
       const transactionId = await fcl.mutate({
-        cadence: unpauseTransaction(),
+        cadence: unPauseTransaction(),
         proposer: fcl.currentUser,
         payer: fcl.currentUser,
         authorizations: [fcl.currentUser],

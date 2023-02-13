@@ -3,13 +3,14 @@
 import React, { useState, useEffect } from "react";
 import {
   getBVTBalance,
+  getFUSDBalance,
   getIsSaleActive,
   getPrice,
   getPurchasers,
   deployICO,
   depositBVT,
   pause,
-  unpause,
+  unPause,
   withdrawBVT,
   refund,
   distribute,
@@ -44,6 +45,7 @@ const AdminDashboard: React.FC = () => {
 
   useEffect(() => {
     getBVTBalance().then((_balance) => setTokenBalance(_balance));
+    getFUSDBalance().then((_balance) => setFUSDBalance(_balance));
     getIsSaleActive().then((boolean) => setTokenSalePaused(!boolean));
     getPrice().then((price) => setSalePrice(price));
     getAllAddresses().then((addresses) => {
@@ -72,12 +74,11 @@ const AdminDashboard: React.FC = () => {
   };
 
   const handlePauseTokenSale = () => {
-    unpause();
-    /*     if (tokenSalePaused) {
-      unpause();
+    if (tokenSalePaused) {
+      unPause();
     } else {
       pause();
-    } */
+    }
   };
 
   const handlePurchasers = async () => {
