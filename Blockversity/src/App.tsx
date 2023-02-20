@@ -1,10 +1,16 @@
-import{Navbar, Welcome, Footer} from './components';
-
+import{Navbar, Welcome, Admin, Exchange} from './components';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 const App: React.FC = () => (
   <div className="min-h-screen">
     <div className="gradient-bg-welcome">
-      <Navbar />
-       <Welcome /> 
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Welcome />} /> 
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/exchange" element={<Exchange />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   </div>
 );
