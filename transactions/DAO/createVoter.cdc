@@ -8,7 +8,7 @@ transaction {
 
     signer.save(<-voter, to: /storage/BlockVersityDAOVoter)
     signer.link<&BlockVersityDAO.Voter>(
-      /private/BlockVersityDAOVoter,
+      /public/BlockVersityDAOVoter,
       target: /storage/BlockVersityDAOVoter
     )
   }

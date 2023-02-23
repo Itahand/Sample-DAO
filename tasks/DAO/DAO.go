@@ -36,10 +36,10 @@ func main() {
 	color.Green("Pass")
 
 	// Create a Voter
-	/* 	color.Red("Should be able to create a Voter resource into the signer's account")
-	   	o.Tx("DAO/createVoter",
-	   		WithSigner("account"))
-	   	color.Green("Pass") */
+	color.Red("Should be able to create a Voter resource into the signer's account")
+	o.Tx("DAO/createVoter",
+		WithSigner("bob"))
+	color.Green("Pass")
 
 	// Proposer creates a Topic
 	color.Red("Account should be able to create a new Topic")
@@ -53,10 +53,19 @@ func main() {
 	)
 	color.Green("Pass")
 
-	// Bob should be able to Vote
-	color.Red("Bob should be able to Vote on a proposal")
+	// Account votes
+	color.Red("Account should be able to Vote on a proposal")
 	o.Tx("DAO/vote",
 		WithSigner("account"),
+		WithArg("ProposalId", "0"),
+		WithArg("OptionIndex", "1"),
+	)
+	color.Green("Pass")
+
+	// Bob votes
+	color.Red("Bob should be able to Vote on a proposal")
+	o.Tx("DAO/vote",
+		WithSigner("bob"),
 		WithArg("ProposalId", "0"),
 		WithArg("OptionIndex", "1"),
 	)
@@ -69,12 +78,12 @@ func main() {
 	color.Green("Pass")
 
 	// Anyone should be able to count votes on the contract
-	color.Red("Alice should be able to count votes on a proposal")
-	o.Script("DAO/countVotes",
-		WithArg("topicId", "0"),
-		WithArg("maxSize", "10"),
-	)
-	color.Green("Pass")
+	/* 	color.Red("Alice should be able to count votes on a proposal")
+	   	o.Script("DAO/countVotes",
+	   		WithArg("topicId", "0"),
+	   		WithArg("maxSize", "10"),
+	   	)
+	   	color.Green("Pass") */
 
 	// Anyone should be able to fetch a list of proposals from the DAO contract
 	color.Red("Should be able to fetch a list of proposals")
@@ -87,8 +96,20 @@ func main() {
 		WithArg("ProposalId", "0"))
 	color.Green("Pass")
 
+	// Count votes on proposal
+	color.Red("Should be able to count votes on one proposal")
+	o.Script("DAO/countVotes",
+		WithArg("ProposalId", "0"))
+	color.Green("Pass")
+
+	// Fetch one proposal's votes
+	color.Red("Should be able to fetch a proposal's Votes")
+	o.Script("DAO/getProposalVotes",
+		WithArg("ProposalId", "0"))
+	color.Green("Pass")
+
 	// Fetch one proposal's count
-	color.Red("Should be able to fetch the number of votes on one proposal")
+	color.Red("Should be able to fetch the number of total votes on one proposal")
 	o.Script("DAO/getProposalTotalVoted",
 		WithArg("ProposalId", "0"))
 	color.Green("Pass")
