@@ -9,16 +9,6 @@
 		"Debug": "./contracts/utility/Debug.cdc",
 		"testFT": "./contracts/utility/testFT.cdc",
 		"Whitelist": "./contracts/Whitelist.cdc",
-		"SwapFactory": {
-			"source": "./contracts/DEX/SwapFactory.cdc",
-			"aliases": {
-				"emulator": "f8d6e0586b0a20c7"
-			}
-		},
-		"SwapPair": "./contracts/DEX/SwapPair.cdc",
-		"SwapErrors": "./contracts/DEX/SwapErrors.cdc",
-		"SwapInterfaces": "./contracts/DEX/SwapInterfaces.cdc",
-		"SwapConfig": "./contracts/DEX/SwapConfig.cdc",
 		"BlockVersityToken": {
 			"source": "./contracts/BlockVersityToken.cdc",
 			"aliases": {
@@ -26,6 +16,7 @@
 			}
 		},
 		"BlockVersityTokenPublicSale": "./contracts/sales/BlockVersityTokenPublicSale.cdc",
+		"BlockVersityDAO": "./contracts/DAO/BlockVersityDAO.cdc",
 		"FungibleTokenMetadataViews": "./contracts/utility/FungibleTokenMetadataViews.cdc",
 		"exampleToken": "./contracts/exampleToken.cdc",
 		"FungibleToken": {
@@ -116,27 +107,14 @@
 	},
 	"deployments": {
 		"emulator": {
-			"emulator-bob": [
-				{
-					"name": "SwapFactory",
-					"args": [
-						{
-							"type": "Address",
-							"value": "0xf8d6e0586b0a20c7"
-						}
-					]
-				}
-			],
+			"emulator-bob": [],
 			"emulator-account": [
 				"BlockVersityToken",
 				"FUSD",
 				"MetadataViews",
 				"FungibleTokenMetadataViews",
 				"NonFungibleToken",
-				"SwapPair",
-				"SwapConfig",
-				"SwapErrors",
-				"SwapInterfaces"
+				"BlockVersityDAO"
 			],
 			"emulator-alice": []
 		},

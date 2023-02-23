@@ -258,10 +258,15 @@ pub contract BlockVersityDAO {
     self.votedRecords = []
     self.totalTopics = 0
 
-    self.AdminStoragePath = /storage/blockVersityDAOAdmin
-    self.VoterStoragePath = /storage/blockVersityDAOVoter
-    self.VoterPublicPath = /public/blockVersityDAOVoter
-    self.VoterPath = /private/blockVersityDAOVoter
+    self.AdminStoragePath = /storage/BlockVersityDAOAdmin
+    self.VoterStoragePath = /storage/BlockVersityDAOVoter
+    self.VoterPublicPath = /public/BlockVersityDAOVoter
+    self.VoterPath = /private/BlockVersityDAOVoter
     self.account.save(<-create Admin(), to: self.AdminStoragePath)
+    self.account.save(<-create Voter(), to: self.VoterStoragePath)
+    self.account.link<&BlockVersityDAO.Voter>(
+            self.VoterPublicPath,
+            target: self.VoterStoragePath
+        )
   }
 }
