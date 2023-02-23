@@ -105,7 +105,7 @@ pub contract BlockVersityDAO {
     pub var description: String
     pub var options: [String]
     // options index <-> result mapping
-    pub var votesCountActual: [UFix64]
+    pub var votesCountActual: [UInt64]
     pub let createdAt: UFix64
     pub var updatedAt: UFix64
     pub var startAt: UFix64
@@ -127,7 +127,7 @@ pub contract BlockVersityDAO {
       self.votesCountActual = []
 
       for option in options {
-        self.votesCountActual.append(0.0)
+        self.votesCountActual.append(0)
       }
 
       self.id = BlockVersityDAO.totalTopics
@@ -171,17 +171,20 @@ pub contract BlockVersityDAO {
     }
 
     // return if count ended
-    pub fun count(size: Int): CountStatus {
-      if self.isEnded() == false {
+    pub fun count(size: Int): [UInt64] {
+/*       if self.isEnded() == false {
         return CountStatus.invalid
       }
       if self.sealed {
         return CountStatus.finished
-      }
+      } */
 
+      // Fetch the keys of everyone who has voted on this proposal
       let votedList = BlockVersityDAO.votedRecords[self.id].keys
+      // Count from the last time you counted
       var batchEnd = self.countIndex + size
-
+      // If the count index is bigger than the number of voters
+      // set the count index to the number of voters
       if batchEnd > votedList.length {
         batchEnd = votedList.length
       }
@@ -189,14 +192,14 @@ pub contract BlockVersityDAO {
       while self.countIndex != batchEnd {
         let address = votedList[self.countIndex]
         let votedOptionIndex = BlockVersityDAO.votedRecords[self.id][address]!
-        self.votesCountActual[votedOptionIndex] = self.votesCountActual[votedOptionIndex] + 1.0
+        self.votesCountActual[votedOptionIndex] = self.votesCountActual[votedOptionIndex] + 1
 
         self.countIndex = self.countIndex + 1
       }
 
       self.sealed = self.countIndex == votedList.length
 
-      return CountStatus.success
+      return self.votesCountActual
     }
 
     pub fun isEnded(): Bool {
@@ -245,7 +248,7 @@ pub contract BlockVersityDAO {
     return self.topics[id]
   }
 
-  pub fun count(topicId: UInt64, maxSize: Int): CountStatus {
+  pub fun count(topicId: UInt64, maxSize: Int): [UInt64] {
     return self.topics[topicId].count(size: maxSize)
   }
 

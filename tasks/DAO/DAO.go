@@ -49,7 +49,7 @@ func main() {
 		WithArg("_description", "BlockVersity is dedicated to stop the doomsday clock from moving any closer to midnight, at any cost."),
 		WithArg("_options", `["200K $BVT", "600K $BVT", "1000K $BVT"]`),
 		WithArg("_startAt", "1641373200.0"),
-		WithArg("_endAt", "16415460000.0"),
+		WithArg("_endAt", "1759546000.0"),
 	)
 	color.Green("Pass")
 
@@ -90,15 +90,15 @@ func main() {
 	o.Script("DAO/getProposals")
 	color.Green("Pass")
 
-	// Fetch one proposal
-	color.Red("Should be able to fetch a single proposal")
-	o.Script("DAO/getProposal",
-		WithArg("ProposalId", "0"))
-	color.Green("Pass")
-
 	// Count votes on proposal
 	color.Red("Should be able to count votes on one proposal")
 	o.Script("DAO/countVotes",
+		WithArg("ProposalId", "0"))
+	color.Green("Pass")
+
+	// Fetch one proposal
+	color.Red("Should be able to fetch a single proposal")
+	o.Script("DAO/getProposal",
 		WithArg("ProposalId", "0"))
 	color.Green("Pass")
 
