@@ -3,8 +3,6 @@
 import { signWhitelist, getAllAddresses } from "../Flow/allowListActions";
 import { purchaseBVT, setupBVT } from "../Flow/ICOActions";
 import { useEffect, useState } from "react";
-import Exchange from "./Exchange";
-import AdminDashboard from "./Admin";
 import { Link } from 'react-router-dom';
 
 const companyCommonStyles =
@@ -87,18 +85,6 @@ const Welcome: React.FC = () => {
                   ))}
                 </div>
               )}
-            </div>
-
-            <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
-              <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism'>
-                <Link to='/admin'>
-                  <button
-                  type='button'
-                  className='text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer'>
-                  Admin Dashboard
-                </button>
-                </Link>
-              </div>
             </div>
 
             <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
