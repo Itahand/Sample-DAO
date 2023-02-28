@@ -39,7 +39,7 @@ export default function CreateProposal({ onSubmit }: Props) {
                         <input
                             type="text"
                             id="title"
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
@@ -50,7 +50,7 @@ export default function CreateProposal({ onSubmit }: Props) {
                         </label>
                         <textarea
                             id="description"
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         ></textarea>
@@ -63,7 +63,7 @@ export default function CreateProposal({ onSubmit }: Props) {
                             <input
                                 key={index}
                                 type="text"
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                className="w-full px-3 py-2 border border-gray-300 text-black rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 value={option}
                                 onChange={(e) => handleOptionChange(index, e.target.value)}
                             />
@@ -83,7 +83,7 @@ export default function CreateProposal({ onSubmit }: Props) {
                         <input
                             type="number"
                             id="startAt"
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full px-3 py-2  text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             value={startAt}
                             onChange={(e) => setStartAt(parseFloat(e.target.value))}
                         />
@@ -95,7 +95,7 @@ export default function CreateProposal({ onSubmit }: Props) {
                         <input
                             type="number"
                             id="endAt"
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full px-3 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             value={endAt}
                             onChange={(e) => setEndAt(parseFloat(e.target.value))}
                         />
