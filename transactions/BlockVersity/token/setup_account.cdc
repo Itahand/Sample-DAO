@@ -1,30 +1,36 @@
+// This transaction is a template for a transaction to allow
+// anyone to add a Vault resource to their account so that
+// they can use the BlockVersityToken
 import FungibleToken from "../../../contracts/utility/FungibleToken.cdc"
 import BlockVersityToken from "../../../contracts/BlockVersityToken.cdc"
+import MetadataViews from "../../../contracts/utility/MetadataViews.cdc"
 
-transaction {
+transaction () {
 
     prepare(signer: AuthAccount) {
 
-        // If the account is already set up that's not a problem, but we don't want to replace it
-        if(signer.borrow<&BlockVersityToken.Vault>(from: BlockVersityToken.TokenStoragePath) != nil) {
+        // Return early if the account already stores a BlockVersityToken Vault
+        if signer.borrow<&BlockVersityToken.Vault>(from: BlockVersityToken.VaultStoragePath) != nil {
             return
         }
 
-        // Create a new Blocto Token Vault and put it in storage
-        signer.save(<-BlockVersityToken.createEmptyVault(), to: BlockVersityToken.TokenStoragePath)
+        // Create a new BlockVersityToken Vault and put it in storage
+        signer.save(
+            <-BlockVersityToken.createEmptyVault(),
+            to: BlockVersityToken.VaultStoragePath
+        )
 
         // Create a public capability to the Vault that only exposes
         // the deposit function through the Receiver interface
         signer.link<&BlockVersityToken.Vault{FungibleToken.Receiver}>(
-            /public/blockVersityTokenReceiver,
-            target: /storage/blockVersityTokenVault
+            BlockVersityToken.ReceiverPublicPath,
+            target: BlockVersityToken.VaultStoragePath
         )
 
-        // Create a public capability to the Vault that only exposes
-        // the balance field through the Balance interface
-        signer.link<&BlockVersityToken.Vault{FungibleToken.Balance}>(
-            /public/blockVersityTokenBalance,
-            target: /storage/blockVersityTokenVault
+        // Create a public capability to the Vault that exposes the Balance and Resolver interfaces
+        signer.link<&BlockVersityToken.Vault{FungibleToken.Balance, MetadataViews.Resolver}>(
+            BlockVersityToken.VaultPublicPath,
+            target: BlockVersityToken.VaultStoragePath
         )
     }
 }

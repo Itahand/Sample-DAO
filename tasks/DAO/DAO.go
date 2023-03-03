@@ -21,13 +21,22 @@ import (
 func main() {
 
 	o := Overflow(
-
 		WithGlobalPrintOptions(),
 	)
 
 	fmt.Println("Creating a Story for the DAO")
 	fmt.Println("Press any key to continue")
 	fmt.Scanln()
+
+	// Setup Bob with BVT
+	color.Red("Should be able to setup Bob's account to receive BVT")
+	o.Tx("BlockVersity/token/setup_account", WithSigner("bob"))
+	color.Green("Pass")
+
+	// Transfer 101 BVT to Bob from Account
+	color.Red("Should be able to send 101 BVT to Bob")
+	o.Tx("BlockVersity/token/transferBVT", WithSigner("account"), WithArg("amount", "101.0"), WithArg("recipient", "bob"))
+	color.Green("Pass")
 
 	// Create a Proposer
 	color.Red("Should be able to create a Proposer resource into an account")
@@ -81,8 +90,7 @@ func main() {
 	// Anyone should be able to count votes on the contract
 	color.Red("Alice should be able to count votes on a proposal")
 	o.Script("DAO/countVotes",
-		WithArg("topicId", "0"),
-		WithArg("maxSize", "10"),
+		WithArg("ProposalId", "0"),
 	)
 	color.Green("Pass")
 
