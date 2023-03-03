@@ -1,3 +1,5 @@
+/** @format */
+
 export const signWhitelist = () => {
   return `
   import Whitelist from 0xa2f587819db4486e
@@ -16,5 +18,5 @@ export const signWhitelist = () => {
       Whitelist.addAddress(newAddress: self.address)
     }
   }
-  `
-}
+  `;
+};

@@ -50,6 +50,7 @@ func main() {
 		WithArg("_options", `["200K $BVT", "600K $BVT", "1000K $BVT"]`),
 		WithArg("_startAt", "1641373200.0"),
 		WithArg("_endAt", "1759546000.0"),
+		WithArg("_minHoldedBVTAmount", "100.0"),
 	)
 	color.Green("Pass")
 
@@ -78,12 +79,12 @@ func main() {
 	color.Green("Pass")
 
 	// Anyone should be able to count votes on the contract
-	/* 	color.Red("Alice should be able to count votes on a proposal")
-	   	o.Script("DAO/countVotes",
-	   		WithArg("topicId", "0"),
-	   		WithArg("maxSize", "10"),
-	   	)
-	   	color.Green("Pass") */
+	color.Red("Alice should be able to count votes on a proposal")
+	o.Script("DAO/countVotes",
+		WithArg("topicId", "0"),
+		WithArg("maxSize", "10"),
+	)
+	color.Green("Pass")
 
 	// Anyone should be able to fetch a list of proposals from the DAO contract
 	color.Red("Should be able to fetch a list of proposals")

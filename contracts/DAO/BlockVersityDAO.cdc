@@ -1,6 +1,5 @@
 import NonFungibleToken from "../utility/NonFungibleToken.cdc"
-// This is not used yet, but I plan to make the contract count the voter's BVT
-// Still not sure how, tho
+import FungibleToken from "../utility/FungibleToken.cdc"
 import BlockVersityToken from "../BlockVersityToken.cdc"
 
 pub contract BlockVersityDAO {
@@ -28,14 +27,15 @@ pub contract BlockVersityDAO {
 
   // Proposer resource holder can propose new topics
   pub resource Proposer {
-    pub fun addTopic(title: String, description: String, options: [String], startAt: UFix64?, endAt: UFix64?) {
+    pub fun addTopic(title: String, description: String, options: [String], startAt: UFix64?, endAt: UFix64?, minHoldedBVTAmount: UFix64?) {
       BlockVersityDAO.topics.append(Topic(
         proposer: self.owner!.address,
         title: title,
         description: description,
         options: options,
         startAt: startAt,
-        endAt: endAt
+        endAt: endAt,
+        minHoldedBVTAmount: minHoldedBVTAmount
       ))
       BlockVersityDAO.votedRecords.append({})
       BlockVersityDAO.totalTopics = BlockVersityDAO.totalTopics + 1
@@ -113,8 +113,9 @@ pub contract BlockVersityDAO {
     pub var sealed: Bool
     pub var countIndex: Int
     pub var voided: Bool
+    pub let minHoldedBVTAmount: UFix64
 
-    init(proposer: Address, title: String, description: String, options: [String], startAt: UFix64?, endAt: UFix64?) {
+    init(proposer: Address, title: String, description: String, options: [String], startAt: UFix64?, endAt: UFix64?, minHoldedBVTAmount: UFix64?) {
       pre {
         title.length <= 1000: "New title too long"
         description.length <= 1000: "New description too long"
@@ -125,6 +126,7 @@ pub contract BlockVersityDAO {
       self.options = options
       self.description = description
       self.votesCountActual = []
+      self.minHoldedBVTAmount = minHoldedBVTAmount != nil ? minHoldedBVTAmount! : 0.0
 
       for option in options {
         self.votesCountActual.append(0)
@@ -166,6 +168,10 @@ pub contract BlockVersityDAO {
         !self.isEnded(): "Vote ended"
         BlockVersityDAO.votedRecords[self.id][voterAddr] == nil: "Already voted"
       }
+
+      let voterBVT = BlockVersityDAO.getHoldedBVT(address: voterAddr)
+
+      assert(voterBVT >= self.minHoldedBVTAmount, message: "Not enought BVT in your Vault to vote")
 
       BlockVersityDAO.votedRecords[self.id][voterAddr] = optionIndex
     }
@@ -234,6 +240,15 @@ pub contract BlockVersityDAO {
     pub fun getTotalVoted(): Int {
       return BlockVersityDAO.votedRecords[self.id].keys.length
     }
+  }
+
+  pub fun getHoldedBVT(address: Address): UFix64 {
+    let acct = getAccount(address)
+    let vaultRef = acct.getCapability(BlockVersityToken.VaultPublicPath)
+        .borrow<&BlockVersityToken.Vault{FungibleToken.Balance}>()
+        ?? panic("Could not borrow Balance reference to the Vault")
+
+    return vaultRef.balance
   }
 
   pub fun getTopics(): [Topic] {
