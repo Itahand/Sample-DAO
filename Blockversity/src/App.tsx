@@ -1,6 +1,6 @@
 /** @format */
 
-import { Navbar, Welcome, Admin, Exchange } from "./components";
+import { Welcome, Admin } from "./components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProposalList from "./components/ProposalList";
 import CreateProposal from "./components/CreateProposal";
@@ -11,7 +11,6 @@ const App: React.FC = () => (
   <div className='min-h-screen'>
     <div className='gradient-bg-welcome'>
       <BrowserRouter>
-        <Navbar />
         <Routes>
           <Route
             path='/'

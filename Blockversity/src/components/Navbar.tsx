@@ -5,16 +5,7 @@ import { HiMenuAlt4 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { logIn, currentUser, unauthenticate } from "../Flow/allowListActions";
-import logo from "../assets/react.svg";
 
-interface NavBarItemProps {
-  title: string;
-  classprops: string;
-}
-
-const NavBarItem: React.FC<NavBarItemProps> = ({ title, classprops }) => (
-  <li className={`mx-4 cursor-pointer ${classprops}`}>{title}</li>
-);
 
 const Navbar: React.FC = () => {
   const [toggleMenu, setToggleMenu] = React.useState(false);
@@ -37,13 +28,6 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className='w-full flex md:justify-center justify-between items-center p-4'>
-      <div className='md:flex-[0.5] flex-initial justify-center items-center'>
-        <img
-          src={logo}
-          alt='logo'
-          className='w-12 cursor-pointer'
-        />
-      </div>
       <ul className='text-white md:flex hidden list-none flex-row justify-between items-center flex-initial'>
         {isConnected === true ? (
           <button onClick={() => Disconnect()}>Disconnect</button>

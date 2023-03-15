@@ -10,6 +10,8 @@ export default function CreateProposal({ onSubmit }: Props) {
     const [options, setOptions] = useState<string[]>([]);
     const [startAt, setStartAt] = useState(0);
     const [endAt, setEndAt] = useState(0);
+    const [createdBy, setCreatedBy] = useState("");
+
 
     const handleOptionChange = (index: number, value: string) => {
         setOptions((prevOptions) => {
@@ -29,9 +31,9 @@ export default function CreateProposal({ onSubmit }: Props) {
     };
 
     return (
-        <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
-            <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism'>
-                <form className="max-w-xl mx-auto p-4" onSubmit={handleSubmit}>
+        <div className='flex flex-col items-center justify-start mt-10'>
+            <div className='py-5 text-white'>
+                <form className="max-w-3xl mx-auto p-2" onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label htmlFor="title" className="block mb-2 font-bold">
                             Title
@@ -56,9 +58,20 @@ export default function CreateProposal({ onSubmit }: Props) {
                         ></textarea>
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="options" className="block mb-2 font-bold">
-                            Options
-                        </label>
+                        <div className="mb-4 flex items-center">
+                            <label htmlFor="options" className="block mr-2 font-bold">
+                                Options
+                            </label>
+                            <button
+                                type="button"
+                                className="bg-[#3C773E] text-white px-4 py-2 rounded-full"
+                                onClick={handleAddOption}
+                            >
+                                +
+                            </button>
+                        </div>
+
+
                         {options.map((option, index) => (
                             <input
                                 key={index}
@@ -68,44 +81,58 @@ export default function CreateProposal({ onSubmit }: Props) {
                                 onChange={(e) => handleOptionChange(index, e.target.value)}
                             />
                         ))}
+
+                    </div>
+                    <div className="flex justify-between">
+                        <div className="mb-4 flex flex-row justify-between items-center">
+                            <label htmlFor="startAt" className="block mr-2 font-bold">
+                                Start At
+                            </label>
+                            <input
+                                type="date"
+                                id="startAt"
+                                className="w-full px-3 py-2  text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                value={startAt}
+                                onChange={(e) => setStartAt(parseFloat(e.target.value))}
+                                placeholder="MM/DD/YYYY"
+                            />
+                        </div>
+                        <div className="mb-4 flex flex-row justify-between items-center">
+                            <label htmlFor="endAt" className="block mr-2 font-bold">
+                                End At
+                            </label>
+                            <input
+                                type="date"
+                                id="endAt"
+                                className="w-full px-3 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                value={endAt}
+                                onChange={(e) => setEndAt(parseFloat(e.target.value))}
+                                placeholder="MM/DD/YYYY"
+                            />
+                        </div>
+                    </div>
+
+
+                    <div className="mb-4">
+                        <label htmlFor="createdBy" className="block mb-2 font-bold">
+                            Created by
+                        </label>
+                        <input
+                            type="text"
+                            id="createdBy"
+                            className="w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            value={createdBy}
+                            onChange={(e) => setCreatedBy(e.target.value)}
+                        />
+                    </div>
+                    <div className="flex justify-end">
                         <button
-                            type="button"
-                            className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                            onClick={handleAddOption}
+                            type="submit"
+                            className="bg-[#2D873B] text-white px-4 py-2 rounded-md mr-2"
                         >
-                            Add Option
+                            Create Proposal
                         </button>
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="startAt" className="block mb-2 font-bold">
-                            Start At
-                        </label>
-                        <input
-                            type="number"
-                            id="startAt"
-                            className="w-full px-3 py-2  text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            value={startAt}
-                            onChange={(e) => setStartAt(parseFloat(e.target.value))}
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="endAt" className="block mb-2 font-bold">
-                            End At
-                        </label>
-                        <input
-                            type="number"
-                            id="endAt"
-                            className="w-full px-3 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            value={endAt}
-                            onChange={(e) => setEndAt(parseFloat(e.target.value))}
-                        />
-                    </div>
-                    <button
-                        type="submit"
-                        className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                    >
-                        Create Proposal
-                    </button>
                 </form>
             </div>
         </div>
