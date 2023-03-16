@@ -5,7 +5,7 @@ import { HiMenuAlt4 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { logIn, currentUser, unauthenticate } from "../Flow/allowListActions";
-
+import { getUserBalance } from "../Flow/GovernanceActions";
 
 const Navbar: React.FC = () => {
   const [toggleMenu, setToggleMenu] = React.useState(false);
