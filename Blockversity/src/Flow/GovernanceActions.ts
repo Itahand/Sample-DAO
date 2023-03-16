@@ -9,17 +9,8 @@ import "./config";
 // // Cadence code
 // ///////////////
 
-// // AllowList Scripts
-import { getAllAddresses as getAllAddressesScript } from "./Scripts/get_all_addresses";
-import { getUserTimestamp as getUserTimestampScript } from "./Scripts/get_user_timestamp";
-
-// ICO Scripts
-import { getBVTBalance as getBVTBalanceScript } from "./Scripts/ICO/getBVT_Balance";
-import { getFUSDVaultBalance as getFUSDVaultBalanceScript } from "./Scripts/ICO/getFUSDVaultBalance";
-import { getIsSaleActive as getIsSaleActiveScript } from "./Scripts/ICO/getIsSaleActive";
-import { getPrice as getPriceScript } from "./Scripts/ICO/getPrice";
-import { getPurchaseInfo as getPurchaseInfoScript } from "./Scripts/ICO/getPurchaseInfo";
-import { getPurchasers as getPurchasersScript } from "./Scripts/ICO/getPurchasers";
+// DAO Scripts
+import { getProposals as getProposalsScript } from "./Scripts/DAO/getProposals";
 
 // // Transactions
 
@@ -48,27 +39,13 @@ export const signWhitelist = async () => {
 
 // // ****** Script Functions ****** //
 
-// Get a Owned NFTs from connected account.
+// Get all proposals on the DAO contract.
 
-export const getAllAddresses = async () => {
+export const getProposals = async () => {
   try {
     const response = await fcl.query({
-      cadence: getAllAddressesScript(),
+      cadence: getProposalsScript(),
       args: (arg: any, t: any) => [],
-    });
-
-    console.log(response);
-    return response;
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export const getUserTimestamp = async (userAddress: any) => {
-  try {
-    const response = await fcl.query({
-      cadence: getUserTimestampScript(),
-      args: (arg: any, t: any) => [arg(userAddress, t.Address)],
     });
 
     console.log(response);
