@@ -1,5 +1,5 @@
-import BlockVersityDAO from "../../contracts/DAO/BlockVersityDAO.cdc"
+import ExampleDAO from "../../contracts/DAO/ExampleDAO.cdc"
 
-pub fun main(ProposalId: UInt64): [BlockVersityDAO.VoteRecord] {
-  return BlockVersityDAO.getTopic(id: ProposalId).getVotes(page: 1, pageSize: 10)
+pub fun main(ProposalId: UInt64): [ExampleDAO.VoteRecord] {
+  return ExampleDAO.getTopic(id: ProposalId).getVotes(page: 1, pageSize: 10)
 }

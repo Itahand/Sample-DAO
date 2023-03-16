@@ -1,14 +1,14 @@
-import BlockVersityDAO from "../../contracts/DAO/BlockVersityDAO.cdc"
+import ExampleDAO from "../../contracts/DAO/ExampleDAO.cdc"
 
-transaction(_title: String, _description: String, _options: [String], _startAt: UFix64, _endAt: UFix64, _minHoldedBVTAmount: UFix64?) {
-  let proposer: &BlockVersityDAO.Proposer
+transaction(_title: String, _description: String, _options: [String], _startAt: UFix64, _endAt: UFix64, _minHoldedGVTAmount: UFix64?) {
+  let proposer: &ExampleDAO.Proposer
   let minHoldedBVTAmount:UFix64?
 
   prepare(signer: AuthAccount) {
-    self.proposer = signer.getCapability(/private/BlockVersityDAOProposer).borrow<&BlockVersityDAO.Proposer>()
+    self.proposer = signer.getCapability(/private/ExampleDAOProposer).borrow<&ExampleDAO.Proposer>()
 	    ?? panic("Could not borrow reference")
 
-    self.minHoldedBVTAmount = _minHoldedBVTAmount != nil ? _minHoldedBVTAmount! : 0.0
+    self.minHoldedBVTAmount = _minHoldedGVTAmount != nil ? _minHoldedGVTAmount! : 0.0
   }
 
 
@@ -20,7 +20,7 @@ transaction(_title: String, _description: String, _options: [String], _startAt: 
       options: _options,
       startAt: _startAt,
       endAt: _endAt,
-      minHoldedBVTAmount: self.minHoldedBVTAmount
+      minHoldedGVTAmount: self.minHoldedBVTAmount
     )
   }
 }

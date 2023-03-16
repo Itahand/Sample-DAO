@@ -1,18 +1,18 @@
-import BlockVersityDAO from "../../contracts/DAO/BlockVersityDAO.cdc"
+import ExampleDAO from "../../contracts/DAO/ExampleDAO.cdc"
 
 transaction {
 
   prepare(signer: AuthAccount) {
     let admin = signer
-      .borrow<&BlockVersityDAO.Admin>(from: BlockVersityDAO.AdminStoragePath)
+      .borrow<&ExampleDAO.Admin>(from: ExampleDAO.AdminStoragePath)
       ?? panic("Signer is not the admin")
 
     let proposer <- admin.createProposer()
 
-    signer.save(<-proposer, to: /storage/BlockVersityDAOProposer)
-    signer.link<&BlockVersityDAO.Proposer>(
-      /private/BlockVersityDAOProposer,
-      target: /storage/BlockVersityDAOProposer
+    signer.save(<-proposer, to: /storage/ExampleDAOProposer)
+    signer.link<&ExampleDAO.Proposer>(
+      /private/ExampleDAOProposer,
+      target: /storage/ExampleDAOProposer
     )
   }
 }
