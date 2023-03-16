@@ -6,7 +6,7 @@ transaction(ProposalId: UInt64, OptionIndex: Int) {
   let voter = signer
   .borrow<&ExampleDAO.Voter>(from: ExampleDAO.VoterStoragePath)
         ?? panic("Signer is not a Voter")
-    voter.vote(topicId: ProposalId, optionIndex: OptionIndex)
+    voter.vote(ProposalId: ProposalId, optionIndex: OptionIndex)
   }
 
   execute {

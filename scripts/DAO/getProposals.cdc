@@ -1,5 +1,5 @@
 import ExampleDAO from "../../contracts/DAO/ExampleDAO.cdc"
 
-pub fun main(): [ExampleDAO.Topic] {
-  return ExampleDAO.getTopics()
+pub fun main(): [ExampleDAO.Proposal] {
+  return ExampleDAO.getProposals()
 }

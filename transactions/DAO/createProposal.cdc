@@ -14,7 +14,7 @@ transaction(_title: String, _description: String, _options: [String], _startAt: 
 
 
   execute {
-    self.proposer.addTopic(
+    self.proposer.addProposal(
       title: _title,
       description: _description,
       options: _options,

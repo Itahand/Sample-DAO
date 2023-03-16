@@ -31,7 +31,7 @@ const recentData: Proposal[] = [
 export default function ProposalList() {
   const [showActiveProposals, setShowActiveProposals] = useState(true);
 
-  console.log(getProposals());
+  console.log(getProposals(), "Called in the frontend");
   const proposals = showActiveProposals
     ? recentData.filter((proposal) => new Date(proposal.end_date) >= new Date())
     : recentData.filter((proposal) => new Date(proposal.end_date) < new Date());

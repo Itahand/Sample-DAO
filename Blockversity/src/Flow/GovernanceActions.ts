@@ -48,7 +48,7 @@ export const getProposals = async () => {
       args: (arg: any, t: any) => [],
     });
 
-    console.log(response);
+    console.log(response, "CALLED IN THE BACKEND");
     return response;
   } catch (e) {
     console.log(e);
