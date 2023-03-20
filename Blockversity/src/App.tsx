@@ -6,6 +6,11 @@ import ProposalList from "./components/ProposalList";
 import CreateProposal from "./components/CreateProposal";
 import Sidebar from "./components/Sidebar";
 import Vote from "./components/Vote";
+import SellToken from "./components/SellToken";
+import Tokenomics from "./components/Tokenomics";
+import ManageToken from "./components/manageToken";
+import CreateToken from "./components/CreateToken";
+import Admine from "./components/Admine";
 
 const App: React.FC = () => (
   <div className='min-h-screen'>
@@ -24,9 +29,31 @@ const App: React.FC = () => (
               element={<Admin />}
             />
             <Route
+              path='/admine'
+              element={<Admine />}
+            />
+            <Route path='/createToken' element={<CreateToken />} />
+            <Route
+              path='/sellToken'
+              element={<SellToken />}
+            />
+
+            <Route
+              path='/tokenomics'
+              element={<Tokenomics />}
+            />
+
+
+            <Route
+              path='/manageToken'
+              element={<ManageToken />}
+            />
+
+            <Route
               path='/proposal'
               element={<ProposalList />}
             />
+
             <Route
               path='/create_proposal'
               element={

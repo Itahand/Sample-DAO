@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { vote } from "../Flow/GovernanceActions";
+import sellToken from "./SellToken";
 
 interface VoteProps {
   proposalId: number;
@@ -25,26 +26,25 @@ const Vote: React.FC<VoteProps> = ({ proposalId, tokensOwned, onVote }) => {
       </div>
       <div className='flex items-center justify-between'>
         <button
-          className={`${
-            vote === true
-              ? "bg-green-500 text-white"
-              : "bg-gray-200 text-gray-700"
-          } py-2 px-4 rounded-lg mr-2`}
+          className={`${vote === true
+            ? "bg-green-500 text-white"
+            : "bg-gray-200 text-gray-700"
+            } py-2 px-4 rounded-lg mr-2`}
           disabled={vote === true || tokensOwned === 0}
           onClick={() => handleVote(true)}>
           For
         </button>
         <button
-          className={`${
-            vote === false
-              ? "bg-red-500 text-white"
-              : "bg-gray-200 text-gray-700"
-          } py-2 px-4 rounded-lg`}
+          className={`${vote === false
+            ? "bg-red-500 text-white"
+            : "bg-gray-200 text-gray-700"
+            } py-2 px-4 rounded-lg`}
           disabled={vote === false || tokensOwned === 0}
           onClick={() => handleVote(false)}>
           Against
         </button>
       </div>
+      <sellToken />
     </div>
   );
 };

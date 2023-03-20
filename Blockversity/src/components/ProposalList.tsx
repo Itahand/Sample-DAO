@@ -30,6 +30,7 @@ const recentData: Proposal[] = [
 
 export default function ProposalList() {
   const [showActiveProposals, setShowActiveProposals] = useState(true);
+  const proposalData = getProposals();
 
   console.log(getProposals(), "Called in the frontend");
   const proposals = showActiveProposals
@@ -42,28 +43,24 @@ export default function ProposalList() {
         <div className='flex-1'>
           <div className='flex justify-center mb-3'>
             <button
-              className={`mr-3 py-1 px-2 border-b-2 ${
-                showActiveProposals
-                  ? "border-blue-500 font-semibold"
-                  : "border-transparent"
-              }`}
+              className={`mr-3 py-1 px-2 border-b-2 ${showActiveProposals
+                ? "border-blue-500 font-semibold"
+                : "border-transparent"
+                }`}
               onClick={() => setShowActiveProposals(true)}>
               Active Proposals
             </button>
             <button
-              className={`py-1 px-2 border-b-2 ${
-                !showActiveProposals
-                  ? "border-blue-500 font-semibold"
-                  : "border-transparent"
-              }`}
+              className={`py-1 px-2 border-b-2 ${!showActiveProposals
+                ? "border-blue-500 font-semibold"
+                : "border-transparent"
+                }`}
               onClick={() => setShowActiveProposals(false)}>
               Past Proposals
             </button>
           </div>
           <div>
-            <table
-              className='w-full'
-              style={{ tableLayout: "fixed" }}>
+            <table className='w-full' style={{ tableLayout: "fixed" }}>
               <thead className='border border-gray-200 rounded-full my-3 custom-thead'>
                 <tr>
                   <th>ID</th>
@@ -80,32 +77,19 @@ export default function ProposalList() {
                 </tr>
               </thead>
               <tbody className='border border-gray-200 bg-slate-500 rounded-sm mt-3 text-center'>
-                {recentData.map((proposal: Proposal) => (
+                {proposals.map((proposal: Proposal) => (
                   <tr key={proposal.id}>
                     <td>#{proposal.id}</td>
-
                     <td>{proposal.title}</td>
-
                     <td>{proposal.description}</td>
-
                     <td>
                       {format(new Date(proposal.start_date), "dd MMM yyyy")}
                     </td>
-
                     <td>
                       {format(new Date(proposal.end_date), "dd MMM yyyy")}
                     </td>
                     <td>{proposal.tokens_required}</td>
                     <td>{proposal.options ? "Accept" : "Reject"}</td>
-
-                    {/* <td>
-                                            <Link
-                                                to={`/proposal/${proposal.id}/vote`}
-                                                className='px-2 py-1 rounded-lg bg-blue-500 text-white hover:bg-blue-600'
-                                            >
-                                                Vote
-                                            </Link>
-                                        </td> */}
                   </tr>
                 ))}
               </tbody>
@@ -115,4 +99,5 @@ export default function ProposalList() {
       </div>
     </div>
   );
+
 }

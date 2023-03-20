@@ -18,6 +18,8 @@ import {
   distribute,
 } from "../Flow/ICOActions";
 
+import tokenomics from "./Tokenomics";
+
 interface InputProps {
   placeholder: string;
   name: string;
