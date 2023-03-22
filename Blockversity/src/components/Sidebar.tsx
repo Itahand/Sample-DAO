@@ -70,6 +70,13 @@ const Sidebar: React.FC = () => {
                         Tokenomics
                     </Link>
                     <Link
+                        to="/ico"
+                        className="block py-2 px-4 text-gray-400  hover:text-green-500"
+                    >
+                        ICO
+                    </Link>
+
+                    <Link
                         to="/manageToken"
                         className="block py-2 px-4 text-gray-400  hover:text-green-500"
                     >
