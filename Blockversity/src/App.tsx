@@ -8,9 +8,27 @@ import Sidebar from "./components/Sidebar";
 import Vote from "./components/Vote";
 import SellToken from "./components/SellToken";
 import Tokenomics from "./components/Tokenomics";
-import ManageToken from "./components/manageToken";
+import ManageToken from "./components/ManageToken";
 import CreateToken from "./components/CreateToken";
 import Admine from "./components/Admine";
+
+type Tokenomics = {
+  name: string;
+  symbol: string;
+  address: string;
+  price: number;
+  maxSupply: number;
+  initialSupply: number;
+};
+
+const myTokenomics: Tokenomics = {
+  name: 'Blockversity',
+  symbol: 'BLK',
+  address: '0x00000',
+  price: 0.000000000000000000,
+  maxSupply: 100000,
+  initialSupply: 100000
+};
 
 const App: React.FC = () => (
   <div className='min-h-screen'>
@@ -40,7 +58,7 @@ const App: React.FC = () => (
 
             <Route
               path='/tokenomics'
-              element={<Tokenomics />}
+              element={<Tokenomics tokenomics={myTokenomics} />}
             />
 
 
