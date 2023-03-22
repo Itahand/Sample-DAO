@@ -36,7 +36,6 @@ export default function CreateProposal({ onSubmit }: Props) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit(title, description, options, startAt, endAt);
-    createProposal(title, description, options, startAt, endAt, createdBy);
   };
 
   return (

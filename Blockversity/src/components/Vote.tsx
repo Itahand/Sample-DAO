@@ -44,7 +44,6 @@ const Vote: React.FC<VoteProps> = ({ proposalId, tokensOwned, onVote }) => {
           Against
         </button>
       </div>
-      <sellToken />
     </div>
   );
 };
