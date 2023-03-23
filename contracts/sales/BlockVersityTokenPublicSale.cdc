@@ -1,9 +1,9 @@
 import FungibleToken from "../utility/FungibleToken.cdc"
 import NonFungibleToken from "../utility/NonFungibleToken.cdc"
-import BlockVersityToken from "../BlockVersityToken.cdc"
+import GovernanceToken from "../GovernanceToken.cdc"
 import FUSD from "../utility/FUSD.cdc"
 
-pub contract BlockVersityTokenPublicSale {
+pub contract GovernanceTokenPublicSale {
 
     /****** Sale Events ******/
 
@@ -25,7 +25,7 @@ pub contract BlockVersityTokenPublicSale {
     /****** Sale Resources ******/
 
     // BVT holder vault
-    access(contract) let bvtVault: @BlockVersityToken.Vault
+    access(contract) let bvtVault: @GovernanceToken.Vault
 
     // FUSD holder vault
     access(contract) let fusdVault: @FUSD.Vault
@@ -83,7 +83,7 @@ pub contract BlockVersityTokenPublicSale {
     }
 
     // BVT purchase method
-    // User pays FUSD and get unlocked BlockVersityToken
+    // User pays FUSD and get unlocked GovernanceToken
     pub fun purchase(from: @FUSD.Vault, address: Address) {
         pre {
             self.isSaleActive: "Token sale is not active"
@@ -137,26 +137,26 @@ pub contract BlockVersityTokenPublicSale {
 
     pub resource Admin {
         pub fun unpause() {
-            BlockVersityTokenPublicSale.isSaleActive = true
+            GovernanceTokenPublicSale.isSaleActive = true
         }
 
         pub fun pause() {
-            BlockVersityTokenPublicSale.isSaleActive = false
+            GovernanceTokenPublicSale.isSaleActive = false
         }
 
         // Distribute BVT with an allocation amount
         // If user's purchase amount exceeds allocation amount, the remainder will be refunded
         pub fun distribute(address: Address, allocationAmount: UFix64) {
             pre {
-                BlockVersityTokenPublicSale.purchases[address] != nil: "Cannot find purchase record for the address"
-                BlockVersityTokenPublicSale.purchases[address]?.state == PurchaseState.initial: "Already distributed or refunded"
+                GovernanceTokenPublicSale.purchases[address] != nil: "Cannot find purchase record for the address"
+                GovernanceTokenPublicSale.purchases[address]?.state == PurchaseState.initial: "Already distributed or refunded"
             }
 
-            let receiverRef = getAccount(address).getCapability(BlockVersityToken.ReceiverPublicPath)
+            let receiverRef = getAccount(address).getCapability(GovernanceToken.ReceiverPublicPath)
                 .borrow<&{FungibleToken.Receiver}>()
-                ?? panic("Could not borrow BlockVersityToken receiver reference")
+                ?? panic("Could not borrow GovernanceToken receiver reference")
 
-            let purchaseInfo = BlockVersityTokenPublicSale.purchases[address]
+            let purchaseInfo = GovernanceTokenPublicSale.purchases[address]
                 ?? panic("Count not get purchase info for the address")
 
             // Make sure allocation amount does not exceed purchase amount
@@ -166,14 +166,14 @@ pub contract BlockVersityTokenPublicSale {
             )
 
             let refundAmount = purchaseInfo.amount - allocationAmount
-            let bvtAmount = allocationAmount / BlockVersityTokenPublicSale.price
-            let bvtVault <- BlockVersityTokenPublicSale.bvtVault.withdraw(amount: bvtAmount)
+            let bvtAmount = allocationAmount / GovernanceTokenPublicSale.price
+            let bvtVault <- GovernanceTokenPublicSale.bvtVault.withdraw(amount: bvtAmount)
 
             // Set the state of the purchase to DISTRIBUTED
             purchaseInfo.state = PurchaseState.distributed
             purchaseInfo.amount = allocationAmount
             purchaseInfo.refundAmount = refundAmount
-            BlockVersityTokenPublicSale.purchases[address] = purchaseInfo
+            GovernanceTokenPublicSale.purchases[address] = purchaseInfo
 
             // Deposit the withdrawn tokens in the recipient's receiver
             receiverRef.deposit(from: <- bvtVault)
@@ -186,7 +186,7 @@ pub contract BlockVersityTokenPublicSale {
                     .borrow<&{FungibleToken.Receiver}>()
                     ?? panic("Could not borrow FUSD vault receiver public reference")
 
-                let fusdVault <- BlockVersityTokenPublicSale.fusdVault.withdraw(amount: refundAmount)
+                let fusdVault <- GovernanceTokenPublicSale.fusdVault.withdraw(amount: refundAmount)
 
                 FUSDReceiverRef.deposit(from: <- fusdVault)
 
@@ -196,22 +196,22 @@ pub contract BlockVersityTokenPublicSale {
 
         pub fun refund(address: Address) {
             pre {
-                BlockVersityTokenPublicSale.purchases[address] != nil: "Cannot find purchase record for the address"
-                BlockVersityTokenPublicSale.purchases[address]?.state == PurchaseState.initial: "Already distributed or refunded"
+                GovernanceTokenPublicSale.purchases[address] != nil: "Cannot find purchase record for the address"
+                GovernanceTokenPublicSale.purchases[address]?.state == PurchaseState.initial: "Already distributed or refunded"
             }
 
             let receiverRef = getAccount(address).getCapability(/public/fusdReceiver)
                 .borrow<&{FungibleToken.Receiver}>()
                 ?? panic("Could not borrow FUSD vault receiver public reference")
 
-            let purchaseInfo = BlockVersityTokenPublicSale.purchases[address]
+            let purchaseInfo = GovernanceTokenPublicSale.purchases[address]
                 ?? panic("Count not get purchase info for the address")
 
-            let fusdVault <- BlockVersityTokenPublicSale.fusdVault.withdraw(amount: purchaseInfo.amount)
+            let fusdVault <- GovernanceTokenPublicSale.fusdVault.withdraw(amount: purchaseInfo.amount)
 
             // Set the state of the purchase to REFUNDED
             purchaseInfo.state = PurchaseState.refunded
-            BlockVersityTokenPublicSale.purchases[address] = purchaseInfo
+            GovernanceTokenPublicSale.purchases[address] = purchaseInfo
 
             receiverRef.deposit(from: <- fusdVault)
 
@@ -223,29 +223,29 @@ pub contract BlockVersityTokenPublicSale {
                 price > 0.0: "Sale price cannot be 0"
             }
 
-            BlockVersityTokenPublicSale.price = price
+            GovernanceTokenPublicSale.price = price
             emit NewPrice(price: price)
         }
 
         pub fun updatePersonalCap(personalCap: UFix64) {
-            BlockVersityTokenPublicSale.personalCap = personalCap
+            GovernanceTokenPublicSale.personalCap = personalCap
             emit NewPersonalCap(personalCap: personalCap)
         }
 
         pub fun withdrawBVT(amount: UFix64): @FungibleToken.Vault {
-            return <- BlockVersityTokenPublicSale.bvtVault.withdraw(amount: amount)
+            return <- GovernanceTokenPublicSale.bvtVault.withdraw(amount: amount)
         }
 
         pub fun withdrawFUSD(amount: UFix64): @FungibleToken.Vault {
-            return <- BlockVersityTokenPublicSale.fusdVault.withdraw(amount: amount)
+            return <- GovernanceTokenPublicSale.fusdVault.withdraw(amount: amount)
         }
 
         pub fun depositBVT(from: @FungibleToken.Vault) {
-            BlockVersityTokenPublicSale.bvtVault.deposit(from: <- from)
+            GovernanceTokenPublicSale.bvtVault.deposit(from: <- from)
         }
 
         pub fun depositFUSD(from: @FungibleToken.Vault) {
-            BlockVersityTokenPublicSale.fusdVault.deposit(from: <- from)
+            GovernanceTokenPublicSale.fusdVault.deposit(from: <- from)
         }
     }
 
@@ -260,9 +260,9 @@ pub contract BlockVersityTokenPublicSale {
         self.personalCap = 500.0
 
         self.purchases = {}
-        self.SaleAdminStoragePath = /storage/blockVersityTokenPublicSaleAdmin
+        self.SaleAdminStoragePath = /storage/GovernanceTokenPublicSaleAdmin
 
-        self.bvtVault <- BlockVersityToken.createEmptyVault()
+        self.bvtVault <- GovernanceToken.createEmptyVault()
         self.fusdVault <- FUSD.createEmptyVault()
         let admin <- create Admin()
         self.account.save(<- admin, to: self.SaleAdminStoragePath)

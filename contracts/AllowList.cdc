@@ -1,4 +1,4 @@
-pub contract Whitelist {
+pub contract AllowList {
 
     // Contract Information
     pub var addressInfo: {Address: UFix64}
