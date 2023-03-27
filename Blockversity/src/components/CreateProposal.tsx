@@ -19,7 +19,8 @@ export default function CreateProposal({ onSubmit }: Props) {
   const [options, setOptions] = useState<string[]>([]);
   const [startAt, setStartAt] = useState(0);
   const [endAt, setEndAt] = useState(0);
-  const [createdBy, setCreatedBy] = useState("");
+  const [createdBy, setCreatedBy] = useState(0);
+  const minHoldedGVTAmount = 0;
 
   const handleOptionChange = (index: number, value: string) => {
     setOptions((prevOptions) => {
@@ -36,14 +37,15 @@ export default function CreateProposal({ onSubmit }: Props) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const proposalId = await createProposal({
+      const proposalId = await createProposal(
         title,
         description,
         options,
         startAt,
         endAt,
         createdBy,
-      });
+      );
+
       onSubmit(title, description, options, startAt, endAt);
       console.log(`Proposal ${proposalId} created`);
     } catch (err) {
@@ -74,7 +76,9 @@ export default function CreateProposal({ onSubmit }: Props) {
           <div className='mb-4'>
             <label
               htmlFor='description'
-              className='block mb-2 font-bold'>
+              className='block mb-2 font-bold'
+            >
+
               Description
             </label>
             <textarea
@@ -148,7 +152,7 @@ export default function CreateProposal({ onSubmit }: Props) {
               Created by
             </label>
             <input
-              type='text'
+              type='number'
               id='createdBy'
               className='w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
               value={createdBy}

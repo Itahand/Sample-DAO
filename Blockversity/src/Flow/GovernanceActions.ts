@@ -48,7 +48,7 @@ export const vote = async (proposalId: number, optionIndex: number) => {
 export const createProposal = async (
   title: string,
   description: string,
-  options: [string],
+  options: string[],
   startAt: number,
   endAt: number,
   minHoldedGVTAmount: number
