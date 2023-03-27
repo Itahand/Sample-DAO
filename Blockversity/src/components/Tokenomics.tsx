@@ -10,14 +10,6 @@ type Tokenomics = {
     initialSupply: number;
 };
 
-const myTokenomics: Tokenomics = {
-    name: 'Blockversity',
-    symbol: 'BLK',
-    address: '0x00000',
-    price: 0.000000000000000000,
-    maxSupply: 100000,
-    initialSupply: 100000
-};
 
 const data = [
     { name: 'Burned Tokens', value: 20 },
@@ -50,17 +42,9 @@ const TokenomicsForm = ({ tokenomics }: { tokenomics: Tokenomics }) => {
                         </div>
                     </div>
                     <div className="flex flex-col sm:flex-row justify-between items-center mt-8">
+
                         <div className="flex flex-col">
-                            <h1 className="text-2xl font-bold text-gray-800">
-                                {tokenomics.maxSupply}
-                            </h1>
-                            <p className="text-sm text-gray-500">Max Supply</p>
-                        </div>
-                        <div className="flex flex-col">
-                            <h1 className="text-2xl font-bold text-gray-800">
-                                {tokenomics.initialSupply}
-                            </h1>
-                            <p className="text-sm text-gray-500">Initial Supply</p>
+
                         </div>
                     </div>
                     <div className="flex flex-col sm:flex-row justify-between items-center mt-8">
@@ -74,15 +58,15 @@ const TokenomicsForm = ({ tokenomics }: { tokenomics: Tokenomics }) => {
                     <div className="flex flex-col sm:flex-row justify-between items-center mt-8">
                         <div className="flex flex-col">
                             <h1 className="text-2xl font-bold text-gray-800">
-                                0.000000000000000000
+                                {tokenomics.initialSupply}
                             </h1>
-                            <p className="text-sm text-gray-500">Total Burned</p>
+                            <p className="text-sm text-gray-500">Initial Supply</p>
                         </div>
                         <div className="flex flex-col">
                             <h1 className="text-2xl font-bold text-gray-800">
-                                0.000000000000000000
+                                {tokenomics.maxSupply}
                             </h1>
-                            <p className="text-sm text-gray-500">Total Locked</p>
+                            <p className="text-sm text-gray-500">Max Supply</p>
                         </div>
                     </div>
                 </div>

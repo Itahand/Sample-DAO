@@ -70,13 +70,16 @@ const Welcome: React.FC = () => {
           <div>
             {user && user?.addr ? (
               <div>
-                <p className='text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base'>User is logged in with address: {user?.addr}</p>
-                <button
-                  type='button'
-                  onClick={() => signWhitelist()}
-                  className='flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]'>
-                  <p className='text-white text-base font-semibold'>Sign Whitelist</p>
-                </button>
+                <p className='text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base'>Please sign the whitelist</p>
+
+                {user?.addr && !addresses.includes(user?.addr) && (
+                  <button
+                    type='button'
+                    onClick={() => signWhitelist()}
+                    className='flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]'>
+                    <p className='text-white text-base font-semibold'>Sign Whitelist</p>
+                  </button>)}
+
 
                 {user?.addr && addresses.includes(user?.addr) && (
                   <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white'>
@@ -94,7 +97,8 @@ const Welcome: React.FC = () => {
                 )}
               </div>
             ) : (
-              <p className='text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base'>User is not logged in</p>
+              <p className='text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base'>Welcome to Your DAO <br />
+                To get started, you need to connect your wallet!</p>
             )}
           </div>
           <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
