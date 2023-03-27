@@ -39,7 +39,7 @@ export default function ProposalList() {
 
     return (
         <div className='flex justify-center items-center'>
-            <div className='px-4 pt-3 pb-4 flex flex-col text-white'>
+            <div className='px-4 pt-3 pb-4 flex flex-col text-black'>
                 <div className='flex-1'>
                     <div className='flex justify-center mb-3'>
                         <button
