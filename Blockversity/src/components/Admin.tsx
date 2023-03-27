@@ -6,6 +6,26 @@ import ICO from "./ICO";
 import Tokennomics from "./Tokenomics";
 import PurchaserList from "./PurchaserList";
 
+
+
+type Tokenomics = {
+  name: string;
+  symbol: string;
+  address: string;
+  price: number;
+  maxSupply: number;
+  initialSupply: number;
+};
+
+const myTokenomics: Tokenomics = {
+  name: 'Blockversity',
+  symbol: 'BLK',
+  address: '0x00000',
+  price: 0.000000000000000000,
+  maxSupply: 100000,
+  initialSupply: 100000
+};
+
 const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState("createToken");
 
@@ -67,7 +87,7 @@ const AdminDashboard: React.FC = () => {
             {activeTab === "sellToken" && <SellToken />}
             {activeTab === "manageToken" && <ManageToken />}
             {activeTab === "ico" && <ICO />}
-            {activeTab === "tokennomics" && <Tokennomics />}
+            {activeTab === "tokennomics" && <Tokennomics tokenomics={myTokenomics} />}
             {activeTab === "purchaserList" && <PurchaserList />}
           </div>
         </div>
