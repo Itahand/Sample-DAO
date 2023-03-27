@@ -83,36 +83,6 @@ const Welcome: React.FC = () => {
                 </div>
               )}
             </div>
-
-            <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
-              <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white'>
-                <button
-                  type='button'
-                  onClick={handleSetup}
-                  className='text-white w-full mt-2 mb-4 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer'>
-                  Setup account to receive BVT
-                </button>
-                <div className='text-white mb-2'>Amount to Buy ($BVT)</div>
-                <input
-                  type='range'
-                  min={0}
-                  max={500}
-                  value={buyAmount}
-                  onChange={(e) => handleBuyChange(Number(e.target.value))}
-                  className='w-full'
-                />
-                <div className='w-1/2 text-white text-center'>
-                  {buyAmount} BVT
-                </div>
-
-                <button
-                  type='button'
-                  onClick={handlePurchase}
-                  className='text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer'>
-                  Purchase BVT
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
