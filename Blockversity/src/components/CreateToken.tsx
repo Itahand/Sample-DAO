@@ -26,6 +26,8 @@ const CreateTokenForm = () => {
         console.log(formData);
         // Here you can handle the submission of the form, for example,
         // sending the data to a server to create a new token.
+
+
     };
 
     const handleInputChange = (

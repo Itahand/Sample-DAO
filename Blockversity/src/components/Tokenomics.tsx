@@ -10,6 +10,15 @@ type Tokenomics = {
     initialSupply: number;
 };
 
+const myTokenomics: Tokenomics = {
+    name: 'Blockversity',
+    symbol: 'BLK',
+    address: '0x00000',
+    price: 0.000000000000000000,
+    maxSupply: 100000,
+    initialSupply: 100000
+};
+
 const data = [
     { name: 'Burned Tokens', value: 20 },
     { name: 'Team Tokens', value: 20 },

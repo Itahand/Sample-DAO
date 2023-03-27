@@ -40,53 +40,47 @@ const Sidebar: React.FC = () => {
                     </Link>
                     <Link
                         to="/admin"
-                        className="block py-2 px-4 text-gray-400  hover:text-green-500"
+                        className="block py-2 px-4 text-white  hover:text-green-500"
                     >
                         Admin
                     </Link>
 
                     <Link
                         to="/vote"
-                        className="block py-2 px-4 text-gray-400  hover:text-green-500"
+                        className="block py-2 px-4 text-white  hover:text-green-500"
                     >
                         Vote
                     </Link>
                     <Link
                         to="/createToken"
-                        className="block py-2 px-4 text-gray-400  hover:text-green-500"
+                        className="block py-2 px-4 text-white  hover:text-green-500"
                     >
                         Create Token
                     </Link>
                     <Link
                         to="/sellToken"
-                        className="block py-2 px-4 text-gray-400  hover:text-green-500"
+                        className="block py-2 px-4 text-white  hover:text-green-500"
                     >
                         Sell Token
                     </Link>
                     <Link
                         to="/tokenomics"
-                        className="block py-2 px-4 text-gray-400  hover:text-green-500"
+                        className="block py-2 px-4 text-white  hover:text-green-500"
                     >
                         Tokenomics
                     </Link>
                     <Link
                         to="/ico"
-                        className="block py-2 px-4 text-gray-400  hover:text-green-500"
+                        className="block py-2 px-4 text-white  hover:text-green-500"
                     >
                         ICO
                     </Link>
 
                     <Link
                         to="/manageToken"
-                        className="block py-2 px-4 text-gray-400  hover:text-green-500"
+                        className="block py-2 px-4 text-white  hover:text-green-500"
                     >
                         Manage Token
-                    </Link>
-                    <Link
-                        to="/admine"
-                        className="block py-2 px-4 text-gray-400  hover:text-green-500"
-                    >
-                        Admine
                     </Link>
 
                 </div>

@@ -10,7 +10,6 @@ import SellToken from "./components/SellToken";
 import Tokenomics from "./components/Tokenomics";
 import ManageToken from "./components/ManageToken";
 import CreateToken from "./components/CreateToken";
-import Admine from "./components/Admine";
 import ICO from "./components/ICO";
 
 type Tokenomics = {
@@ -50,10 +49,6 @@ const App: React.FC = () => (
             <Route
               path='/ico'
               element={<ICO />}
-            />
-            <Route
-              path='/admine'
-              element={<Admine />}
             />
             <Route path='/createToken' element={<CreateToken />} />
             <Route

@@ -17,11 +17,17 @@ const initialFormValues: TokenManagement = {
 export default function ManageTokensForm() {
     const [formValues, setFormValues] = useState<TokenManagement>(initialFormValues);
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value, type, checked } = event.target;
+    const handleFreezeClick = () => {
         setFormValues({
             ...formValues,
-            [name]: type === 'checkbox' ? checked : value,
+            freeze: !formValues.freeze,
+        });
+    };
+
+    const handleDistributeClick = () => {
+        setFormValues({
+            ...formValues,
+            distribute: !formValues.distribute,
         });
     };
 
@@ -40,38 +46,46 @@ export default function ManageTokensForm() {
                         id="refund"
                         name="refund"
                         value={formValues.refund}
-                        onChange={handleChange}
+                        onChange={(event) =>
+                            setFormValues({ ...formValues, refund: Number(event.target.value) })
+                        }
                         className="rounded-lg border-gray-400 border p-2 w-full mt-2"
                     />
-                    <label htmlFor="burn" className="mt-4">Burn</label>
+                    <label htmlFor="burn" className="mt-4">
+                        Burn
+                    </label>
                     <input
                         type="number"
                         id="burn"
                         name="burn"
                         value={formValues.burn}
-                        onChange={handleChange}
+                        onChange={(event) =>
+                            setFormValues({ ...formValues, burn: Number(event.target.value) })
+                        }
                         className="rounded-lg border-gray-400 border p-2 w-full mt-2"
                     />
                 </div>
                 <div className="flex flex-col">
-                    <label htmlFor="freeze">Freeze</label>
-                    <input
-                        type="checkbox"
-                        id="freeze"
-                        name="freeze"
-                        checked={formValues.freeze}
-                        onChange={handleChange}
-                        className="mt-2"
-                    />
-                    <label htmlFor="distribute" className="mt-4">Distribute</label>
-                    <input
-                        type="checkbox"
-                        id="distribute"
-                        name="distribute"
-                        checked={formValues.distribute}
-                        onChange={handleChange}
-                        className="mt-2"
-                    />
+                    <label>Freeze</label>
+                    <button
+                        type="button"
+                        className={`mt-2 rounded-lg border-gray-400 border p-2 w-full ${formValues.freeze ? 'bg-green-500 text-white' : ''
+                            }`}
+                        onClick={handleFreezeClick}
+                    >
+                        {formValues.freeze ? 'Frozen' : 'Not frozen'}
+                    </button>
+                    <label htmlFor="distribute" className="mt-4">
+                        Distribute
+                    </label>
+                    <button
+                        type="button"
+                        className={`mt-2 rounded-lg border-gray-400 border p-2 w-full ${formValues.distribute ? 'bg-green-500 text-white' : ''
+                            }`}
+                        onClick={handleDistributeClick}
+                    >
+                        {formValues.distribute ? 'Distributed' : 'Not distributed'}
+                    </button>
                 </div>
             </div>
             <button type="submit" className="mt-8 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600">
