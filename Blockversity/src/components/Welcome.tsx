@@ -21,15 +21,14 @@ interface InputProps {
 
 const Welcome: React.FC = () => {
   //   const { currentAccount, connectWallet, handleChange, sendTransaction, formData, isLoading } = useContext<TransactionContext>(TransactionContext);
-  const [addresses, setAddresses] = useState([]);
   const [buyAmount, setBuyAmount] = useState(0);
   const [toggle, setToggle] = useState(false);
   const [formData, setFormData] = useState({
     addressTo: "",
     amount: "",
   });
-
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<{ addr: string } | null>(null);
+  const [addresses, setAddresses] = useState<string[]>([]);
 
   useEffect(() => {
     currentUser().subscribe(setUser);
@@ -69,7 +68,7 @@ const Welcome: React.FC = () => {
       <div className='flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4'>
         <div className='flex flex-1 justify-start items-start flex-col mf:mr-10'>
           <div>
-            {user?.addr ? (
+            {user && user?.addr ? (
               <div>
                 <p className='text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base'>User is logged in with address: {user?.addr}</p>
                 <button
@@ -79,7 +78,7 @@ const Welcome: React.FC = () => {
                   <p className='text-white text-base font-semibold'>Sign Whitelist</p>
                 </button>
 
-                {addresses.includes(user?.addr) && (
+                {user?.addr && addresses.includes(user?.addr) && (
                   <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white'>
                     <button onClick={() => showAddresses()}>Get All Addresses</button>
                     {toggle && (
