@@ -20,7 +20,7 @@ export default function CreateProposal({ onSubmit }: Props) {
   const [startAt, setStartAt] = useState(0);
   const [endAt, setEndAt] = useState(0);
   const [createdBy, setCreatedBy] = useState(0);
-  const minHoldedGVTAmount = 0;
+  const [minHoldedGVTAmount, setMinHoldedGVTAmount] = useState(0);
 
   const handleOptionChange = (index: number, value: string) => {
     setOptions((prevOptions) => {
@@ -43,7 +43,7 @@ export default function CreateProposal({ onSubmit }: Props) {
         options,
         startAt,
         endAt,
-        createdBy,
+        minHoldedGVTAmount,
       );
 
       onSubmit(title, description, options, startAt, endAt);
@@ -153,10 +153,10 @@ export default function CreateProposal({ onSubmit }: Props) {
             </label>
             <input
               type='number'
-              id='createdBy'
+              id='minHoldedGVTAmount'
               className='w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
-              value={createdBy}
-              onChange={(e) => setCreatedBy(e.target.value)}
+              value={minHoldedGVTAmount}
+              onChange={(e) => setMinHoldedGVTAmount(parseFloat(e.target.value))}
             />
           </div>
           <div className='flex justify-end'>
