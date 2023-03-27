@@ -33,9 +33,22 @@ export default function CreateProposal({ onSubmit }: Props) {
     setOptions((prevOptions) => [...prevOptions, ""]);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit(title, description, options, startAt, endAt);
+    try {
+      const proposalId = await createProposal({
+        title,
+        description,
+        options,
+        startAt,
+        endAt,
+        createdBy,
+      });
+      onSubmit(title, description, options, startAt, endAt);
+      console.log(`Proposal ${proposalId} created`);
+    } catch (err) {
+      console.error(`Error creating proposal: ${err}`);
+    }
   };
 
   return (
@@ -153,4 +166,4 @@ export default function CreateProposal({ onSubmit }: Props) {
       </div>
     </div>
   );
-}
+};
