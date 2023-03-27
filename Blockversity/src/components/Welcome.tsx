@@ -3,6 +3,7 @@
 import { signWhitelist, getAllAddresses } from "../Flow/allowListActions";
 import { purchaseBVT, setupBVT } from "../Flow/ICOActions";
 import { useEffect, useState } from "react";
+import { currentUser } from "../Flow/allowListActions";
 import { Link } from 'react-router-dom';
 
 const companyCommonStyles =
@@ -27,6 +28,12 @@ const Welcome: React.FC = () => {
     addressTo: "",
     amount: "",
   });
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    currentUser().subscribe(setUser);
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -61,28 +68,38 @@ const Welcome: React.FC = () => {
     <div className='flex w-full justify-center items-center'>
       <div className='flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4'>
         <div className='flex flex-1 justify-start items-start flex-col mf:mr-10'>
-          <p className='text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base'>
-            You have successfully signed the whitelist
-          </p>
-          <button
-            type='button'
-            onClick={() => signWhitelist()}
-            className='flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]'>
-            <p className='text-white text-base font-semibold'>Sign Whitelist</p>
-          </button>
+          <div>
+            {user?.addr ? (
+              <div>
+                <p className='text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base'>User is logged in with address: {user?.addr}</p>
+                <button
+                  type='button'
+                  onClick={() => signWhitelist()}
+                  className='flex flex-row justify-center items-center my-5 bg-[#0f9c45] p-3 rounded-full cursor-pointer hover:bg-[#76ef4e]'>
+                  <p className='text-white text-base font-semibold'>Sign Whitelist</p>
+                </button>
+
+                {addresses.includes(user?.addr) && (
+                  <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white'>
+                    <button onClick={() => showAddresses()}>Get All Addresses</button>
+                    {toggle && (
+                      <div>
+                        {addresses.map((address) => (
+                          <div key={address}>
+                            <p>{address}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <p className='text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base'>User is not logged in</p>
+            )}
+          </div>
           <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
-            <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white blue-glassmorphism'>
-              <button onClick={() => showAddresses()}>Get All Addresses</button>
-              {toggle && (
-                <div>
-                  {addresses.map((address) => (
-                    <div key={address}>
-                      <p>{address}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+
           </div>
         </div>
       </div>

@@ -51,37 +51,6 @@ const Sidebar: React.FC = () => {
                     >
                         Vote
                     </Link>
-                    <Link
-                        to="/createToken"
-                        className="block py-2 px-4 text-white  hover:text-green-500"
-                    >
-                        Create Token
-                    </Link>
-                    <Link
-                        to="/sellToken"
-                        className="block py-2 px-4 text-white  hover:text-green-500"
-                    >
-                        Sell Token
-                    </Link>
-                    <Link
-                        to="/tokenomics"
-                        className="block py-2 px-4 text-white  hover:text-green-500"
-                    >
-                        Tokenomics
-                    </Link>
-                    <Link
-                        to="/ico"
-                        className="block py-2 px-4 text-white  hover:text-green-500"
-                    >
-                        ICO
-                    </Link>
-
-                    <Link
-                        to="/manageToken"
-                        className="block py-2 px-4 text-white  hover:text-green-500"
-                    >
-                        Manage Token
-                    </Link>
 
                 </div>
 
