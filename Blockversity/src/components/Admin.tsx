@@ -46,21 +46,21 @@ const AdminDashboard: React.FC = () => {
             <div className={`flex-grow ${isManageAccountActive ? "" : "hidden"}`}>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Managed account</h3>
               <button
-                className={`btn btn-outline-secondary m-2 ${activeTab === "createToken" ? "btn-primary" : ""
+                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "createToken" ? "btn-primary" : ""
                   }`}
                 onClick={() => handleTabClick("createToken")}
               >
                 Create Token
               </button>
               <button
-                className={`btn btn-outline-secondary m-2 ${activeTab === "sellToken" ? "btn-primary" : ""
+                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "sellToken" ? "btn-primary" : ""
                   }`}
                 onClick={() => handleTabClick("sellToken")}
               >
                 Sell Token
               </button>
               <button
-                className={`btn btn-outline-secondary m-2 ${activeTab === "manageToken" ? "btn-primary" : ""
+                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "manageToken" ? "btn-primary" : ""
                   }`}
                 onClick={() => handleTabClick("manageToken")}
               >
@@ -70,21 +70,21 @@ const AdminDashboard: React.FC = () => {
             <div className={`flex-grow ${isManageAccountActive ? "hidden" : ""}`}>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Dashboard</h3>
               <button
-                className={`btn btn-outline-secondary m-2 ${activeTab === "ico" ? "btn-primary" : ""
+                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "ico" ? "btn-primary" : ""
                   }`}
                 onClick={() => handleTabClick("ico")}
               >
                 ICO
               </button>
               <button
-                className={`btn btn-outline-secondary m-2 ${activeTab === "tokennomics" ? "btn-primary" : ""
+                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "tokennomics" ? "btn-primary" : ""
                   }`}
                 onClick={() => handleTabClick("tokennomics")}
               >
                 Tokennomics
               </button>
               <button
-                className={`btn btn-outline-secondary m-2 ${activeTab === "purchaserList" ? "btn-primary" : ""
+                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "purchaserList" ? "btn-primary" : ""
                   }`}
                 onClick={() => handleTabClick("purchaserList")}
               >
@@ -93,7 +93,7 @@ const AdminDashboard: React.FC = () => {
             </div>
             <div className="flex-grow">
               <button
-                className="btn btn-outline-secondary m-2"
+                className="btn rounded-lg border-gray-400 border p-2 w-full max-w-xs bg-green-500 text-white"
                 onClick={() => toggleSections()}
               >
                 {isManageAccountActive ? "Dashboard" : "Manage Account"}
