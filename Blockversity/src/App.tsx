@@ -39,8 +39,8 @@ const App: React.FC = () => (
                     title: string,
                     description: string,
                     options: string[],
-                    startAt: number,
-                    endAt: number
+                    startAt: Date,
+                    endAt: Date
                   ): void {
                     throw new Error("Function not implemented.");
                   }}

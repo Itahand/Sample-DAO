@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { getProposals } from "../Flow/GovernanceActions";
@@ -12,8 +12,11 @@ type Proposal = {
   start_date: string;
   end_date: string;
   tokens_required: string;
-  options: boolean;
+  options: string[];
 };
+
+
+
 
 const recentData: Proposal[] = [
   {
@@ -23,19 +26,39 @@ const recentData: Proposal[] = [
     start_date: "2021-05-17T03:24:00",
     end_date: "2022-05-17T03:24:00",
     tokens_required: "100",
-    options: true,
+    options: ["yes", "no"],
   },
   // ...
 ];
 
+interface ProposalData {
+  id: string;
+  title: string;
+  description: string;
+  start_date: string;
+  end_date: string;
+  tokens_required: string;
+  options: string[];
+}
+
 export default function ProposalList() {
   const [showActiveProposals, setShowActiveProposals] = useState(true);
-  const proposalData = getProposals();
+  const [proposalData, setProposalData] = useState<ProposalData[]>([]);
 
-  console.log(getProposals(), "Called in the frontend");
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getProposals();
+      setProposalData(data);
+    }
+
+    fetchData();
+  }, []);
+
+  console.log(proposalData, "Called in the frontend");
+
   const proposals = showActiveProposals
-    ? recentData.filter((proposal) => new Date(proposal.end_date) >= new Date())
-    : recentData.filter((proposal) => new Date(proposal.end_date) < new Date());
+    ? proposalData.filter((proposal) => new Date(proposal.end_date) >= new Date())
+    : proposalData.filter((proposal) => new Date(proposal.end_date) < new Date());
 
   return (
     <div className='flex justify-center items-center'>

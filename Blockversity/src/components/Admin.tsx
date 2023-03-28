@@ -15,6 +15,7 @@ type Tokenomics = {
   initialSupply: number;
 };
 
+
 const myTokenomics: Tokenomics = {
   name: 'Tour Token',
   symbol: 'YK',

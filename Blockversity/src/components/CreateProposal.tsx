@@ -8,8 +8,8 @@ interface Props {
     title: string,
     description: string,
     options: string[],
-    startAt: number,
-    endAt: number
+    startAt: Date,
+    endAt: Date
   ) => void;
 }
 
@@ -17,8 +17,8 @@ export default function CreateProposal({ onSubmit }: Props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [options, setOptions] = useState<string[]>([]);
-  const [startAt, setStartAt] = useState(0);
-  const [endAt, setEndAt] = useState(0);
+  const [startAt, setStartAt] = useState(new Date());
+  const [endAt, setEndAt] = useState(new Date());
   const [createdBy, setCreatedBy] = useState(0);
   const [minHoldedGVTAmount, setMinHoldedGVTAmount] = useState(0);
 
@@ -41,8 +41,8 @@ export default function CreateProposal({ onSubmit }: Props) {
         title,
         description,
         options,
-        startAt,
-        endAt,
+        startAt.getTime(),
+        endAt.getTime(),
         minHoldedGVTAmount,
       );
 
@@ -91,79 +91,94 @@ export default function CreateProposal({ onSubmit }: Props) {
             <div className='mb-4 flex items-center'>
               <label
                 htmlFor='options'
-                className='block mr-2 font-bold'>
+                className='block mb-2 font-bold'
+              >
                 Options
               </label>
               <button
                 type='button'
-                className='bg-[#3C773E] text-white px-4 py-2 rounded-full'
+                className='ml-2 px-3 py-1 bg-green-700  text-white rounded-full'
                 onClick={handleAddOption}>
                 +
               </button>
             </div>
-
             {options.map((option, index) => (
-              <input
-                key={index}
-                type='text'
-                className='w-full px-3 py-2 border border-gray-300 text-black rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
-                value={option}
-                onChange={(e) => handleOptionChange(index, e.target.value)}
-              />
+              <div key={index} className='mb-2'>
+                <input
+                  type='text'
+                  className='w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                  value={option}
+                  onChange={(e) => handleOptionChange(index, e.target.value)}
+                />
+              </div>
             ))}
           </div>
-          <div className='flex justify-between'>
-            <div className='mb-4 flex flex-row justify-between items-center'>
-              <label
-                htmlFor='startAt'
-                className='block mr-2 font-bold'>
-                Start At
-              </label>
-              <input
-                type='date'
-                id='startAt'
-                className='w-full px-3 py-2  text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
-                value={startAt}
-                onChange={(e) => setStartAt(parseFloat(e.target.value))}
-                placeholder='MM/DD/YYYY'
-              />
-            </div>
-            <div className='mb-4 flex flex-row justify-between items-center'>
-              <label
-                htmlFor='endAt'
-                className='block mr-2 font-bold'>
-                End At
-              </label>
-              <input
-                type='date'
-                id='endAt'
-                className='w-full px-3 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
-                value={endAt}
-                onChange={(e) => setEndAt(parseFloat(e.target.value))}
-                placeholder='MM/DD/YYYY'
-              />
-            </div>
-          </div>
-
           <div className='mb-4'>
             <label
-              htmlFor='createdBy'
-              className='block mb-2 font-bold'>
-              Created by
+              htmlFor='startAt'
+              className='block mb-2 font-bold'
+            >
+              Start At
+            </label>
+            <input
+              type='datetime-local'
+              id='startAt'
+              className='w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+              value={startAt.toISOString().slice(0, 16)}
+              onChange={(e) => setStartAt(new Date(e.target.value))}
+            />
+          </div>
+          <div className='mb-4'>
+            <label
+              htmlFor='endAt'
+              className='block mb-2 font-bold'
+            >
+              End At
+            </label>
+            <input
+              type='datetime-local'
+              id='endAt'
+              className='w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+              value={endAt.toISOString().slice(0, 16)}
+              onChange={(e) => setEndAt(new Date(e.target.value))}
+            />
+          </div>
+          <div className='mb-4'>
+            <label
+              htmlFor='minHoldedGVTAmount'
+              className='block mb-2 font-bold'
+            >
+              Min Holded GVT Amount
             </label>
             <input
               type='number'
               id='minHoldedGVTAmount'
               className='w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
               value={minHoldedGVTAmount}
-              onChange={(e) => setMinHoldedGVTAmount(parseFloat(e.target.value))}
+              onChange={(e) => setMinHoldedGVTAmount(parseInt(e.target.value))}
             />
           </div>
-          <div className='flex justify-end'>
+          <div className='mb-4'>
+            <label
+              htmlFor='createdBy'
+              className='block mb-2 font-bold'
+            >
+              Created By
+            </label>
+            <input
+              type='number'
+              id='createdBy'
+              className='w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+              value={createdBy}
+              onChange={(e) => setCreatedBy(parseInt(e.target.value))}
+            />
+          </div>
+          <div className='mb-4'>
             <button
               type='submit'
-              className='bg-[#2D873B] text-white px-4 py-2 rounded-md mr-2'>
-              Create Proposal
+              className='w-full px-3 py-1 bg-green-700 text-white rounded-md'
+            >
+              Create
             </button>
           </div>
         </form>
@@ -171,3 +186,4 @@ export default function CreateProposal({ onSubmit }: Props) {
     </div>
   );
 };
+
