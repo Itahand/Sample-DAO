@@ -6,8 +6,6 @@ import ICO from "./ICO";
 import Tokennomics from "./Tokenomics";
 import PurchaserList from "./PurchaserList";
 
-
-
 type Tokenomics = {
   name: string;
   symbol: string;
@@ -28,9 +26,14 @@ const myTokenomics: Tokenomics = {
 
 const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState("createToken");
+  const [isManageAccountActive, setIsManageAccountActive] = useState(true);
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
+  };
+
+  const toggleSections = () => {
+    setIsManageAccountActive(!isManageAccountActive);
   };
 
   return (
@@ -39,7 +42,7 @@ const AdminDashboard: React.FC = () => {
         <div className="px-4 py-5 sm:p-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Admin</h2>
           <div className="flex flex-wrap justify-center">
-            <div className="flex-grow">
+            <div className={`flex-grow ${isManageAccountActive ? "" : "hidden"}`}>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Managed account</h3>
               <button
                 className={`btn btn-outline-secondary m-2 ${activeTab === "createToken" ? "btn-primary" : ""
@@ -63,7 +66,7 @@ const AdminDashboard: React.FC = () => {
                 Manage Token
               </button>
             </div>
-            <div className="flex-grow">
+            <div className={`flex-grow ${isManageAccountActive ? "hidden" : ""}`}>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Dashboard</h3>
               <button
                 className={`btn btn-outline-secondary m-2 ${activeTab === "ico" ? "btn-primary" : ""
@@ -87,8 +90,16 @@ const AdminDashboard: React.FC = () => {
                 Purchaser List
               </button>
             </div>
+            <div className="flex-grow">
+              <button
+                className="btn btn-outline-secondary m-2"
+                onClick={() => toggleSections()}
+              >
+                {isManageAccountActive ? "Dashboard" : "Manage Account"}
+              </button>
+            </div>
           </div>
-          <div className="mt-6">
+          <div className="mt-4">
             {activeTab === "createToken" && <CreateToken />}
             {activeTab === "sellToken" && <SellToken />}
             {activeTab === "manageToken" && <ManageToken />}
