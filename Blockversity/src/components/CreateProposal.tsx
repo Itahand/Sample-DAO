@@ -39,8 +39,8 @@ export default function CreateProposal({ onSubmit }: Props) {
     e.preventDefault();
     try {
 
-      const start = Math.round(startAt.getTime() / 1000);
-      const end = Math.round(endAt.getTime() / 1000);
+      const start = startAt.getTime() / 1000;
+      const end = endAt.getTime() / 1000;
 
       const proposalId = await createProposal(
         title,
