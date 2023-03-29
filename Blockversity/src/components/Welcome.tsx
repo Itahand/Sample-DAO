@@ -64,7 +64,7 @@ const Welcome: React.FC = () => {
           <div>
             {user && user?.addr ? (
               <div>
-                <p className='text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base'>You have successfully signed the whitelist</p>
+                <p className='text-left my-2 text-white font-light text-base'>You have successfully signed the whitelist</p>
 
                 {user?.addr && !addresses.includes(user?.addr) && (
                   <button
@@ -92,7 +92,7 @@ const Welcome: React.FC = () => {
                 )}
               </div>
             ) : (
-              <p className='text-left my-1 text-white font-light md:w-9/12 w-11/12 text-base'>Welcome to Your DAO <br />
+              <p className='text-left text-white font-light '>Welcome to Your DAO <br />
                 To get started, you need to connect your wallet!</p> // on put 2 lines
             )}
           </div>
