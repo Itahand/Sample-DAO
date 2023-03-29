@@ -1,4 +1,8 @@
-import GovernanceTokenPublicSale from "../../contracts/sales/GovernanceTokenSale.cdc"
+/** @format */
+
+export const getSaleInfo = () => {
+  return `
+import GovernanceTokenPublicSale from 0x800a10d0fff7acd4
 
 pub struct Info {
   pub let tokenName: String
@@ -44,4 +48,5 @@ pub fun main(): Info {
     purchasers: GovernanceTokenPublicSale.getPurchasers()
   )
 }
-
+  `;
+};

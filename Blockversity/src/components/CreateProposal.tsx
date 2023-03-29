@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { createProposal } from "../Flow/GovernanceActions";
+import { setProxy, depositProposer } from "../Flow/GovernanceActions";
 
 interface Props {
   onSubmit: (
@@ -43,7 +44,7 @@ export default function CreateProposal({ onSubmit }: Props) {
         options,
         startAt.getTime(),
         endAt.getTime(),
-        minHoldedGVTAmount,
+        minHoldedGVTAmount
       );
 
       onSubmit(title, description, options, startAt, endAt);
@@ -76,9 +77,7 @@ export default function CreateProposal({ onSubmit }: Props) {
           <div className='mb-4'>
             <label
               htmlFor='description'
-              className='block mb-2 font-bold'
-            >
-
+              className='block mb-2 font-bold'>
               Description
             </label>
             <textarea
@@ -91,8 +90,7 @@ export default function CreateProposal({ onSubmit }: Props) {
             <div className='mb-4 flex items-center'>
               <label
                 htmlFor='options'
-                className='block mb-2 font-bold'
-              >
+                className='block mb-2 font-bold'>
                 Options
               </label>
               <button
@@ -103,7 +101,9 @@ export default function CreateProposal({ onSubmit }: Props) {
               </button>
             </div>
             {options.map((option, index) => (
-              <div key={index} className='mb-2'>
+              <div
+                key={index}
+                className='mb-2'>
                 <input
                   type='text'
                   className='w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
@@ -116,8 +116,7 @@ export default function CreateProposal({ onSubmit }: Props) {
           <div className='mb-4'>
             <label
               htmlFor='startAt'
-              className='block mb-2 font-bold'
-            >
+              className='block mb-2 font-bold'>
               Start At
             </label>
             <input
@@ -131,8 +130,7 @@ export default function CreateProposal({ onSubmit }: Props) {
           <div className='mb-4'>
             <label
               htmlFor='endAt'
-              className='block mb-2 font-bold'
-            >
+              className='block mb-2 font-bold'>
               End At
             </label>
             <input
@@ -146,8 +144,7 @@ export default function CreateProposal({ onSubmit }: Props) {
           <div className='mb-4'>
             <label
               htmlFor='minHoldedGVTAmount'
-              className='block mb-2 font-bold'
-            >
+              className='block mb-2 font-bold'>
               Min Holded GVT Amount
             </label>
             <input
@@ -161,8 +158,7 @@ export default function CreateProposal({ onSubmit }: Props) {
           <div className='mb-4'>
             <label
               htmlFor='createdBy'
-              className='block mb-2 font-bold'
-            >
+              className='block mb-2 font-bold'>
               Created By
             </label>
             <input
@@ -176,8 +172,7 @@ export default function CreateProposal({ onSubmit }: Props) {
           <div className='mb-4'>
             <button
               type='submit'
-              className='w-full px-3 py-1 bg-green-700 text-white rounded-md'
-            >
+              className='w-full px-3 py-1 bg-green-700 text-white rounded-md'>
               Create
             </button>
           </div>
@@ -185,5 +180,4 @@ export default function CreateProposal({ onSubmit }: Props) {
       </div>
     </div>
   );
-};
-
+}

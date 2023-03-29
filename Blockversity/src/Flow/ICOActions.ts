@@ -14,7 +14,7 @@ import { Buffer } from "buffer/";
 import { getBVTBalance as getBVTBalanceScript } from "./Scripts/ICO/getBVT_Balance";
 import { getFUSDVaultBalance as getFUSDVaultBalanceScript } from "./Scripts/ICO/getFUSDVaultBalance";
 import { getIsSaleActive as getIsSaleActiveScript } from "./Scripts/ICO/getIsSaleActive";
-import { getPrice as getPriceScript } from "./Scripts/ICO/getPrice";
+import { getSaleInfo as getSaleInfoScript } from "./Scripts/ICO/getSaleInfo";
 import { getPurchaseInfo as getPurchaseInfoScript } from "./Scripts/ICO/getPurchaseInfo";
 import { getPurchasers as getPurchasersScript } from "./Scripts/ICO/getPurchasers";
 
@@ -290,12 +290,12 @@ export const getIsSaleActive = async () => {
   }
 };
 
-// Check ICO's sale price
+// Check ICO's general Info
 
-export const getPrice = async () => {
+export const getSaleInfo = async () => {
   try {
     const response = await fcl.query({
-      cadence: getPriceScript(),
+      cadence: getSaleInfoScript(),
       args: (arg: any, t: any) => [],
     });
     console.log(response);
