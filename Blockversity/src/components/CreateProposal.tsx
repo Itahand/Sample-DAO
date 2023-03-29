@@ -21,7 +21,6 @@ export default function CreateProposal({ onSubmit }: Props) {
   const [startAt, setStartAt] = useState(new Date());
   const [endAt, setEndAt] = useState(new Date());
   const [minHoldedGVTAmount, setMinHoldedGVTAmount] = useState(0);
-  const [date, setDate] = useState(new Date());
 
 
   const handleOptionChange = (index: number, value: string) => {
@@ -39,12 +38,17 @@ export default function CreateProposal({ onSubmit }: Props) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+
+      const start = (startAt.getTime() * 1000);
+
+      const end = (startAt.getTime() * 1000);
+
       const proposalId = await createProposal(
         title,
         description,
         options,
-        startAt.getTime(),
-        endAt.getTime(),
+        start,
+        end,
         minHoldedGVTAmount
       );
 
@@ -135,6 +139,7 @@ export default function CreateProposal({ onSubmit }: Props) {
               }}
             />
           </div>
+
           <div className='mb-4'>
             <label
               htmlFor='endAt'
@@ -146,7 +151,7 @@ export default function CreateProposal({ onSubmit }: Props) {
               id='endAt'
               pattern='\d{4}-\d{2}-\d{2}'
               className='w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
-              value={startAt.toISOString().slice(0, 10)}
+              value={endAt.toISOString().slice(0, 10)}
               onChange={(e) => {
                 const EndDateValue = e.target.value;
                 const EndDate = new Date(EndDateValue);

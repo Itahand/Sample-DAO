@@ -140,10 +140,6 @@ export default function SellTokensForm() {
                         </div>
                     </div>
                 </div>
-                <div className="w-full md:w-1/3 px-4 mb-6 md:mb-0">
-                    <h2 className="text-2xl mb-2 font-medium">Token Details</h2>
-
-                </div>
             </div>
             <div className="flex justify-center">
                 <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="submit">
