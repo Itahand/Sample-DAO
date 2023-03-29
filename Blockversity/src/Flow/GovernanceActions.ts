@@ -16,11 +16,52 @@ import { getProposals as getProposalsScript } from "./Scripts/DAO/getProposals";
 import { getUserBalance as getUserBalanceScript } from "./Scripts/getGVT_Balance";
 
 // // Transactions
-
+import { setProxy as setProxyScript } from "./Transactions/DAO/createProposerProxy";
+import { depositProposer as depositProposerScript } from "./Transactions/DAO/depositProposer";
 import { createProposal as createProposalTransaction } from "./Transactions/DAO/createProposal";
 import { vote as voteTransaction } from "./Transactions/DAO/vote";
 
 // // ****** Transactions Functions ****** //
+
+export const setProxy = async () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const transactionId = await fcl.mutate({
+        cadence: setProxyScript(),
+        proposer: fcl.currentUser,
+        payer: fcl.currentUser,
+        authorizations: [fcl.currentUser],
+        args: (arg: any, t: any) => [],
+        limit: 500,
+      });
+      const transaction = await fcl.tx(transactionId).onceSealed();
+      console.log(transaction); // The transactions status and events after being sealed
+    } catch (error) {
+      console.log(error);
+      reject(false);
+    }
+  });
+};
+
+export const depositProposer = async (address: string) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const transactionId = await fcl.mutate({
+        cadence: setProxyScript(),
+        proposer: fcl.currentUser,
+        payer: fcl.currentUser,
+        authorizations: [fcl.currentUser],
+        args: (arg: any, t: any) => [arg(address, t.Address)],
+        limit: 500,
+      });
+      const transaction = await fcl.tx(transactionId).onceSealed();
+      console.log(transaction); // The transactions status and events after being sealed
+    } catch (error) {
+      console.log(error);
+      reject(false);
+    }
+  });
+};
 
 export const vote = async (proposalId: number, optionIndex: number) => {
   return new Promise(async (resolve, reject) => {

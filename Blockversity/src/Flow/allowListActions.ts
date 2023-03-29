@@ -1,7 +1,9 @@
+/** @format */
+
 //@ts-ignore
 import * as fcl from "@onflow/fcl";
 //import t from "@onflow/types";
-import './config';
+import "./config";
 
 // ///////////////
 // // Cadence code
@@ -11,30 +13,27 @@ import './config';
 export const unauthenticate = () => fcl.unauthenticate();
 export const logIn = async () => await fcl.logIn();
 export const signUp = () => fcl.signUp();
-export const currentUser = () => fcl.currentUser()
+export const currentUser = () => fcl.currentUser();
 
 // // AllowList Scripts
-import { getAllAddresses as getAllAddressesScript } from './Scripts/get_all_addresses';
-import { getUserTimestamp as getUserTimestampScript } from './Scripts/get_user_timestamp';
+import { getAllAddresses as getAllAddressesScript } from "./Scripts/get_all_addresses";
+import { getUserTimestamp as getUserTimestampScript } from "./Scripts/get_user_timestamp";
 
 // ICO Scripts
-import { getBVTBalance as getBVTBalanceScript } from './Scripts/ICO/getBVT_Balance';
-import { getFUSDVaultBalance as getFUSDVaultBalanceScript } from './Scripts/ICO/getFUSDVaultBalance';
-import { getIsSaleActive as getIsSaleActiveScript } from './Scripts/ICO/getIsSaleActive';
-import { getPrice as getPriceScript } from './Scripts/ICO/getPrice';
-import { getPurchaseInfo as getPurchaseInfoScript } from './Scripts/ICO/getPurchaseInfo';
-import { getPurchasers as getPurchasersScript } from './Scripts/ICO/getPurchasers';
-
+import { getBVTBalance as getBVTBalanceScript } from "./Scripts/ICO/getBVT_Balance";
+import { getFUSDVaultBalance as getFUSDVaultBalanceScript } from "./Scripts/ICO/getFUSDVaultBalance";
+import { getIsSaleActive as getIsSaleActiveScript } from "./Scripts/ICO/getIsSaleActive";
+import { getPrice as getPriceScript } from "./Scripts/ICO/getSaleInfo";
+import { getPurchaseInfo as getPurchaseInfoScript } from "./Scripts/ICO/getPurchaseInfo";
+import { getPurchasers as getPurchasersScript } from "./Scripts/ICO/getPurchasers";
 
 // // Transactions
 
-import { signWhitelist as signWhitelistTransaction } from './Transactions/sign_Whitelist';
+import { signWhitelist as signWhitelistTransaction } from "./Transactions/sign_Whitelist";
 
 // // ****** Transactions Functions ****** //
 
 export const signWhitelist = async () => {
-
-
   return new Promise(async (resolve, reject) => {
     try {
       const transactionId = await fcl.mutate({
@@ -42,16 +41,16 @@ export const signWhitelist = async () => {
         proposer: fcl.currentUser,
         payer: fcl.currentUser,
         authorizations: [fcl.currentUser],
-        limit: 500
+        limit: 500,
       });
-      const transaction = await fcl.tx(transactionId).onceSealed()
-      console.log(transaction) // The transactions status and events after being sealed
+      const transaction = await fcl.tx(transactionId).onceSealed();
+      console.log(transaction); // The transactions status and events after being sealed
     } catch (e) {
       console.log(e);
       reject(false);
     }
   });
-}
+};
 
 // // ****** Script Functions ****** //
 
@@ -69,7 +68,7 @@ export const getAllAddresses = async () => {
   } catch (e) {
     console.log(e);
   }
-}
+};
 
 export const getUserTimestamp = async (userAddress: any) => {
   try {
@@ -83,4 +82,4 @@ export const getUserTimestamp = async (userAddress: any) => {
   } catch (e) {
     console.log(e);
   }
-}
+};
