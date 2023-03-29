@@ -70,7 +70,7 @@ const Welcome: React.FC = () => {
           <div>
             {user && user?.addr ? (
               <div>
-                <p className='text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base'>Please sign the whitelist</p>
+                <p className='text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base'>You have successfully signed the whitelist</p>
 
                 {user?.addr && !addresses.includes(user?.addr) && (
                   <button
@@ -83,6 +83,7 @@ const Welcome: React.FC = () => {
 
                 {user?.addr && addresses.includes(user?.addr) && (
                   <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center text-white'>
+                    <p className='text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base'>You can now review or create proposals or vote on current ones</p>
                     <button onClick={() => showAddresses()}>Get All Addresses</button>
                     {toggle && (
                       <div>
@@ -98,7 +99,7 @@ const Welcome: React.FC = () => {
               </div>
             ) : (
               <p className='text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base'>Welcome to Your DAO <br />
-                To get started, you need to connect your wallet!</p>
+                To get started, you need to connect your wallet!</p> // on put 2 lines
             )}
           </div>
           <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>

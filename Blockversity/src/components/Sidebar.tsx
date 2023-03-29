@@ -45,13 +45,6 @@ const Sidebar: React.FC = () => {
                         Admin
                     </Link>
 
-                    <Link
-                        to="/vote"
-                        className="block py-2 px-4 text-white  hover:text-green-500"
-                    >
-                        Vote
-                    </Link>
-
                 </div>
 
             </div>

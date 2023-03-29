@@ -19,7 +19,6 @@ export default function CreateProposal({ onSubmit }: Props) {
   const [options, setOptions] = useState<string[]>([]);
   const [startAt, setStartAt] = useState(new Date());
   const [endAt, setEndAt] = useState(new Date());
-  const [createdBy, setCreatedBy] = useState(0);
   const [minHoldedGVTAmount, setMinHoldedGVTAmount] = useState(0);
 
   const handleOptionChange = (index: number, value: string) => {
@@ -148,7 +147,7 @@ export default function CreateProposal({ onSubmit }: Props) {
               htmlFor='minHoldedGVTAmount'
               className='block mb-2 font-bold'
             >
-              Min Holded GVT Amount
+              Minimum Governance Token Amount
             </label>
             <input
               type='number'
@@ -156,21 +155,6 @@ export default function CreateProposal({ onSubmit }: Props) {
               className='w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
               value={minHoldedGVTAmount}
               onChange={(e) => setMinHoldedGVTAmount(parseInt(e.target.value))}
-            />
-          </div>
-          <div className='mb-4'>
-            <label
-              htmlFor='createdBy'
-              className='block mb-2 font-bold'
-            >
-              Created By
-            </label>
-            <input
-              type='number'
-              id='createdBy'
-              className='w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
-              value={createdBy}
-              onChange={(e) => setCreatedBy(parseInt(e.target.value))}
             />
           </div>
           <div className='mb-4'>

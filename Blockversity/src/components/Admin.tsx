@@ -46,22 +46,19 @@ const AdminDashboard: React.FC = () => {
             <div className={`flex-grow ${isManageAccountActive ? "" : "hidden"}`}>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Managed account</h3>
               <button
-                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "createToken" ? "btn-primary" : ""
-                  }`}
+                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "createToken" ? "btn-primary text-green-500" : ""}`}
                 onClick={() => handleTabClick("createToken")}
               >
                 Create Token
               </button>
               <button
-                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "sellToken" ? "btn-primary" : ""
-                  }`}
+                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "sellToken" ? "btn-primary text-green-500" : ""}`}
                 onClick={() => handleTabClick("sellToken")}
               >
                 Sell Token
               </button>
               <button
-                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "manageToken" ? "btn-primary" : ""
-                  }`}
+                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "manageToken" ? "btn-primary text-green-500" : ""}`}
                 onClick={() => handleTabClick("manageToken")}
               >
                 Manage Token
@@ -70,22 +67,21 @@ const AdminDashboard: React.FC = () => {
             <div className={`flex-grow ${isManageAccountActive ? "hidden" : ""}`}>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Dashboard</h3>
               <button
-                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "ico" ? "btn-primary" : ""
-                  }`}
+                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "ico" ? "btn-primary text-green-500" : ""}`}
                 onClick={() => handleTabClick("ico")}
               >
                 ICO
               </button>
+
               <button
-                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "tokennomics" ? "btn-primary" : ""
-                  }`}
+                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "tokennomics" ? "btn-primary text-green-500" : ""}`}
                 onClick={() => handleTabClick("tokennomics")}
               >
                 Tokennomics
               </button>
+
               <button
-                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "purchaserList" ? "btn-primary" : ""
-                  }`}
+                className={`btn btn-outline-secondary m-2 text-blue-400 ${activeTab === "purchaserList" ? "btn-primary text-green-500" : ""}`}
                 onClick={() => handleTabClick("purchaserList")}
               >
                 Purchaser List
