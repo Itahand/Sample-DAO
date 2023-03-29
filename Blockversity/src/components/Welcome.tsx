@@ -5,6 +5,7 @@ import { purchaseBVT, setupBVT } from "../Flow/ICOActions";
 import { useEffect, useState } from "react";
 import { currentUser } from "../Flow/allowListActions";
 import { Link } from 'react-router-dom';
+import { setProxy, depositProposer } from "../Flow/GovernanceActions";
 
 const companyCommonStyles =
   "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
@@ -34,34 +35,27 @@ const Welcome: React.FC = () => {
     currentUser().subscribe(setUser);
   }, []);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    name: string
-  ) => {
-    setFormData({ ...formData, [name]: e.target.value });
-  };
-
-  const handleBuyChange = (value: number) => {
-    setBuyAmount(value);
-  };
-
   const showAddresses = () => {
     setToggle(!toggle);
   };
 
-  const handleSetup = () => {
-    setupBVT();
-  };
 
-  const handlePurchase = () => {
-    purchaseBVT(buyAmount.toFixed(1));
-  };
 
   useEffect(() => {
     getAllAddresses().then((addresses) => {
       setAddresses(addresses);
     });
   }, []);
+
+  const handleSetProxyClick = async () => {
+    try {
+      await setProxy();
+      alert('Proxy set successfully!');
+    } catch (error) {
+      console.log(error);
+      alert('Error setting proxy.');
+    }
+  };
 
   return (
     <div className='flex w-full justify-center items-center'>
@@ -98,11 +92,17 @@ const Welcome: React.FC = () => {
                 )}
               </div>
             ) : (
-              <p className='text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base'>Welcome to Your DAO <br />
+              <p className='text-left my-1 text-white font-light md:w-9/12 w-11/12 text-base'>Welcome to Your DAO <br />
                 To get started, you need to connect your wallet!</p> // on put 2 lines
             )}
           </div>
           <div className='flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10'>
+            <button
+              className='text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#125030] rounded-full cursor-pointer'
+              onClick={handleSetProxyClick}
+            >
+              Set Proxy
+            </button>
 
           </div>
         </div>

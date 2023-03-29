@@ -155,20 +155,6 @@ export default function CreateProposal({ onSubmit }: Props) {
             />
           </div>
           <div className='mb-4'>
-            <label
-              htmlFor='createdBy'
-              className='block mb-2 font-bold'>
-              Created By
-            </label>
-            <input
-              type='number'
-              id='createdBy'
-              className='w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
-              value={createdBy}
-              onChange={(e) => setCreatedBy(parseInt(e.target.value))}
-            />
-          </div>
-          <div className='mb-4'>
             <button
               type='submit'
               className='w-full px-3 py-1 bg-green-700 text-white rounded-md'>

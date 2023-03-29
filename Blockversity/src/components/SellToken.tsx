@@ -49,27 +49,17 @@ export default function SellTokensForm() {
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="maxSupply">
                                 Max Supply
                             </label>
-                            <input
-                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="maxSupply"
-                                type="number"
-                                name="maxSupply"
-                                value={formData.maxSupply}
-                                onChange={handleInputChange}
-                            />
+                            <div>
+                                {initialFormData.maxSupply}
+                            </div>
                         </div>
                         <div className="text-lg mb-2">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="totalSupply">
                                 Total Supply
                             </label>
-                            <input
-                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="totalSupply"
-                                type="number"
-                                name="totalSupply"
-                                value={formData.totalSupply}
-                                onChange={handleInputChange}
-                            />
+                            <div>
+                                {initialFormData.totalSupply}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -80,37 +70,73 @@ export default function SellTokensForm() {
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="minCap">
                                 Min Cap
                             </label>
-                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="minCap" type="number" name="minCap" value={formData.minCap} onChange={handleInputChange} />
+                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="minCap"
+                                type="number"
+                                name="minCap"
+                                value={formData.minCap}
+                                onChange={(e) => setFormData({ ...formData, minCap: parseInt(e.target.value) })} />
                         </div>
                         <div className="text-lg mb-2">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="maxCap">
                                 Max Cap
                             </label>
-                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="maxCap" type="number" name="maxCap" value={formData.maxCap} onChange={handleInputChange} />
+                            <input
+                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="maxCap"
+                                type="number"
+                                name="maxCap"
+                                value={formData.maxCap}
+                                onChange={(e) => setFormData({ ...formData, maxCap: parseInt(e.target.value) })}
+                            />
                         </div>
                         <div className="text-lg mb-2">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="startDate">
                                 Start Date
                             </label>
-                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="startDate" type="date" name="startDate" value={formData.startDate.toISOString().slice(0, 10)} onChange={handleInputChange} />
+                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="startDate"
+                                type="date"
+                                name="startDate"
+                                value={formData.startDate.toISOString().slice(0, 10)}
+                                onChange={(e) => setFormData({ ...formData, startDate: new Date(e.target.value) })}
+                            />
                         </div>
                         <div className="text-lg mb-2">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="endDate">
                                 End Date
                             </label>
-                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="endDate" type="date" name="endDate" value={formData.endDate.toISOString().slice(0, 10)} onChange={handleInputChange} />
+                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="endDate"
+                                type="date"
+                                name="endDate"
+                                value={formData.endDate.toISOString().slice(0, 10)}
+                                onChange={(e) => setFormData({ ...formData, endDate: new Date(e.target.value) })}
+                            />
                         </div>
                         <div className="text-lg mb-2">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="tokenPrice">
                                 Token Price
                             </label>
-                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="tokenPrice" type="number" name="tokenPrice" value={formData.tokenPrice} onChange={handleInputChange} />
+                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="tokenPrice"
+                                type="number"
+                                name="tokenPrice"
+                                value={formData.tokenPrice}
+                                onChange={(e) => setFormData({ ...formData, tokenPrice: parseInt(e.target.value) })}
+                            />
                         </div>
                         <div className="text-lg mb-2">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="lockup">
                                 Lockup
                             </label>
-                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="lockup" type="number" name="lockup" value={formData.lockup} onChange={handleInputChange} />
+                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="lockup"
+                                type="number"
+                                name="lockup"
+                                value={formData.lockup}
+                                onChange={(e) => setFormData({ ...formData, lockup: parseInt(e.target.value) })}
+                            />
                         </div>
                     </div>
                 </div>
