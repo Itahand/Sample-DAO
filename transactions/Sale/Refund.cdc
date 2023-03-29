@@ -2,7 +2,7 @@ import GovernanceTokenPublicSale from "../../contracts/sales/GovernanceTokenSale
 
 transaction() {
 
-      prepare() {
+      prepare(account: AuthAccount) {
         GovernanceTokenPublicSale.refund()
       }
 }

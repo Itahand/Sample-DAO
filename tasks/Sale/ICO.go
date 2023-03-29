@@ -27,11 +27,14 @@ func main() {
 
 	o.Tx("fusd/transferFUSD",
 		WithSigner("account"),
-		WithArg("amount", "100.0"),
+		WithArg("amount", "150.0"),
 		WithArg("recipient", "bob"),
 	)
 
 	o.Tx("Sale/Purchase",
 		WithSigner("bob"),
-		WithArg("amount", "50.0"))
+		WithArg("amount", "100.0"))
+
+	o.Tx("Sale/Distribute",
+		WithSigner("bob"))
 }

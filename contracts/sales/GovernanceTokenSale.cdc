@@ -99,7 +99,7 @@ pub contract GovernanceTokenPublicSale {
   pub fun purchase(from: @FUSD.Vault, address: Address) {
       pre {
           self.saleHasEnded(): "Token sale has ended"
-          self.purchases[address] != nil: "Already purchased by the same account"
+          self.purchases[address] == nil: "Already purchased by the same account"
           from.balance <= self.maxCap: "Purchase amount exceeds personal cap"
           from.balance >= self.minCap: "Purchase amount does not reach the minimum cap"
       }
