@@ -9,14 +9,13 @@
 		"Debug": "./contracts/utility/Debug.cdc",
 		"testFT": "./contracts/utility/testFT.cdc",
 		"Whitelist": "./contracts/Whitelist.cdc",
+		"GovernanceTokenSale": "./contracts/sales/GovernanceTokenSale.cdc",
 		"GovernanceToken": {
 			"source": "./contracts/GovernanceToken.cdc",
 			"aliases": {
 				"testnet": "0x800a10d0fff7acd4"
 			}
 		},
-		"BlockVersityTokenPublicSale": "./contracts/sales/BlockVersityTokenPublicSale.cdc",
-		"BlockVersityDAO": "./contracts/DAO/BlockVersityDAO.cdc",
 		"FungibleTokenMetadataViews": {
 			"source": "./contracts/utility/FungibleTokenMetadataViews.cdc",
 			"aliases": {
@@ -24,14 +23,7 @@
 			}
 		},
 		"exampleToken": "./contracts/exampleToken.cdc",
-		"FungibleToken": {
-			"source": "./contracts/utility/FungibleToken.cdc",
-			"aliases": {
-				"testnet": "9a0766d93b6608b7",
-				"emulator": "ee82856bf20e2aa6",
-				"mainnet": "0xf233dcee88fe0abe"
-			}
-		},
+		"FungibleToken": "./contracts/utility/FungibleToken.cdc",
 		"FUSD": {
 			"source": "./contracts/utility/FUSD.cdc",
 			"aliases": {
@@ -67,8 +59,15 @@
 		"testnet": "access.devnet.nodes.onflow.org:9000"
 	},
 	"accounts": {
-		"BlockVersity": {
-			"fromFile": "BlockVersity.private.json"
+		"testnet-account": {
+			"address": "0x800a10d0fff7acd4",
+			"key": {
+				"type": "hex",
+				"index": 0,
+				"signatureAlgorithm": "ECDSA_P256",
+				"hashAlgorithm": "SHA3_256",
+				"privateKey": "077a4268773503750e1ad2757f3f6768ff73ef03c3410e2e7e4e027ca43b2a04"
+			}
 		},
 		"emulator-account": {
 			"address": "f8d6e0586b0a20c7",
@@ -106,14 +105,18 @@
 	"deployments": {
 		"emulator": {
 			"emulator-bob": [],
-			"emulator-account": [],
+			"emulator-account": [
+				"NonFungibleToken",
+				"FungibleToken",
+				"MetadataViews",
+				"GovernanceToken",
+				"FUSD",
+				"FungibleTokenMetadataViews",
+				"GovernanceTokenSale"
+			],
 			"emulator-alice": []
 		},
-		"testnet": {
-			"BlockVersity": [
-				"BlockVersityTokenPublicSale"
-			]
-		},
+		"testnet": {},
 		"mainnet": {
 			"emulator-second": [
 				"Debug"

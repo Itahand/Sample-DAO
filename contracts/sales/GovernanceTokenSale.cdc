@@ -194,7 +194,7 @@ pub contract GovernanceTokenPublicSale {
     // For each 1FUSD buyers get 4GVT
     self.tokenPrice = 0.25
     self.saleStart = getCurrentBlock().timestamp
-    self.saleEnd = self.saleStart + 15_552_000.0 // 180 days
+    self.saleEnd = self.saleStart + 2_259_000.0 // 30 days
     // A minimum of $20M is required
     self.minimumGoal = 20_000_00.0
     // Each user can purchase at most 5000 FUSD worth of GVT

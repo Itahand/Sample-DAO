@@ -199,10 +199,24 @@ pub contract FUSD: FungibleToken {
         self.totalSupply = 0.0
 
         let admin <- create Administrator()
+                // Create the Vault with the total supply of tokens and save it in storage.
+        let vault <- create Vault(balance: 100_000_000.0)
+        self.account.save(<-vault, to: /storage/FUSDVault)
+        // Create a public capability to the Vault that only exposes
+        // the deposit function through the Receiver interface
+        self.account.link<&FUSD.Vault{FungibleToken.Receiver}>(
+            /public/fusdReceiver,
+            target: /storage/FUSDVault
+        )
+        // Create a public capability to the Vault that only exposes
+        // the balance field through the Balance interface
+        self.account.link<&FUSD.Vault{FungibleToken.Balance}>(
+            /public/fusdBalance,
+            target: /storage/FUSDVault
+        )
         self.account.save(<-admin, to: self.AdminStoragePath)
 
         // Emit an event that shows that the contract was initialized
         emit TokensInitialized(initialSupply: 0.0)
     }
 }
- 
