@@ -23,7 +23,6 @@ import { getUserTimestamp as getUserTimestampScript } from "./Scripts/get_user_t
 import { getBVTBalance as getBVTBalanceScript } from "./Scripts/ICO/getBVT_Balance";
 import { getFUSDVaultBalance as getFUSDVaultBalanceScript } from "./Scripts/ICO/getFUSDVaultBalance";
 import { getIsSaleActive as getIsSaleActiveScript } from "./Scripts/ICO/getIsSaleActive";
-import { getPrice as getPriceScript } from "./Scripts/ICO/getSaleInfo";
 import { getPurchaseInfo as getPurchaseInfoScript } from "./Scripts/ICO/getPurchaseInfo";
 import { getPurchasers as getPurchasersScript } from "./Scripts/ICO/getPurchasers";
 

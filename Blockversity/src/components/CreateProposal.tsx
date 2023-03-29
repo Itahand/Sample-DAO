@@ -119,10 +119,10 @@ export default function CreateProposal({ onSubmit }: Props) {
               Start At
             </label>
             <input
-              type='datetime-local'
+              type='date'
               id='startAt'
               className='w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
-              value={startAt.toISOString().slice(0, 16)}
+              value={startAt.toISOString().slice(0, 10)}
               onChange={(e) => setStartAt(new Date(e.target.value))}
             />
           </div>
@@ -133,10 +133,10 @@ export default function CreateProposal({ onSubmit }: Props) {
               End At
             </label>
             <input
-              type='datetime-local'
+              type='date'
               id='endAt'
               className='w-full px-3 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
-              value={endAt.toISOString().slice(0, 16)}
+              value={endAt.toISOString().slice(0, 10)}
               onChange={(e) => setEndAt(new Date(e.target.value))}
             />
           </div>

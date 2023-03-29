@@ -101,7 +101,7 @@ const Welcome: React.FC = () => {
               className='text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#125030] rounded-full cursor-pointer'
               onClick={handleSetProxyClick}
             >
-              Set Proxy
+              Setup Account
             </button>
 
           </div>

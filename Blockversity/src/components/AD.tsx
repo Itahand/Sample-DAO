@@ -6,7 +6,6 @@ import {
     getBVTBalance,
     getFUSDBalance,
     getIsSaleActive,
-    getPrice,
     getPurchasers,
     setupBVT,
     deployICO,
@@ -50,7 +49,6 @@ const AdminDashboard: React.FC = () => {
         getBVTBalance().then((_balance) => setTokenBalance(_balance));
         getFUSDBalance().then((_balance) => setFUSDBalance(_balance));
         getIsSaleActive().then((boolean) => setTokenSalePaused(!boolean));
-        getPrice().then((price) => setSalePrice(price));
         getPurchasers().then((addresses) => {
             setAddresses(addresses);
         });
