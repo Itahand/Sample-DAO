@@ -8,9 +8,9 @@ type Proposal = {
   id: string;
   title: string;
   description: string;
-  start_date: string;
-  end_date: string;
-  tokens_required: string;
+  startAt: Date;
+  endAt: Date;
+  minHoldedGVTAmount: string;
   options: string[];
 };
 
@@ -22,7 +22,14 @@ export default function ProposalList() {
   useEffect(() => {
     async function fetchData() {
       const data = await getProposals();
-      setProposalData(data);
+      const formattedData = data.map((proposal: Proposal) => {
+        return {
+          ...proposal,
+          startAt: new Date(Number(proposal.startAt) * 1000),
+          endAt: new Date(Number(proposal.endAt) * 1000),
+        };
+      });
+      setProposalData(formattedData);
     }
 
     fetchData();
@@ -83,13 +90,9 @@ export default function ProposalList() {
                     <td>#{proposal.id}</td>
                     <td>{proposal.title}</td>
                     <td>{proposal.description}</td>
-                    <td>
-                      {proposal.start_date}
-                    </td>
-                    <td>
-                      {proposal.end_date}
-                    </td>
-                    <td>{proposal.tokens_required}</td>
+                    <td>{format(proposal.startAt, "yyyy-MM-dd")}</td>
+                    <td>{format(proposal.endAt, "yyyy-MM-dd")}</td>
+                    <td>{proposal.minHoldedGVTAmount}</td>
                     <td>{proposal.options ? "Accept" : "Reject"}</td>
                   </tr>
                 ))}

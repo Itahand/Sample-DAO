@@ -90,9 +90,9 @@ export const createProposal = async (
   title: string,
   description: string,
   options: string[],
-  startAt: number,
-  endAt: number,
-  minHoldedGVTAmount: number
+  startAt: string, //changed to string
+  endAt: string, //changed to string
+  minHoldedGVTAmount: string //changed to string
 ) => {
   return new Promise(async (resolve, reject) => {
     try {
