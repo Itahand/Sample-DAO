@@ -40,7 +40,8 @@ const App: React.FC = () => (
                     description: string,
                     options: string[],
                     startAt: Date,
-                    endAt: Date
+                    endAt: Date,
+                    minHoldedGVTAmount: number
                   ): void {
                     throw new Error("Function not implemented.");
                   }}

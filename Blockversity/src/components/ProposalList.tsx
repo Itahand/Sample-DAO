@@ -1,8 +1,7 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import { Link } from "react-router-dom";
 import { getProposals } from "../Flow/GovernanceActions";
 
 type Proposal = {
@@ -16,34 +15,9 @@ type Proposal = {
 };
 
 
-
-
-const recentData: Proposal[] = [
-  {
-    id: "1",
-    title: "chicken nuggets",
-    description: "chicken nuggets",
-    start_date: "2021-05-17T03:24:00",
-    end_date: "2022-05-17T03:24:00",
-    tokens_required: "100",
-    options: ["yes", "no"],
-  },
-  // ...
-];
-
-interface ProposalData {
-  id: string;
-  title: string;
-  description: string;
-  start_date: string;
-  end_date: string;
-  tokens_required: string;
-  options: string[];
-}
-
 export default function ProposalList() {
   const [showActiveProposals, setShowActiveProposals] = useState(true);
-  const [proposalData, setProposalData] = useState<ProposalData[]>([]);
+  const [proposalData, setProposalData] = useState<Proposal[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -56,10 +30,11 @@ export default function ProposalList() {
 
   console.log(proposalData, "Called in the frontend");
 
-  const proposals = showActiveProposals
-    ? proposalData.filter((proposal) => new Date(proposal.end_date) >= new Date())
-    : proposalData.filter((proposal) => new Date(proposal.end_date) < new Date());
+  const proposals = proposalData
 
+  console.log(proposals, "proposals");
+  console.log(proposalData, "proposalData");
+  console.log(showActiveProposals, "showActiveProposals");
   return (
     <div className='flex justify-center items-center'>
       <div className='px-4 pt-3 pb-4 flex flex-col text-white'>
@@ -100,16 +75,19 @@ export default function ProposalList() {
                 </tr>
               </thead>
               <tbody className='border border-gray-200 bg-slate-500 rounded-sm mt-3 text-center'>
+
+
+
                 {proposals.map((proposal: Proposal) => (
                   <tr key={proposal.id}>
                     <td>#{proposal.id}</td>
                     <td>{proposal.title}</td>
                     <td>{proposal.description}</td>
                     <td>
-                      {format(new Date(proposal.start_date), "dd MMM yyyy")}
+                      {proposal.start_date}
                     </td>
                     <td>
-                      {format(new Date(proposal.end_date), "dd MMM yyyy")}
+                      {proposal.end_date}
                     </td>
                     <td>{proposal.tokens_required}</td>
                     <td>{proposal.options ? "Accept" : "Reject"}</td>

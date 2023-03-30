@@ -10,7 +10,8 @@ interface Props {
     description: string,
     options: string[],
     startAt: Date,
-    endAt: Date
+    endAt: Date,
+    minHoldedGVTAmount: number
   ) => void;
 }
 
@@ -20,7 +21,7 @@ export default function CreateProposal({ onSubmit }: Props) {
   const [options, setOptions] = useState<string[]>([]);
   const [startAt, setStartAt] = useState(new Date());
   const [endAt, setEndAt] = useState(new Date());
-  const [minHoldedGVTAmount, setMinHoldedGVTAmount] = useState(0);
+  const [minHoldedGVTAmount, setMinHoldedGVTAmount] = useState(0.0);
 
 
   const handleOptionChange = (index: number, value: string) => {
@@ -41,6 +42,8 @@ export default function CreateProposal({ onSubmit }: Props) {
 
       const start = startAt.getTime() / 1000;
       const end = endAt.getTime() / 1000;
+      console.log("start", start);
+      console.log("end", end);
 
       const proposalId = await createProposal(
         title,
@@ -51,7 +54,7 @@ export default function CreateProposal({ onSubmit }: Props) {
         minHoldedGVTAmount
       );
 
-      onSubmit(title, description, options, startAt, endAt);
+      onSubmit(title, description, options, startAt, endAt, minHoldedGVTAmount);
       console.log(`Proposal ${proposalId} created`);
     } catch (err) {
       console.error(`Error creating proposal: ${err}`);
