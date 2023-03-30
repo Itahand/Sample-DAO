@@ -40,24 +40,26 @@ export default function CreateProposal({ onSubmit }: Props) {
     e.preventDefault();
     try {
 
-      const start = startAt.getTime() / 1000;
-      const end = endAt.getTime() / 1000;
+      const start = (startAt.getTime() / 1000).toFixed(2);
+      const end = (endAt.getTime() / 1000).toFixed(2);
       console.log("start", start);
       console.log("end", end);
-
+      console.log("start", typeof start);
+      console.log("end", typeof end);
+      // how to add a .0 to the end of a number? for example  1620000000 => 1620000000.0
       const proposalId = await createProposal(
         title,
         description,
         options,
         start,
         end,
-        minHoldedGVTAmount
+        minHoldedGVTAmount.toFixed(2)
       );
 
       onSubmit(title, description, options, startAt, endAt, minHoldedGVTAmount);
       console.log(`Proposal ${proposalId} created`);
     } catch (err) {
-      console.error(`Error creating proposal: ${err}`);
+      console.error(`Error creating proposal: ${err} startAt: ${typeof startAt} endAt: ${typeof endAt}`);
     }
   };
 
