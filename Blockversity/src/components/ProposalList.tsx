@@ -37,7 +37,10 @@ export default function ProposalList() {
 
   console.log(proposalData, "Called in the frontend");
 
-  const proposals = proposalData
+  const proposals = showActiveProposals
+    ? proposalData.filter((proposal) => proposal.endAt >= new Date())
+    : proposalData.filter((proposal) => proposal.endAt < new Date());
+
 
   console.log(proposals, "proposals");
   console.log(proposalData, "proposalData");
