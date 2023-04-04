@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { getProposals } from "../Flow/GovernanceActions";
 
+
 type Proposal = {
   id: string;
   title: string;
@@ -96,7 +97,11 @@ export default function ProposalList() {
                     <td>{format(proposal.startAt, "yyyy-MM-dd")}</td>
                     <td>{format(proposal.endAt, "yyyy-MM-dd")}</td>
                     <td>{proposal.minHoldedGVTAmount}</td>
-                    <td>{proposal.options ? "Accept" : "Reject"}</td>
+                    <td>
+                      {proposal.options.map((option, index) => (
+                        <div key={index}>{option}</div>
+                      ))}
+                    </td>
                   </tr>
                 ))}
               </tbody>
