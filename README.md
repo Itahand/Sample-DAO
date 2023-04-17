@@ -1,15 +1,3 @@
-<a href="https://www.blockversity.xyz/" target="_blank">
-    <img src="https://www.blockversity.xyz/img/logo-1-1@1x.png" alt="BlockVersity logo" title="BlockVersity" align="right" height="40" />
-</a>
-
-# BlockVersity-DAO
-
-[BlockVersity](https://www.blockversity.xyz/) is THE platform agnostic community for online educators supported by a DAO. BlockVersity's objective is to serve online educators with NFTs as a service,  giving power back to Course Creators and verifiable on-chain credentials to students.
-
-BlockVersity gives power back to thousands of global course creators selling on centralized marketplaces, offering them fairer compensation by providing tools to sell courses as NFTs on their websiste, social networks or even by email. For students, BlockVersity provides them with verifiable on-chain credentials. These proof-of-skill NFTs would have the same credibility globally.
-
-[![BlockVersity Website](https://i.postimg.cc/Pfw7z1g4/Screenshot-2022-12-14-at-11-40-21-AM.png)](https://www.blockversity.xyz/)
-
 ## Overview
 
  Congratulations! This is the first step in your journey towards learning how to build a DAO on the Flow network. This document's objective is to provide the basic tools and help you understand how to use them. You can read the full guide [here](https://medium.com/blockversity/build-a-dao-on-flow-21569387fc3a) 
